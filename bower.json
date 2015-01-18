@@ -7,10 +7,10 @@
     "name": "bower-rails generated vendor assets",
     "dependencies": {
       "jquery": "latest",
+      "bootstrap-sass": "latest",
       "angular": "latest",
       "angular-ui-router": "latest",
       "angular-animate": "latest",
-      "bootstrap-sass-official": "latest",
       "moment":"latest"
     }
   }
