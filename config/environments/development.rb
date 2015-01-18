@@ -47,7 +47,7 @@ Rails.application.configure do
       location: '/usr/bin/msmtp',
       arguments: "-C #{Rails.root}/config/msmtprc --logfile #{Rails.root}/log/msmtp.log -a default -t"
   }
-  config.action_mailer.default_url_options = {host: "www.#{ENV['PIXIU_DOMAIN']}", port: 3000, from: "no-reply@#{ENV['PIXIU_DOMAIN']}"}
+  config.action_mailer.default_url_options = {host: 'localhost', port: 3000, from: "no-reply@#{ENV['PIXIU_DOMAIN']}"}
 
   Slim::Engine.set_options pretty: true, sort_attrs: false
 
