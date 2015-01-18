@@ -24,13 +24,18 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rbenv'
+  gem 'squasher'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -41,5 +46,55 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'rspec-rails'
+  gem 'rspec-mocks'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'page-object'
+
 end
+
+group :production do
+  gem 'rack-cache'
+  gem 'dalli'
+  gem 'puma'
+  gem 'lograge'
+end
+
+gem 'rails-i18n'
+gem 'slim'
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-async'
+gem 'cancancan', '~> 1.9'
+gem 'rolify'
+gem 'carrierwave'
+gem 'fog'
+gem 'mini_magick'
+gem 'highline'
+gem 'bootstrap-sass'
+gem 'angularjs-rails'
+gem 'highcharts-rails'
+gem 'autoprefixer-rails'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'emoji'
+gem 'jquery-ui-rails'
+gem 'sidekiq'
+gem 'sidekiq-limit_fetch'
+gem 'faye-websocket'
+gem 'redcarpet'
+gem 'attr_encrypted'
+gem 'eventmachine'
+gem 'omniauth'
+gem 'rufus-scheduler'
+gem 'rails-settings-cached', '0.4.1'
+gem 'kaminari'
+gem 'sinatra', require: nil
+gem 'select2-rails'
+
 
