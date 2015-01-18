@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
+  get 'home/index'
+
   scope '/:locale' do
 
   end

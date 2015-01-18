@@ -5,4 +5,6 @@
  * 订单跟踪
 
 ## 常用命令
+  rails generate controller name act1 act2 --no-test-framework --no-assets --no-helper
+
 

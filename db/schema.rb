@@ -11,7 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118060121) do
+ActiveRecord::Schema.define(version: 20150118165425) do
+
+  create_table "carts", force: :cascade do |t|
+    t.string   "token",      limit: 36, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "carts", ["token"], name: "index_carts_on_token", using: :btree
+
+  create_table "carts_products", id: false, force: :cascade do |t|
+    t.integer "product_id", limit: 4
+    t.integer "cart_id",    limit: 4
+  end
+
+  add_index "carts_products", ["cart_id"], name: "index_carts_products_on_cart_id", using: :btree
+  add_index "carts_products", ["product_id"], name: "index_carts_products_on_product_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "project_uid", limit: 32,    null: false
+    t.string   "uid",         limit: 32,    null: false
+    t.text     "content",     limit: 65535, null: false
+    t.integer  "comment_id",  limit: 4
+    t.integer  "order_id",    limit: 4,     null: false
+    t.integer  "user_id",     limit: 4,     null: false
+    t.integer  "star",        limit: 4,     null: false
+    t.datetime "created",                   null: false
+  end
+
+  add_index "comments", ["project_uid"], name: "index_comments_on_project_uid", using: :btree
+  add_index "comments", ["uid"], name: "index_comments_on_uid", using: :btree
+
+  create_table "locales", force: :cascade do |t|
+    t.integer "flag", limit: 2,  null: false
+    t.string  "lang", limit: 5,  null: false
+    t.string  "uid",  limit: 36, null: false
+    t.integer "tid",  limit: 4,  null: false
+  end
+
+  add_index "locales", ["lang"], name: "index_locales_on_lang", using: :btree
+  add_index "locales", ["uid"], name: "index_locales_on_uid", using: :btree
 
   create_table "notices", force: :cascade do |t|
     t.string   "lang",       limit: 5,   default: "zh-CN", null: false
@@ -21,6 +61,46 @@ ActiveRecord::Schema.define(version: 20150118060121) do
   end
 
   add_index "notices", ["lang"], name: "index_notices_on_lang", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4,              null: false
+    t.string   "uid",        limit: 36,             null: false
+    t.integer  "status",     limit: 4,  default: 0, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "orders", ["uid"], name: "index_orders_on_uid", unique: true, using: :btree
+
+  create_table "orders_products", id: false, force: :cascade do |t|
+    t.integer "product_id", limit: 4
+    t.integer "order_id",   limit: 4
+  end
+
+  add_index "orders_products", ["order_id"], name: "index_orders_products_on_order_id", using: :btree
+  add_index "orders_products", ["product_id"], name: "index_orders_products_on_product_id", using: :btree
+
+  create_table "prices", force: :cascade do |t|
+    t.integer  "product_id", limit: 4,                            null: false
+    t.decimal  "value",                precision: 10, default: 0, null: false
+    t.integer  "flag",       limit: 4,                default: 0, null: false
+    t.datetime "created",                                         null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.integer  "user_id", limit: 4,                       null: false
+    t.string   "lang",    limit: 5,     default: "zh-CN", null: false
+    t.string   "uid",     limit: 36,                      null: false
+    t.string   "name",    limit: 255,                     null: false
+    t.string   "logo",    limit: 255
+    t.string   "summary", limit: 255,                     null: false
+    t.text     "details", limit: 65535,                   null: false
+    t.integer  "status",  limit: 4,     default: 0,       null: false
+    t.datetime "created",                                 null: false
+  end
+
+  add_index "products", ["lang"], name: "index_products_on_lang", using: :btree
+  add_index "products", ["uid"], name: "index_products_on_uid", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
