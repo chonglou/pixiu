@@ -34,6 +34,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano3-puma'
   gem 'capistrano-rbenv'
+  #gem 'capistrano-bower'
   gem 'squasher'
 end
 

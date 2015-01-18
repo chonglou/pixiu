@@ -26,6 +26,8 @@
     sudo apt-get install libffi-dev zlib1g-dev libssl-dev
     sudo apt-get install libmysqlclient-dev
     sudo apt-get clean
+    sudo npm install -g bower
+    sudo ln -s /usr/bin/nodejs /usr/bin/node
     mysql_secure_installation
 
 ### SSL证书安装
@@ -69,7 +71,6 @@
     cd /var/www/pixiu
     mkdir -p shared/config
     cd shared
-    npm install bower
     # upload your config files(config/sidekiq.yml .rbenv-vars)
 
 
