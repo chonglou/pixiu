@@ -1,6 +1,6 @@
 PIXIU_LOCALE=zh-CN
-PIXIU_DATABASE_PASSWORD=
 PIXIU_DOMAIN=localhost.localdomain
+PIXIU_DATABASE_URL=mysql2://pixiu:changeme@db.$PIXIU_DOMAIN/pixiu
 PIXIU_REDIS_URL=redis://redis.$PIXIU_DOMAIN:6379/0
 PIXIU_ELASTICSEARCH_URL=http://es.$PIXIU_DOMAIN:9200
 # split by ';'

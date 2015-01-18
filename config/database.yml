@@ -48,7 +48,5 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: pixiu_production
-  username: pixiu
-  password: <%= ENV['PIXIU_DATABASE_PASSWORD'] %>
+  pool: 20
+  url: <%= ENV['PIXIU_DATABASE_URL'] %>

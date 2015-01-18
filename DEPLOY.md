@@ -30,6 +30,11 @@
     sudo ln -s /usr/bin/nodejs /usr/bin/node
     mysql_secure_installation
 
+### 数据库设置
+    CREATE DATABASE pixiu CHARACTER SET utf8;
+    GRANT ALL PRIVILEGES ON pixiu.* TO 'pixiu'@'localhost' IDENTIFIED BY 'changeme';
+    FLUSH PRIVILEGES;
+
 ### SSL证书安装
 #### 制作（可选）
 
