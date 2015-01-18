@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118055240) do
+ActiveRecord::Schema.define(version: 20150118060121) do
+
+  create_table "notices", force: :cascade do |t|
+    t.string   "lang",       limit: 5,   default: "zh-CN", null: false
+    t.string   "content",    limit: 255,                   null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "notices", ["lang"], name: "index_notices_on_lang", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255

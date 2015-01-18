@@ -6,3 +6,6 @@ root.skip_confirmation!
 root.save!
 root.add_role 'admin'
 root.add_role 'root'
+
+Notice.create lang:'zh-CN', content:'安装成功'
+Notice.create lang:'en', content:'Install completed'
