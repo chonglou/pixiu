@@ -26,7 +26,7 @@ set :deploy_to, '/var/www/pixiu'
 set :linked_files, fetch(:linked_files, []).push('config/sidekiq.yml', '.rbenv-vars')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'node_modules', 'vendor/assets/bower_components')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'node_modules', 'vendor/assets/bower_components')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

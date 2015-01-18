@@ -48,5 +48,10 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
+  <<: *default
   pool: 20
-  url: <%= ENV['PIXIU_DATABASE_URL'] %>
+  database: pixiu
+  host: <%= ENV['PIXIU_DATABASE_HOST'] %>
+  port: 3306
+  username: pixiu
+  password: <%= ENV['PIXIU_DATABASE_PASSWORD'] %>
