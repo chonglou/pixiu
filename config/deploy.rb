@@ -23,7 +23,7 @@ set :deploy_to, '/var/www/pixiu'
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/sidekiq.yml','config/secrets.yml','config/rbenv-vars.yml')
+set :linked_files, fetch(:linked_files, []).push('config/sidekiq.yml', '.rbenv-vars')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'node_modules', 'vendor/assets/bower_components')

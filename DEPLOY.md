@@ -23,16 +23,10 @@
     sudo apt-get install build-essential
     sudo apt-get install pwgen git
     sudo apt-get install nginx nodejs mysql-server memcached redis-server elasticsearch
+    sudo apt-get install libffi-dev zlib1g-dev libssl-dev
+    sudo apt-get install libmysqlclient-dev
     sudo apt-get clean
     mysql_secure_installation
-
-### 目录设置
-    sudo mkdir -p /var/www/pixiu
-    sudo chown -R deploy:deploy /var/www/pixiu
-    cd /var/www/pixiu
-    mkdir shared
-    cd shared
-    npm install bower
 
 ### SSL证书安装
 #### 制作（可选）
@@ -43,7 +37,6 @@
     openssl req -new -key key.pem  -subj "/C=US/ST=California/L=Goleta/O=pixiu/CN=0-dong.com" -out cert.csr -text 
     openssl x509 -req -in cert.csr -sha512 -days 3650  -signkey key.pem -out cert.pem -text
 
-#### 创建目录
 
 #### 安装
 
@@ -63,13 +56,21 @@
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
     echo 'eval "$(rbenv init -)"' >> ~/.bashrc
     # 重新登录 使.bashrc生效
-    sudo apt-get install libffi-dev zlib1g-dev libssl-dev
     rbenv install 2.2.0
     git clone git@github.com:chonglou/pixiu.git
     cd pixiu
     gem install bundler # 如果发生错误 一般是缺失相应的lib文件 补上即可
     bundle install
     rbenv rehash
+
+### 目录设置
+    sudo mkdir -p /var/www/pixiu
+    sudo chown -R deploy:deploy /var/www/pixiu
+    cd /var/www/pixiu
+    mkdir -p shared/config
+    cd shared
+    npm install bower
+    # upload your config files(config/sidekiq.yml .rbenv-vars)
 
 
 ## 本地
