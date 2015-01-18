@@ -1,0 +1,15 @@
+---
+:verbose: false
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+:concurrency:  12
+
+:queues:
+  - [default, 10]
+  - [bill, 15]
+  - [order, 20]
+  - [email, 5]
+
+:limits:
+  bill: 1
+  order: 1
