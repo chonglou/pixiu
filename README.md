@@ -1,6 +1,9 @@
 # 貔貅(PIXIU)-开源电子商店
 ---------------------
 
+## Deploy
+Please read DEPLOY.md
+
 ## That's ALL
 Enjoy it!
 
