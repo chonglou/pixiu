@@ -1,3 +1,4 @@
+require 'syslog/logger'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -53,7 +54,6 @@ Rails.application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-  require 'syslog/logger'
   config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new('pixiu', Syslog::LOG_LOCAL7))
 
   # Use a different cache store in production.

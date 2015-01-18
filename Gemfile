@@ -96,5 +96,8 @@ gem 'rails-settings-cached', '0.4.1'
 gem 'kaminari'
 gem 'sinatra', require: nil
 gem 'select2-rails'
+#gem 'elasticsearch-model'
+gem 'elasticsearch-persistence'
+gem 'elasticsearch-rails'
 
 

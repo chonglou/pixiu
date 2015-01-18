@@ -15,9 +15,9 @@
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
     echo 'eval "$(rbenv init -)"' >> ~/.bashrc
     # 重新登录 使.bashrc生效
-    rbenv install 2.1.5
-    git clone git@github.com:chonglou/itpkg.git
-    cd itpkg
+    rbenv install 2.2.0
+    git clone git@github.com:chonglou/pixiu.git
+    cd pixiu
     gem install bundler # 如果发生错误 一般是缺失相应的lib文件 补上即可
     bundle install
     rbenv rehash

@@ -1,0 +1,1 @@
+Elasticsearch::Persistence.client = Elasticsearch::Client.new url:ENV['PIXIU_ELASTICSEARCH_URL'], log: !Rails.env.production?
