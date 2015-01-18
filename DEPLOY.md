@@ -2,7 +2,8 @@
 ---------
 ## 服务器(以ubuntu为例)
 ### 依赖包
-  sudo apt-get install pwgen
+  sudo apt-get install pwgen nodejs
+  npm install bower
 ### ruby环境
  * rbenv https://github.com/sstephenson/rbenv
  * rbenv-vars  https://github.com/sstephenson/ruby-vars
