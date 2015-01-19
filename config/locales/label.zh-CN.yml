@@ -1,0 +1,11 @@
+zh-CN:
+  helpers:
+    label:
+      user:
+        login: '邮箱/ID'
+        label: '唯一ID'
+        username: '用户名'
+        email: '邮箱'
+        password: '密码'
+        password_confirmation: '密码确认'
+        current_password: '当前密码'

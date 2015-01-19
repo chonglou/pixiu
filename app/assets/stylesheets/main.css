@@ -1,0 +1,32 @@
+html,
+body {
+    overflow-x: hidden;
+}
+
+
+footer {
+    text-align: center;
+}
+
+
+.nav_bar-icon {
+    height: 18px;
+    width: 18px;
+}
+
+.wrap {
+    word-break: break-all;
+    /*
+    word-wrap: break-word;
+    word-break: normal;
+    */
+}
+
+.wrap-fixed
+{
+    width:200px;
+    white-space:nowrap;
+    word-break:keep-all;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

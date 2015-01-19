@@ -1,0 +1,19 @@
+nav class='navbar navbar-fixed-top navbar-inverse'
+  div class='container-fluid'
+    div class='navbar-header'
+      button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'
+        span class='sr-only' Toggle navigation
+        span class='icon-bar'
+        span class='icon-bar'
+        span class='icon-bar'
+      a class='navbar-brand' href='#{root_path}' #{site_info 'name'}
+
+    div id='navbar' class='collapse navbar-collapse'
+      ul class='nav navbar-nav'
+        - top_nav_links.each do |l|
+          - if l.fetch(:url) == request.original_url
+            li class='active'
+              a href='#{l.fetch :url}' #{l.fetch :name}
+          -else
+            li
+              a href='#{l.fetch :url}' #{l.fetch :name}

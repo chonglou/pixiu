@@ -1,4 +1,8 @@
+- content_for :head
+  = stylesheet_link_tag 'nav_bar', media: 'all', 'data-turbolinks-track' => true
+
 - content_for :body
+  = render 'widgets/top_nav_bar_0'
   div class="container-fluid"
     div class='row'
       div class='col-sm-offset-1 col-sm-9'

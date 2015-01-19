@@ -1,2 +1,13 @@
 zh-CN:
   links:
+    home:
+      index: '首页'
+    about_us: '联系我们'
+    personal:
+      index: '用户中心'
+      sign_in: '账户登录'
+    document:
+      index: '帮助中心'
+    product:
+      tags: 
+        index: '商品分类'

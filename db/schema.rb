@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119024637) do
+ActiveRecord::Schema.define(version: 20150119043340) do
 
   create_table "carts", force: :cascade do |t|
     t.string   "token",      limit: 36, null: false
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20150119024637) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "lang",       limit: 5,     default: "zh-CN", null: false
+    t.string   "title",      limit: 255,                     null: false
+    t.text     "body",       limit: 65535,                   null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "documents", ["title"], name: "index_documents_on_title", using: :btree
 
   create_table "locales", force: :cascade do |t|
     t.integer "flag", limit: 2,  null: false
