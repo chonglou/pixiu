@@ -49,10 +49,10 @@
 
     sudo mkdir -p /etc/nginx/ssl
     cd /etc/nginx/ssl
-    sudo cp /tmp/ssl/pixiu-key.pem ./
-    sudo cp /tmp/ssl/pixiu-cert.pem ./
-    sudo chmod 400 pixiu-key.pem
-    sudo chmod 444 pixiu-cert.pem
+    sudo cp /tmp/ssl/key.pem pixiu_production_key.pem 
+    sudo cp /tmp/ssl/cert.pem pixiu_production_cert.pem 
+    sudo chmod 400 pixiu_production_key.pem
+    sudo chmod 444 pixiu_production_cert.pem
     rm -r /tmp/ssl
 
 ### ruby环境
@@ -82,7 +82,7 @@
 ## 本地
 ### 部署
     cap production puma:nginx_config
-    cap production puma:config
+    cap production deploy:migrate
     cap production deploy
 
 
