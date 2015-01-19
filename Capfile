@@ -23,7 +23,6 @@ require 'capistrano/rbenv'
 # require 'capistrano/rails/migrations'
 # require 'capistrano/passenger'
 require 'capistrano/rails'
-require 'capistrano/bower'
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
 # Load custom tasks from `lib/capistrano/tasks' if you have any defined
