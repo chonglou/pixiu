@@ -8,6 +8,13 @@ class Admin::SiteController < ApplicationController
   end
 
   def info
+    case request.method
+      when 'GET'
+      when 'POST'
+        %w(name title keywords description copyright).each {|k|Setting["site_#{k}_#{request[:locale]}"] = params[k.to_sym]}
+        render 'info'
+      else
+    end
   end
 
   private

@@ -7,8 +7,10 @@ zh-CN:
         index: '用户列表'
         edit: '修改用户权限'
       site:
-        index: '站点信息'
+        index: '站点管理'
         info: '基本参数'
+        user:
+          index: '用户列表'
         status:
           title: '当前状态'
           database: '数据库'
