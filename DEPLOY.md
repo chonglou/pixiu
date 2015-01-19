@@ -80,10 +80,17 @@
 
 
 ## 本地
-### 部署
+
+### 部署(第一次)
     cap production puma:nginx_config
     cap production deploy:migrate
     cap production deploy
+    TASK=db:seed cap production rails:task
+
+### 升级
+    cap production deploy
+    TASK=db:seed cap production rails:task (可选)
+    
 
 
 ## 测试
