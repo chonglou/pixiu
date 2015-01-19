@@ -1,1 +1,3 @@
 zh-CN:
+  labels:
+    must_admin: '您必须是管理员'

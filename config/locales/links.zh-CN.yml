@@ -4,11 +4,13 @@ zh-CN:
     add_to_favorites: '收藏本页'
     admin:
       site:
-        info: '站点信息'
+        info: '站点参数'
     home:
       index: '首页'
     about_us: '联系我们'
     personal:
+      document:
+        index: '文档管理'
       index: '用户中心'
       register_or_signin: '登录/注册'
       profile: '个人信息'

@@ -9,6 +9,13 @@ class ApplicationController < ActionController::Base
     {locale: I18n.locale}.merge options
   end
 
+  def must_admin!
+    unless current_user && current_user.has_role?(:admin)
+      flash[:alert] = t('labels.must_admin')
+      redirect_to root_path
+    end
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:label, :email, :first_name, :middle_name, :last_name, :password, :password_confirmation, :remember_me) }

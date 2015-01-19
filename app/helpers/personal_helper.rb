@@ -1,10 +1,10 @@
 module PersonalHelper
-  def personal_ctl_panel
+  def left_nav_links
     user = current_user
     links = [{url:edit_user_registration_url, name:t('links.personal.profile')}]
     if user.is_admin?
       links << {url: admin_site_info_url, name: t('links.admin.site.info')}
-      links << {url: documents_url, name: t('links.document.index')}
+      links << {url: documents_url, name: t('links.personal.document.index')}
     end
     links
   end
@@ -14,8 +14,7 @@ module PersonalHelper
     if user
       label = t('links.welcome', username: user.label, logo: email2logo(user.email, 18))
       links={
-          personal_path => t('links.personal.index'),
-          edit_user_registration_path => t('links.personal.profile'),
+          edit_user_registration_path => t('links.personal.index'),
           destroy_user_session_path => t('links.personal.sign_out')
       }
     else
