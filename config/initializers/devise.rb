@@ -258,4 +258,12 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
 
+Rails.application.config.to_prepare do
+  Devise::SessionsController.layout 'personal'
+  Devise::RegistrationsController.layout proc{ |_| user_signed_in? ? 'dashboard' : 'personal' }
+  Devise::ConfirmationsController.layout 'personal'
+  Devise::UnlocksController.layout 'personal'
+  Devise::PasswordsController.layout 'personal'
+end
+
 Devise::Async.backend = :sidekiq

@@ -8,7 +8,7 @@
   - [default, 10]
   - [bill, 15]
   - [order, 20]
-  - [email, 5]
+  - [mailer, 5]
 
 :limits:
   bill: 1

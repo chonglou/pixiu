@@ -1,4 +1,5 @@
-case SiteInfo.version
+case Setting.version
+  when 'v20150118'
   else
     Setting.init = Time.now
 
@@ -14,5 +15,5 @@ case SiteInfo.version
     Locale.create flag: :notice, uid: nl, lang: 'zh-CN', tid: n1.id
     Locale.create flag: :notice, uid: nl, lang: 'en', tid: n2.id
 
-    SiteInfo.version = 'v20150118'
+    Setting.version = 'v20150118'
 end

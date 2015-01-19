@@ -1,0 +1,3 @@
+module Widget
+
+end

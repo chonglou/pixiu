@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    meta name="keywords" content="#{Setting.keywords}"
+    meta name="description" content="#{Setting.description}"
+    meta name="author" content="jitang.zheng@gmail.com"
+    link rel="shortcut icon" type="image/vnd.microsoft.icon" href="#{Setting.favicon}"
+    title #{Setting.title}#{"-#{@title}" if @title}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    /[if lt IE 9]
+      = javascript_include_tag 'html5shiv.min'
+      = javascript_include_tag 'respond.min'
+    = csrf_meta_tags
+    = yield :head
+  body
+    = yield :body
