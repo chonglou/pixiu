@@ -1,0 +1,20 @@
+-@title = t('links.admin.site.status.title')
+
+div class='row'
+  div class='col-sm-3'
+    h3 #{t('links.admin.site.status.database')}
+    hr
+    =render 'widgets/json', body:@mysql
+  div id='sidekiq-status' class='col-sm-4'
+    h3 #{t('links.admin.site.status.jobs')}
+    hr
+    a href='#{sidekiq_web_path}' target='_blank'
+      = render 'widgets/draw_picture', text:'SIDEKIQ-WEB', lang:'en'
+    =render 'widgets/json', body:{}
+    javascript:
+      $(function(){
+        $.get("#{sidekiq_web_path(locale:nil)}/dashboard/stats", function(data){
+          $("div#sidekiq-status pre code").text(JSON.stringify(data, null, '\t'));
+        });
+      });
+

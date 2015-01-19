@@ -14,17 +14,20 @@ Rails.application.routes.draw do
     resource :tags
 
     namespace :admin do
-      get 'users'=> 'users#index'
-      get 'site/info'
+
+      resources :users, only:[:index, :edit, :update]
+      get 'site/status'
+      %w(info).each do |a|
+        get "site/#{a}"
+        post "site/#{a}"
+      end
+
       resources :notices
     end
 
     resources :documents
 
-    get 'personal'=>'personal#index'
-
     get 'home' => 'home/index'
-    get 'home/about_us'
 
     get 'search' => 'search#index'
   end

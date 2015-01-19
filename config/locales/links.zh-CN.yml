@@ -3,11 +3,19 @@ zh-CN:
     welcome: "欢迎你, <img src='%{logo}' alt='%{username}' title='%{username}'/>"
     add_to_favorites: '收藏本页'
     admin:
+      user:
+        index: '用户列表'
+        edit: '修改用户权限'
       site:
-        info: '站点参数'
+        index: '站点信息'
+        info: '基本参数'
+        status:
+          title: '当前状态'
+          database: '数据库'
+          jobs: '后台任务'
     home:
       index: '首页'
-    about_us: '联系我们'
+
     personal:
       document:
         index: '文档管理'
@@ -21,7 +29,8 @@ zh-CN:
       active: '激活账户'
       unlock: '解锁账户'
     document:
-      index: '帮助中心'
+      help: '帮助中心'
+      contact: '联系我们'
     product:
       tags: 
         index: '商品分类'

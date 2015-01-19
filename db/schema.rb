@@ -59,14 +59,16 @@ ActiveRecord::Schema.define(version: 20150119043340) do
   end
 
   create_table "documents", force: :cascade do |t|
+    t.string   "name",       limit: 32,                      null: false
     t.string   "lang",       limit: 5,     default: "zh-CN", null: false
-    t.string   "title",      limit: 255,                     null: false
+    t.string   "title",      limit: 64,                      null: false
+    t.string   "summary",    limit: 255,                     null: false
     t.text     "body",       limit: 65535,                   null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
 
-  add_index "documents", ["title"], name: "index_documents_on_title", using: :btree
+  add_index "documents", ["name"], name: "index_documents_on_name", unique: true, using: :btree
 
   create_table "locales", force: :cascade do |t|
     t.integer "flag", limit: 2,  null: false

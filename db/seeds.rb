@@ -13,5 +13,5 @@ Locale.create flag: :notice, uid: nl, lang: 'zh-CN', tid: n1.id
 Locale.create flag: :notice, uid: nl, lang: 'en', tid: n2.id
 
 Setting['site_name_zh-CN']= '貔貅系统'
-Setting['site_name_en']= 'Pixiu'
+Setting['site_name_en']= 'Pixiu System'
 Setting.version = 'v20150118'

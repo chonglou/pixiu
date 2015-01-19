@@ -22,10 +22,10 @@
             ul class="nav nav-tabs"
               - @right_nav_links.each do |l|
                 - if l.fetch(:url) == request.original_url
-                  ul class="dropdown-menu" role="menu" class="active"
+                  li role="menu" class="active"
                     a href="#{l.fetch :url}" #{l.fetch :name}
                 - else
-                  ul class="dropdown-menu" role="menu"
+                  li role="menu"
                     a href="#{l.fetch :url}" #{l.fetch :name}
         = yield
     = render 'widgets/footer'
