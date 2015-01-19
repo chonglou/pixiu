@@ -12,7 +12,11 @@
       "angular": "latest",
       "angular-ui-router": "latest",
       "angular-animate": "latest",
-      "moment":"latest"
+      "famfamfam-flags": "latest",
+      "famfamfam-silk": "latest",
+      //      "famfamfam-flags-sprite":"latest",
+      //      "famfamfam-silk-sprite":"latest",
+      "moment": "latest"
     }
   }
 }

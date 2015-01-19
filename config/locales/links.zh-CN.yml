@@ -1,11 +1,23 @@
 zh-CN:
   links:
+    welcome: "欢迎你, <img src='%{logo}' alt='%{username}' title='%{username}'/>"
+    add_to_favorites: '收藏本页'
+    admin:
+      site:
+        info: '站点信息'
     home:
       index: '首页'
     about_us: '联系我们'
     personal:
       index: '用户中心'
+      register_or_signin: '登录/注册'
+      profile: '个人信息'
+      sign_out: '安全退出'
       sign_in: '账户登录'
+      register: '注册账户'
+      reset_password: '重置密码'
+      active: '激活账户'
+      unlock: '解锁账户'
     document:
       index: '帮助中心'
     product:

@@ -1,0 +1,8 @@
+li id="personalBar" class="dropdown"
+  a href="#" class="dropdown-toggle" data-toggle="dropdown"
+    |#{{personal_bar.fetch :label}}
+    b class="caret"
+  ul class="dropdown-menu"
+    |#{{personal_bar.fetch(:links).map{|k,v| "<li><a href='#{k}'>#{v}</a></li>"}.join("<li class='divider'></li>")}}
+
+

@@ -2,13 +2,13 @@ nav class='navbar navbar-fixed-top navbar-inverse'
   div class='container-fluid'
     div class='navbar-header'
       button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar'
-        span class='sr-only' Toggle navigation
+        span class='sr-only'
         span class='icon-bar'
         span class='icon-bar'
         span class='icon-bar'
       a class='navbar-brand' href='#{root_path}' #{site_info 'name'}
 
-    div id='navbar' class='collapse navbar-collapse'
+    div class='collapse navbar-collapse'
       ul class='nav navbar-nav'
         - top_nav_links.each do |l|
           - if l.fetch(:url) == request.original_url
@@ -17,3 +17,29 @@ nav class='navbar navbar-fixed-top navbar-inverse'
           -else
             li
               a href='#{l.fetch :url}' #{l.fetch :name}
+      form method="post" target="_blank" action="#{search_path}" class="navbar-form form-inline pull-left"
+        = hidden_field_tag :authenticity_token, form_authenticity_token
+        input class="form-control col-lg-8" name="keyword" text="text" placeholder="#{t 'placeholders.click_to_search'}"
+      ul class="nav navbar-nav navbar-right"
+        li
+          a id="favorites" rel="sidebar" #{t 'links.add_to_favorites'}
+        = render 'widgets/personal_bar'
+        li id="qqAuthBar"
+        li id="googleAuthBar"
+        = render 'widgets/lang_bar'
+
+javascript:
+  $(function () {
+    $("a#favorites").click(function () {
+      var ctrl = (navigator.userAgent.toLowerCase()).indexOf('mac') != -1 ? 'Command/Cmd' : 'CTRL';
+
+      if (document.all) {
+        window.external.addFavorite(location.href, document.title);
+      } else/* if (window.sidebar) {
+       window.sidebar.addPanel(location.href, document.title, "");
+       } else */{
+        alert('添加失败!\n您可以尝试通过快捷键' + ctrl + ' + D 加入到收藏夹~')
+      }
+    });
+  });
+

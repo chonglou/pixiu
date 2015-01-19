@@ -1,0 +1,11 @@
+li
+  = link_to image_tag('famfamfam-flags/img/cn.png', alt: '简体中文', class: 'nav_bar-icon'), controller: controller.controller_name, action: controller.action_name, locale: 'zh-CN'
+li
+  = link_to image_tag('famfamfam-flags/img/us.png', alt: 'English', class: 'nav_bar-icon'), controller: controller.controller_name, action: controller.action_name, locale: 'en'
+
+/li
+/  a href="#{url_for controller:controller.controller_name, action:controller.action_name, locale:'zh-CN'}"
+/    i class='famfamfam-flag-cn'
+/li
+/  a href="#{url_for controller:controller.controller_name, action:controller.action_name, locale:'en'}"
+/    i class='famfamfam-flag-us'

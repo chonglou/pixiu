@@ -13,8 +13,6 @@ module SiteHelper
     links +=sl if sl
 
     if user_signed_in?
-      links << {url: new_user_session_url, name: t('links.personal.sign_in')}
-    else
       links << {url: personal_url, name: t('links.personal.index')}
     end
     links << {url: documents_url, name: t('links.document.index')}

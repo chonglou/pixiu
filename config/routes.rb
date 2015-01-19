@@ -2,7 +2,8 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
 
-  get 'documents/index'
+
+
 
   #-------开始-----------
   scope '/:locale' do
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
     resource :tags
 
     namespace :admin do
+      get 'users'=> 'users#index'
       get 'site/info'
       resources :notices
     end
@@ -22,10 +24,9 @@ Rails.application.routes.draw do
     get 'personal'=>'personal#index'
 
     get 'home' => 'home/index'
-
     get 'home/about_us'
 
-    
+    get 'search' => 'search#index'
   end
 
   authenticate :user, lambda { |u| u.is_admin? } do
