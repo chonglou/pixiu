@@ -5,5 +5,4 @@
 /.idea
 *.swp
 
-/node_modules
 /vendor/assets/bower_components

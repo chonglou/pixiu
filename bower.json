@@ -1,4 +1,5 @@
 {
+  "name": "貔貅",
   "lib": {
     "name": "bower-rails generated lib assets",
     "dependencies": {}
