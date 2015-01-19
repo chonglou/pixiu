@@ -4,7 +4,7 @@ class Admin::SiteController < ApplicationController
   before_action :_set_nav_links
 
   def clear
-    %w('robots.txt sitemap.xml.gz en/rss.xml zh-CN/rss.xml 404.html 422.html 500.html').each {|n| Rails.cache.delete "cache://public/#{n}"}
+    %w(robots.txt sitemap.xml.gz en/rss.xml zh-CN/rss.xml).each {|n| Rails.cache.delete "cache://public/#{n}"}
     flash[:notice] = t('labels.success')
     redirect_to admin_site_status_path
   end

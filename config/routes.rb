@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+
+  %w(robots sitemap rss).each {|a| get a => "home##{a}"}
   root 'home#index'
 
 end
