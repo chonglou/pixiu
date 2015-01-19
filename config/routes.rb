@@ -2,9 +2,6 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
 
-
-
-
   #-------开始-----------
   scope '/:locale' do
     resources :products
@@ -15,8 +12,9 @@ Rails.application.routes.draw do
 
     namespace :admin do
 
-      resources :users, only:[:index, :edit, :update]
+      resources :users, only: [:index, :edit, :update]
       get 'site/status'
+      post 'site/clear'
       %w(info).each do |a|
         get "site/#{a}"
         post "site/#{a}"

@@ -15,6 +15,9 @@ zh-CN:
           title: '当前状态'
           database: '数据库'
           jobs: '后台任务'
+          cache:
+            title: '缓存系统'
+            clear: '清空'
     home:
       index: '首页'
 

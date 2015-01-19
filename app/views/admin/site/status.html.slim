@@ -17,4 +17,12 @@ div class='row'
           $("div#sidekiq-status pre code").text(JSON.stringify(data, null, '\t'));
         });
       });
+  div class='col-sm-3'
+    h3 #{t('links.admin.site.status.cache.title')}
+    hr
+    = render 'widgets/json', body:(Rails.env.production? ? Rails.cache.stats : {})
+    = button_to t('links.admin.site.status.cache.clear'), admin_site_clear_path, method: :post, data: { confirm: t('labels.are_you_sure') }, class:'btn btn-danger'
+
+
+
 

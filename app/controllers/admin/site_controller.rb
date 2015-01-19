@@ -3,6 +3,12 @@ class Admin::SiteController < ApplicationController
   before_action :must_admin!
   before_action :_set_nav_links
 
+  def clear
+    %w('robots.txt sitemap.xml.gz en/rss.xml zh-CN/rss.xml 404.html 422.html 500.html').each {|n| Rails.cache.delete "cache://public/#{n}"}
+    flash[:notice] = t('labels.success')
+    redirect_to admin_site_status_path
+  end
+
   def status
     @mysql=ActiveRecord::Base.connection.execute('SHOW STATUS').inject({}) { |rs, (k, v)| rs[k]=v; rs }
   end
@@ -11,7 +17,7 @@ class Admin::SiteController < ApplicationController
     case request.method
       when 'GET'
       when 'POST'
-        %w(name title keywords description copyright).each {|k|Setting["site_#{k}_#{request[:locale]}"] = params[k.to_sym]}
+        %w(name title keywords description copyright).each { |k| Setting["site_#{k}_#{request[:locale]}"] = params[k.to_sym] }
         render 'info'
       else
     end

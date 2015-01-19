@@ -77,9 +77,10 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'bower-rails'
+gem 'autoprefixer-rails'
 
 # gem 'highcharts-rails'
-# gem 'autoprefixer-rails'
+
 # gem 'momentjs-rails'
 # gem 'bootstrap3-datetimepicker-rails'
 # gem 'emoji'
