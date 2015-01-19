@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118165425) do
+ActiveRecord::Schema.define(version: 20150119024637) do
 
   create_table "carts", force: :cascade do |t|
     t.string   "token",      limit: 36, null: false
@@ -42,6 +42,21 @@ ActiveRecord::Schema.define(version: 20150118165425) do
 
   add_index "comments", ["project_uid"], name: "index_comments_on_project_uid", using: :btree
   add_index "comments", ["uid"], name: "index_comments_on_uid", using: :btree
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4,     null: false
+    t.string   "qq",         limit: 16
+    t.string   "wechat",     limit: 32
+    t.string   "logo",       limit: 255
+    t.string   "fax",        limit: 16
+    t.string   "phone",      limit: 16
+    t.string   "email",      limit: 32
+    t.string   "skype",      limit: 32
+    t.string   "address",    limit: 255
+    t.text     "details",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "locales", force: :cascade do |t|
     t.integer "flag", limit: 2,  null: false
@@ -88,15 +103,16 @@ ActiveRecord::Schema.define(version: 20150118165425) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer  "user_id", limit: 4,                       null: false
-    t.string   "lang",    limit: 5,     default: "zh-CN", null: false
-    t.string   "uid",     limit: 36,                      null: false
-    t.string   "name",    limit: 255,                     null: false
-    t.string   "logo",    limit: 255
-    t.string   "summary", limit: 255,                     null: false
-    t.text     "details", limit: 65535,                   null: false
-    t.integer  "status",  limit: 4,     default: 0,       null: false
-    t.datetime "created",                                 null: false
+    t.integer  "user_id",   limit: 4,                       null: false
+    t.string   "lang",      limit: 5,     default: "zh-CN", null: false
+    t.string   "uid",       limit: 36,                      null: false
+    t.string   "name",      limit: 255,                     null: false
+    t.string   "logo",      limit: 255
+    t.string   "summary",   limit: 255,                     null: false
+    t.text     "details",   limit: 65535,                   null: false
+    t.integer  "status",    limit: 4,     default: 0,       null: false
+    t.datetime "created",                                   null: false
+    t.integer  "vendor_id", limit: 4,                       null: false
   end
 
   add_index "products", ["lang"], name: "index_products_on_lang", using: :btree
@@ -163,5 +179,12 @@ ActiveRecord::Schema.define(version: 20150118165425) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "vendors", force: :cascade do |t|
+    t.string   "name",       limit: 255,   null: false
+    t.text     "details",    limit: 65535, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
 end

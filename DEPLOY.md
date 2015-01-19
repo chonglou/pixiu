@@ -81,16 +81,13 @@
 
 ## 本地
 
-### 部署(第一次)
+### 上传nginx配置
     cap production puma:nginx_config
+### 初始化数据库
     cap production deploy:migrate
-    cap production deploy
     TASK=db:seed cap production rails:task
-
-### 升级
+### 部署
     cap production deploy
-    TASK=db:seed cap production rails:task (可选)
-    
 
 
 ## 测试
