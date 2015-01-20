@@ -37,6 +37,9 @@ set :keep_releases, 7
 # rbenv
 set :rbenv_ruby, '2.2.0'
 
+# bower
+set :bower_flags, '-p'
+
 namespace :deploy do
 
   after :restart, :clear_cache do
