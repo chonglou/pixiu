@@ -5,6 +5,14 @@ class HomeController < ApplicationController
   def index
   end
 
+  def google
+    render 'google', layout: false
+  end
+
+  def baidu
+    render 'baidu', layout: false
+  end
+
   def sitemap
     xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'
     start = Setting.init

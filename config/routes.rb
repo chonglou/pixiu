@@ -15,9 +15,9 @@ Rails.application.routes.draw do
       resources :notices
       resources :users, only: [:index, :edit, :update]
 
-      %w(status seo).each{|a| get "site/#{a}"}
+      %w(status seo).each { |a| get "site/#{a}" }
 
-      %w(google baidu favicon clear).each {|a| post "site/#{a}" }
+      %w(google baidu favicon clear).each { |a| post "site/#{a}" }
 
       %w(info).each do |a|
         get "site/#{a}"
@@ -39,7 +39,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  %w(robots sitemap rss).each {|a| get a => "home##{a}"}
+
+  get 'robots' => 'home#robots', constraints: {format: 'txt'}
+  %w(sitemap rss).each { |a| get a => "home##{a}", constraints: {format: 'xml'} }
+  %w(google baidu).each { |a| match a, to: "home##{a}", anchor: false, constraints: {format: 'html'}, via: [:get] }
+
   root 'home#index'
 
 end
