@@ -1,13 +1,8 @@
-div class='col-sm-9'
-  input id="#{resource.class.to_s.downcase}_#{field}" name="#{resource.class.to_s.downcase}[#{field}]" type="hidden" value="#{resource.send field}"
-  script id="#{resource.class.to_s.downcase}_#{field}_box" name="content" type="text/plain"
+div class='col-sm-10'
+  script id="#{resource.class.to_s.downcase}_#{field}" name="#{resource.class.to_s.downcase}[#{field}]" type="text/plain" #{{resource.send field}}
   javascript:
     $(document).ready(function () {
       $.getScript('/3rd/UEditor/ueditor.all.min.js', function(){
-        var id = '#{resource.class.to_s.downcase}_#{field}';
-        var ue = UE.getEditor(id + "_box");
-        ue.ready(function () {
-          ue.setContent($("input#" + id).val());
-        });
+        UE.getEditor('#{resource.class.to_s.downcase}_#{field}');
       });
     });
