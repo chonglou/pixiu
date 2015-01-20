@@ -19,10 +19,14 @@
 
     = f.group do
       = f.label :body
-      = f.text_area :body
+      = render 'widgets/html_field', resource: @document, field: :body
+
 
     = f.button_group do
       = f.submit t('buttons.submit')
       = f.reset t('buttons.reset')
       = f.back t('buttons.back')
+
+
+
 

@@ -1,3 +1,4 @@
+window.UEDITOR_HOME_URL = "/3rd/UEditor/";
 /**
  * ueditor完整配置项
  * 可以在这里配置整个编辑器的特性
@@ -30,7 +31,7 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: URL + "jsp/controller.jsp"
+        , serverUrl: URL + "../../ueditor"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         , toolbars: [[
@@ -411,3 +412,5 @@
     };
 
 })();
+
+
