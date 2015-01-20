@@ -3,6 +3,12 @@ div class='col-sm-10'
   javascript:
     $(document).ready(function () {
       $.getScript('/3rd/UEditor/ueditor.all.min.js', function(){
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        console.log($('meta[name="csrf-token"]').attr('content'));
         UE.getEditor('#{resource.class.to_s.downcase}_#{field}');
       });
     });

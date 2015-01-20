@@ -14,17 +14,17 @@
 ActiveRecord::Schema.define(version: 20150120204313) do
 
   create_table "attachments", force: :cascade do |t|
-    t.integer  "owner",      limit: 4,   null: false
-    t.string   "title",      limit: 255, null: false
-    t.string   "name",       limit: 36,  null: false
-    t.string   "ext",        limit: 5,   null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "avatar",     limit: 255
+    t.integer  "user_id",      limit: 4,   null: false
+    t.string   "title",        limit: 255, null: false
+    t.string   "content_type", limit: 255, null: false
+    t.string   "ext",          limit: 5,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "avatar",       limit: 255
   end
 
+  add_index "attachments", ["content_type"], name: "index_attachments_on_content_type", using: :btree
   add_index "attachments", ["ext"], name: "index_attachments_on_ext", using: :btree
-  add_index "attachments", ["name"], name: "index_attachments_on_name", unique: true, using: :btree
   add_index "attachments", ["title"], name: "index_attachments_on_title", using: :btree
 
   create_table "carts", force: :cascade do |t|

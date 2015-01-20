@@ -5,3 +5,7 @@ zh-CN:
     success: '操作成功！'
     input_not_valid: '输入数据类型不对'
     recent_documents: '相关文档'
+    ueditor:
+      error:
+        address: '请求地址出错'
+        callback: 'callback参数不合法'

@@ -74,6 +74,7 @@ gem 'devise-async'
 gem 'cancancan', '~> 1.9'
 gem 'rolify'
 gem 'carrierwave'
+gem 'fog'
 gem 'mini_magick'
 
 # 有bug 会让task运行两遍
@@ -81,11 +82,11 @@ gem 'mini_magick'
 gem 'autoprefixer-rails'
 
 # gem 'highcharts-rails'
-
 # gem 'momentjs-rails'
 # gem 'bootstrap3-datetimepicker-rails'
 # gem 'emoji'
 # gem 'jquery-ui-rails'
+# gem 'select2-rails'
 
 gem 'sidekiq'
 gem 'sidekiq-limit_fetch'
@@ -99,7 +100,7 @@ gem 'rufus-scheduler'
 gem 'rails-settings-cached', '0.4.1'
 gem 'kaminari'
 gem 'sinatra', require: nil
-gem 'select2-rails'
+
 #gem 'elasticsearch-model'
 gem 'elasticsearch-persistence'
 gem 'elasticsearch-rails'

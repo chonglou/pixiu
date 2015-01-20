@@ -35,7 +35,13 @@ Rails.application.routes.draw do
     get 'search' => 'search#index'
   end
 
-  get 'attachments'=>'attachments#index'
+
+
+  namespace :attachments do
+    get 'controller'
+    post 'controller'
+  end
+
 
   get 'robots' => 'home#robots', constraints: {format: 'txt'}
   get 'favicon' => 'home#favicon', constraints: {format: 'ico'}
