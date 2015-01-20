@@ -12,15 +12,18 @@ Rails.application.routes.draw do
 
     namespace :admin do
 
+      resources :notices
       resources :users, only: [:index, :edit, :update]
-      get 'site/status'
-      post 'site/clear'
+
+      %w(status seo).each{|a| get "site/#{a}"}
+
+      %w(google baidu favicon clear).each {|a| post "site/#{a}" }
+
       %w(info).each do |a|
         get "site/#{a}"
         post "site/#{a}"
       end
 
-      resources :notices
     end
 
     resources :documents

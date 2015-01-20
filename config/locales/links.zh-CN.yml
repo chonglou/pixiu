@@ -9,6 +9,13 @@ zh-CN:
       site:
         index: '站点管理'
         info: '基本参数'
+        seo:
+          title: '搜索引擎'
+          favicon: '图标'
+          google:
+            code: 'Google'
+          baidu:
+            code: '百度'
         user:
           index: '用户列表'
         status:

@@ -1,0 +1,40 @@
+- @title = t('links.admin.site.seo.title')
+br
+div class="row"
+  fieldset
+    legend #{t('links.admin.site.seo.favicon')}
+    = form_tag(admin_site_favicon_path, class:'form-horizontal') do
+      div class="form-group"
+        label class="col-sm-2 control-label" Icon Url
+        div class="col-sm-6"
+          =text_field_tag :url, Setting.favicon, class: 'form-control'
+
+      div class="form-group"
+        div class="col-sm-offset-3"
+          = submit_tag t('buttons.submit'), class: 'btn btn-primary'
+br
+div class="row"
+  fieldset
+    legend #{t('links.admin.site.seo.google.code')}
+    = form_tag(admin_site_google_path, class:'form-horizontal') do
+      div class="form-group"
+        label class="col-sm-2 control-label" Code
+        div class="col-sm-6"
+          =text_field_tag :code, Setting.google_code, class: 'form-control'
+
+      div class="form-group"
+        div class="col-sm-offset-3"
+          = submit_tag t('buttons.submit'), class: 'btn btn-primary'
+br
+div class="row"
+  fieldset
+    legend #{t('links.admin.site.seo.baidu.code')}
+    = form_tag(admin_site_baidu_path, class:'form-horizontal') do
+      div class="form-group"
+        label class="col-sm-2 control-label" Code
+        div class="col-sm-6"
+          =text_field_tag :code, Setting.baidu_code, class: 'form-control'
+
+      div class="form-group"
+        div class="col-sm-offset-3"
+          = submit_tag t('buttons.submit'), class: 'btn btn-primary'
