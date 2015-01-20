@@ -21,7 +21,7 @@
     sudo add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main"
     sudo apt-get update
     sudo apt-get install build-essential
-    sudo apt-get install pwgen git
+    sudo apt-get install pwgen git imagemagick
     sudo apt-get install nginx nodejs mysql-server memcached redis-server elasticsearch
     sudo apt-get install libffi-dev zlib1g-dev libssl-dev
     sudo apt-get install libmysqlclient-dev

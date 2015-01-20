@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119043340) do
+ActiveRecord::Schema.define(version: 20150120204313) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "owner",      limit: 4,   null: false
+    t.string   "title",      limit: 255, null: false
+    t.string   "name",       limit: 36,  null: false
+    t.string   "ext",        limit: 5,   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "avatar",     limit: 255
+  end
+
+  add_index "attachments", ["ext"], name: "index_attachments_on_ext", using: :btree
+  add_index "attachments", ["name"], name: "index_attachments_on_name", unique: true, using: :btree
+  add_index "attachments", ["title"], name: "index_attachments_on_title", using: :btree
 
   create_table "carts", force: :cascade do |t|
     t.string   "token",      limit: 36, null: false

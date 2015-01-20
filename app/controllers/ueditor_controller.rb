@@ -2,11 +2,10 @@ class UeditorController < ApplicationController
   def index
     case _get_action
       when 'config'
-        rv={}
+        render text: File.open("#{Rails.root}/config/ueditor.json", 'r') { |f| f.read.gsub /\/\*[\s\S]+?\*\//, '' }
       else
-        rv={}
+        render json: {}
     end
-    render json: rv
   end
 
   private
