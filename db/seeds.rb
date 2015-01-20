@@ -6,12 +6,15 @@ root.save!
 root.add_role 'admin'
 root.add_role 'root'
 
-n1 = Notice.create lang: 'zh-CN', content: '安装成功'
-n2 = Notice.create lang: 'en', content: 'Install completed'
-nl= SecureRandom.uuid
-Locale.create flag: :notice, uid: nl, lang: 'zh-CN', tid: n1.id
-Locale.create flag: :notice, uid: nl, lang: 'en', tid: n2.id
-
 Setting['site_name_zh-CN']= '貔貅系统'
 Setting['site_name_en']= 'Pixiu System'
+
+Notice.create lang: 'zh-CN', content: '安装成功'
+Notice.create lang: 'en', content: 'Install completed'
+
+Document.create lang: 'zh-CN', name: 'contact', title: '联系我们', summary: '摘要', body: '详细信息'
+Document.create lang: 'en', name: 'contact', title: 'Contact Us', summary: 'Summary', body: 'Details'
+Document.create lang: 'zh-CN', name: 'help', title: '帮助中心', summary: '摘要', body: '详细信息'
+Document.create lang: 'en', name: 'help', title: 'Help Center', summary: 'Summary', body: 'Details'
+
 Setting.version = 'v20150118'

@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20150119043340) do
     t.datetime "updated_at",                                 null: false
   end
 
-  add_index "documents", ["name"], name: "index_documents_on_name", unique: true, using: :btree
+  add_index "documents", ["name", "lang"], name: "index_documents_on_name_and_lang", unique: true, using: :btree
 
   create_table "locales", force: :cascade do |t|
     t.integer "flag", limit: 2,  null: false
@@ -115,16 +115,15 @@ ActiveRecord::Schema.define(version: 20150119043340) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer  "user_id",   limit: 4,                       null: false
-    t.string   "lang",      limit: 5,     default: "zh-CN", null: false
-    t.string   "uid",       limit: 36,                      null: false
-    t.string   "name",      limit: 255,                     null: false
-    t.string   "logo",      limit: 255
-    t.string   "summary",   limit: 255,                     null: false
-    t.text     "details",   limit: 65535,                   null: false
-    t.integer  "status",    limit: 4,     default: 0,       null: false
-    t.datetime "created",                                   null: false
-    t.integer  "vendor_id", limit: 4,                       null: false
+    t.integer  "user_id", limit: 4,                       null: false
+    t.string   "lang",    limit: 5,     default: "zh-CN", null: false
+    t.string   "uid",     limit: 36,                      null: false
+    t.string   "name",    limit: 255,                     null: false
+    t.string   "logo",    limit: 255
+    t.string   "summary", limit: 255,                     null: false
+    t.text     "details", limit: 65535,                   null: false
+    t.integer  "status",  limit: 4,     default: 0,       null: false
+    t.datetime "created",                                 null: false
   end
 
   add_index "products", ["lang"], name: "index_products_on_lang", using: :btree
@@ -191,12 +190,5 @@ ActiveRecord::Schema.define(version: 20150119043340) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
-
-  create_table "vendors", force: :cascade do |t|
-    t.string   "name",       limit: 255,   null: false
-    t.text     "details",    limit: 65535, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
 
 end

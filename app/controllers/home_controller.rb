@@ -83,7 +83,7 @@ class HomeController < ApplicationController
       r = RSS::Maker.make('atom') do |maker|
         maker.channel.author = "no-reply@#{ENV['PIXIU_DOMAIN']}"
         maker.channel.updated = Time.now.to_s
-        maker.channel.about = show_document_url('about_us', locale: (lang||'zh-CN'))
+        maker.channel.about = show_document_url('contact', locale: (lang||'zh-CN'))
         maker.channel.title = Setting["site_title_#{lang||'zh-CN'}"] || ' '
 
         insert_item = ->(link, title, description, updated) {

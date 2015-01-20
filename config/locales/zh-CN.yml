@@ -3,4 +3,4 @@ zh-CN:
     require_role: '权限不足'
     are_you_sure: '你确定要进行此操作么？'
     success: '操作成功！'
-    recent_documents: '相关文章'
+    recent_documents: '相关文档'
