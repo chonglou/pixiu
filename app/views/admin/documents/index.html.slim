@@ -12,7 +12,7 @@ div class='row'
   footer
     | #{time_ago_in_words d.updated_at} &nbsp;
     cite
-      = link_to t('buttons.view'), show_document_path(d.name)
+      = link_to t('buttons.view'), show_document_path(d.name), target: '_blank'
       | &nbsp; &nbsp;
       = link_to t('buttons.edit'), edit_admin_document_path(d)
 

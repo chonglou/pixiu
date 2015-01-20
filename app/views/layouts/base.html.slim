@@ -11,6 +11,7 @@ html
     link rel="shortcut icon" type="image/x-icon" href="#{Setting.favicon}"
     title #{site_info 'title'}#{"-#{@title}" if @title}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'base', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'base', 'data-turbolinks-track' => true
     /[if lt IE 9]

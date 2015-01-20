@@ -30,7 +30,7 @@ class HomeController < ApplicationController
           xm.urlset(xmlns: xmlns) {
             Document.select(:name, :lang, :updated_at).where('updated_at >= ? && updated_at< ?', time, time>>1).order(updated_at: :desc).each do |doc|
               xm.url {
-                xm.loc show_document_path(doc.name, locale: doc.lang)
+                xm.loc show_document_url(doc.name, locale: doc.lang)
                 xm.lastmod doc.updated_at
               }
             end
