@@ -2,6 +2,8 @@ require 'rss'
 require 'builder'
 
 class HomeController < ApplicationController
+  include SharedHelper
+
   def index
   end
 
@@ -26,10 +28,10 @@ class HomeController < ApplicationController
           xm = Builder::XmlMarkup.new(target: target)
           xm.instruct!
           xm.urlset(xmlns: xmlns) {
-            Document.select(:name, :updated_at).where('updated_at >= ? && updated_at< ?', time, time>>1).each do |doc|
-              xml.url {
-                xml.loc document_path(locale: nil, id: doc.name)
-                xml.lastmod doc.updated_at
+            Document.select(:name, :lang, :updated_at).where('updated_at >= ? && updated_at< ?', time, time>>1).order(updated_at: :desc).each do |doc|
+              xm.url {
+                xm.loc show_document_path(doc.name, locale: doc.lang)
+                xm.lastmod doc.updated_at
               }
             end
             # todo 其它
@@ -81,22 +83,23 @@ class HomeController < ApplicationController
       r = RSS::Maker.make('atom') do |maker|
         maker.channel.author = "no-reply@#{ENV['PIXIU_DOMAIN']}"
         maker.channel.updated = Time.now.to_s
-        maker.channel.about = document_url(id: 'about_us', locale: (lang||'zh-CN'))
+        maker.channel.about = show_document_url('about_us', locale: (lang||'zh-CN'))
         maker.channel.title = Setting["site_title_#{lang||'zh-CN'}"] || ' '
 
-        insert_item = ->(link, title, updated) {
+        insert_item = ->(link, title, description, updated) {
           maker.items.new_item do |item|
             item.link = link
             item.title = title
-            item.updated = updated
+            item.description = html2text description
+            item.updated = updated.to_s
           end
         }
 
         if lang
-          Document.select(:name, :updated_at, :title).where(lang: lang).limit(5).each { |doc| insert_item.call documents_url(id: doc.name), doc.title, doc.updated_at }
+          Document.select(:name, :lang, :summary, :updated_at, :title).where(lang: lang).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_url(doc.name, locale:doc.lang), doc.title, md2html(doc.summary), doc.updated_at }
           #todo 其它
         else
-          Document.select(:name, :updated_at, :title).limit(5).each { |doc| insert_item.call documents_url(id: doc.name), doc.title, doc.updated_at }
+          Document.select(:name, :lang, :summary, :updated_at, :title).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_url(doc.name, locale:doc.lang), doc.title, md2html(doc.summary), doc.updated_at }
           #todo 其它
         end
 

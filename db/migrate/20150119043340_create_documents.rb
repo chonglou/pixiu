@@ -8,6 +8,6 @@ class CreateDocuments < ActiveRecord::Migration
       t.text :body, null:false
       t.timestamps null: false
     end
-    add_index :documents, :name, unique: true
+    add_index :documents, [:name, :lang], unique: true
   end
 end
