@@ -1,10 +1,12 @@
 module PersonalHelper
   def left_nav_links
     user = current_user
-    links = [{url:edit_user_registration_url, name:t('links.personal.profile')}]
+    links = [{url: edit_user_registration_url, name: t('links.personal.profile')}]
     if user.is_admin?
       links << {url: admin_site_info_url, name: t('links.admin.site.index')}
-      links << {url: admin_users_url, name: t('links.personal.users.index')}
+    end
+    if user.is_author? || user.is_admin?
+      links << {url: admin_notices_url, name: t('links.admin.notice.index')}
       links << {url: documents_url, name: t('links.personal.document.index')}
     end
     links

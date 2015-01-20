@@ -24,8 +24,8 @@ module SiteHelper
     [
         {url: admin_site_status_url, name: t('links.admin.site.status.title')},
         {url: admin_site_info_url, name: t('links.admin.site.info')},
-        {url: admin_notices_url, name: t('links.admin.notice.index')},
         {url: admin_site_seo_url, name: t('links.admin.site.seo.title')},
+        {url: admin_users_url, name: t('links.admin.user.index')},
     ]
   end
 end

@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+
+  def to_s
+    "#{self.label}<#{self.email}>"
+  end
 end

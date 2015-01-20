@@ -1,0 +1,30 @@
+- @title = t('links.admin.user.index')
+- @right_nav_links = admin_site_right_nav_links
+br
+= paginate @users
+
+table id='users' class="table table-bordered table-hover"
+  thead
+    tr
+      th #{t('helpers.label.user.username')}
+      th #{t('helpers.label.role.admin')}
+      th #{t('helpers.label.role.author')}
+      th #{t('helpers.label.role.seller')}
+      th #{t('helpers.label.role.assistant')}
+  tbody
+    - @users.each do |u|
+      -unless u.is_root?
+        tr url='#{edit_admin_user_path(u)}'
+          td #{u}
+          td #{u.is_admin?}
+          td #{u.is_author?}
+          td #{u.is_seller?}
+          td #{u.is_assistant?}
+
+javascript:
+  $(function(){
+    click_table_row('users');
+  });
+
+
+

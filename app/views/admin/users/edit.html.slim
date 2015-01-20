@@ -1,0 +1,30 @@
+- @title = t('links.admin.user.edit', user:@user.label)
+br
+div class="row"
+  fieldset
+    legend #{@title}
+    = form_tag(admin_user_path(@user), method: :patch, class: 'form-horizontal') do
+      div class="form-group"
+        div class="col-sm-offset-1 col-sm-2"
+          = label_tag :admin, :class => 'checkbox' do
+            = check_box_tag :admin, true, @user.is_admin?
+            | #{t('helpers.label.role.admin')}
+        div class="col-sm-2"
+          = label_tag :author, :class => 'checkbox' do
+            = check_box_tag :author, true, @user.is_author?
+            | #{t('helpers.label.role.author')}
+        div class="col-sm-2"
+          = label_tag :seller, :class => 'checkbox' do
+            = check_box_tag :seller, true, @user.is_seller?
+            | #{t('helpers.label.role.seller')}
+        div class="col-sm-2"
+          = label_tag :assistant, :class => 'checkbox' do
+            = check_box_tag :assistant, true,@user.is_assistant?
+            | #{t('helpers.label.role.assistant')}
+
+
+      div class="form-group"
+        div class="col-sm-offset-3"
+          = submit_tag t('buttons.submit'), class: 'btn btn-primary'
+          | &nbsp; &nbsp;
+          = link_to t('buttons.back'), admin_users_path, class: 'btn btn-info'

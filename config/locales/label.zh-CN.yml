@@ -1,6 +1,11 @@
 zh-CN:
   helpers:
     label:
+      role:
+        assistant: '客户服务'
+        author: '网站编辑'
+        seller: '售前服务'
+        admin: '管理员'
       user:
         login: '邮箱/ID'
         label: '唯一ID'
