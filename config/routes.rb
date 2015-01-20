@@ -35,8 +35,10 @@ Rails.application.routes.draw do
     get 'search' => 'search#index'
   end
 
-  get 'ueditor'=>'ueditor#index'
+  get 'attachments'=>'attachments#index'
+
   get 'robots' => 'home#robots', constraints: {format: 'txt'}
+  get 'favicon' => 'home#favicon', constraints: {format: 'ico'}
   %w(sitemap rss).each { |a| get a => "home##{a}", constraints: {format: 'xml'} }
   %w(google baidu).each { |a| match a, to: "home##{a}", anchor: false, constraints: {format: 'html'}, via: [:get] }
 

@@ -13,7 +13,12 @@ class Admin::SiteController < ApplicationController
   end
 
   def favicon
-    Setting.favicon = params[:url]
+    iio = params[:icon]
+    if iio && iio.content_type == 'image/vnd.microsoft.icon'
+      Setting.favicon = {data:iio.read, type:iio.content_type}
+    else
+      flash[:alert] = t('labels.input_not_valid')
+    end
     redirect_to admin_site_seo_path
   end
 

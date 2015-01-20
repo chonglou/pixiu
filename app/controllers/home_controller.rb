@@ -7,6 +7,15 @@ class HomeController < ApplicationController
   def index
   end
 
+  def favicon
+    icon = Setting.favicon
+    if icon
+      send_data icon.fetch(:data), type: icon.fetch(:type), disposition: 'inline'
+    else
+      render text: ''
+    end
+  end
+
   def google
     render 'google', layout: false
   end
@@ -96,10 +105,10 @@ class HomeController < ApplicationController
         }
 
         if lang
-          Document.select(:name, :lang, :summary, :updated_at, :title).where(lang: lang).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_url(doc.name, locale:doc.lang), doc.title, md2html(doc.summary), doc.updated_at }
+          Document.select(:name, :lang, :summary, :updated_at, :title).where(lang: lang).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_url(doc.name, locale: doc.lang), doc.title, md2html(doc.summary), doc.updated_at }
           #todo 其它
         else
-          Document.select(:name, :lang, :summary, :updated_at, :title).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_url(doc.name, locale:doc.lang), doc.title, md2html(doc.summary), doc.updated_at }
+          Document.select(:name, :lang, :summary, :updated_at, :title).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_url(doc.name, locale: doc.lang), doc.title, md2html(doc.summary), doc.updated_at }
           #todo 其它
         end
 

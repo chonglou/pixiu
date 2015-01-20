@@ -3,4 +3,5 @@ zh-CN:
     require_role: '权限不足'
     are_you_sure: '你确定要进行此操作么？'
     success: '操作成功！'
+    input_not_valid: '输入数据类型不对'
     recent_documents: '相关文档'

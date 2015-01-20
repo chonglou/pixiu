@@ -6,5 +6,5 @@
 *.swp
 
 /public/*
-!/public/favicon.ico
+!/public/.keep
 /vendor/assets/bower_components

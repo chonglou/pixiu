@@ -4,17 +4,17 @@ br
 div class="row"
   fieldset
     legend #{t('links.admin.site.seo.favicon')}
-    = form_tag(admin_site_favicon_path, class: 'form-horizontal') do
+    = form_tag(admin_site_favicon_path, class: 'form-horizontal', multipart: true) do
       div class="form-group"
-        label class="col-sm-2 control-label" Icon Url
-        div class="col-sm-6"
-          =text_field_tag :url, Setting.favicon, class: 'form-control'
+        label class="col-sm-2 control-label" Please select file:
+        div class="col-sm-offset-1col-sm-6"
+          = file_field_tag 'icon'
 
       div class="form-group"
         div class="col-sm-offset-3"
           = submit_tag t('buttons.submit'), class: 'btn btn-primary'
           | &nbsp; &nbsp;
-          = link_to t('buttons.view'), Setting.favicon, class: 'btn btn-info', target: '_blank'
+          = link_to t('buttons.view'), '/favicon.ico', class: 'btn btn-info', target: '_blank'
 br
 div class="row"
   fieldset

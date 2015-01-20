@@ -9,6 +9,7 @@
     "famfamfam-flags": "latest",
     "famfamfam-silk": "latest",
     "moment": "latest",
+    "jquery-file-upload": "latest",
     "ueditor": "latest"
   }
 }
