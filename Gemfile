@@ -76,7 +76,8 @@ gem 'rolify'
 gem 'carrierwave'
 gem 'mini_magick'
 
-gem 'bower-rails'
+# 有bug 会让task运行两遍
+#gem 'bower-rails'
 gem 'autoprefixer-rails'
 
 # gem 'highcharts-rails'

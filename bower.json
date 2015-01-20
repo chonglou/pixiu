@@ -16,7 +16,8 @@
       "famfamfam-silk": "latest",
       //      "famfamfam-flags-sprite":"latest",
       //      "famfamfam-silk-sprite":"latest",
-      "moment": "latest"
+      "moment": "latest",
+      "ueditor": "latest"
     }
   }
 }

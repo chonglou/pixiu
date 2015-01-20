@@ -27,6 +27,7 @@
     sudo apt-get install libmysqlclient-dev
     sudo apt-get clean
     sudo npm install -g bower
+    sudo npm install -g grunt-cli
     sudo ln -s /usr/bin/nodejs /usr/bin/node
     mysql_secure_installation
 
