@@ -4,6 +4,7 @@ module PersonalHelper
     links = [{url:edit_user_registration_url, name:t('links.personal.profile')}]
     if user.is_admin?
       links << {url: admin_site_info_url, name: t('links.admin.site.index')}
+      links << {url: admin_users_url, name: t('links.personal.users.index')}
       links << {url: documents_url, name: t('links.personal.document.index')}
     end
     links

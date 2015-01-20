@@ -1,0 +1,20 @@
+- @title=t('links.admin.notice.edit', id:@notice.id)
+
+= bootstrap_form(@notice, url:{action:'update'}) do |f|
+  = f.error_messages
+  = f.fieldset do
+    = f.legend(@title)
+
+    = f.group do
+      = f.label :content
+      = f.text_area :content, autofocus: true
+
+    = f.button_group do
+      = f.submit t('buttons.submit')
+      = f.reset t('buttons.reset')
+      = f.back t('buttons.back')
+
+h3 #{t('links.admin.notice.remove', id:@notice.id)}
+hr
+= render 'widgets/remove_button', url:admin_notice_path(@notice)
+

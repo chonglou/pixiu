@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
 
-      resources :notices
+      resources :notices, except:[:show]
       resources :users, only: [:index, :edit, :update]
 
       %w(status seo).each { |a| get "site/#{a}" }

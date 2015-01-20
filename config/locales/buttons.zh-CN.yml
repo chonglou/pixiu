@@ -3,3 +3,7 @@ zh-CN:
     submit: '提交'
     back: '返回'
     view: '查看'
+    reset: '重写'
+    remove: '删除'
+    edit: '编辑'
+    test: '测试'

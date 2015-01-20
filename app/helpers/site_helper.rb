@@ -19,4 +19,13 @@ module SiteHelper
 
     links
   end
+
+  def admin_site_right_nav_links
+    [
+        {url: admin_site_status_url, name: t('links.admin.site.status.title')},
+        {url: admin_site_info_url, name: t('links.admin.site.info')},
+        {url: admin_notices_url, name: t('links.admin.notice.index')},
+        {url: admin_site_seo_url, name: t('links.admin.site.seo.title')},
+    ]
+  end
 end

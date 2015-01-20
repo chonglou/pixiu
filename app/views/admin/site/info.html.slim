@@ -1,9 +1,10 @@
 - @title = t('links.admin.site.info')
+- @right_nav_links = admin_site_right_nav_links
 br
 div class="row"
   fieldset
     legend #{@title}
-    = form_tag(admin_site_info_path, class:'form-horizontal') do
+    = form_tag(admin_site_info_path, class: 'form-horizontal') do
       div class="form-group"
         label class="col-sm-2 control-label" Name
         div class="col-sm-6"
@@ -21,7 +22,7 @@ div class="row"
       div class="form-group"
         label class="col-sm-2 control-label" Description
         div class="col-sm-9"
-          =text_area_tag :description, site_info('description'), class: 'form-control', rows:10
+          =text_area_tag :description, site_info('description'), class: 'form-control', rows: 10
 
       div class="form-group"
         label class="col-sm-2 control-label" Copyright
@@ -32,4 +33,4 @@ div class="row"
         div class="col-sm-offset-3"
           = submit_tag t('buttons.submit'), class: 'btn btn-primary'
           | &nbsp; &nbsp;
-          = link_to t('buttons.back'), :back, class:'btn btn-info'
+          = link_to t('buttons.back'), :back, class: 'btn btn-info'

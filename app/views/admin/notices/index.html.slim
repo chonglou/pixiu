@@ -1,0 +1,18 @@
+- @title = t('links.admin.notice.index')
+- @right_nav_links = admin_site_right_nav_links
+br
+div class='row'
+  div class='btn-group pull-right'
+    = link_to t('links.admin.notice.new'), new_admin_notice_path, class:'btn btn-primary'
+= paginate @notices
+
+- @notices.each do |n|
+  blockquote
+    p #{{md2html n.content}}
+  footer
+    | #{time_ago_in_words n.updated_at} &nbsp;
+    cite
+      = link_to t('buttons.edit'),edit_admin_notice_path(n)
+
+
+

@@ -1,0 +1,16 @@
+- @title=t('links.admin.notice.new')
+
+= bootstrap_form(@notice, url:{action:'create'}) do |f|
+  = f.error_messages
+  = f.fieldset do
+    = f.legend(@title)
+
+    = f.group do
+      = f.label :content
+      = f.text_area :content, autofocus: true
+
+    = f.button_group do
+      = f.submit t('buttons.submit')
+      = f.reset t('buttons.reset')
+      = f.back t('buttons.back')
+

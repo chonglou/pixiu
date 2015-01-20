@@ -1,9 +1,10 @@
 - @title = t('links.admin.site.seo.title')
+- @right_nav_links = admin_site_right_nav_links
 br
 div class="row"
   fieldset
     legend #{t('links.admin.site.seo.favicon')}
-    = form_tag(admin_site_favicon_path, class:'form-horizontal') do
+    = form_tag(admin_site_favicon_path, class: 'form-horizontal') do
       div class="form-group"
         label class="col-sm-2 control-label" Icon Url
         div class="col-sm-6"
@@ -13,12 +14,12 @@ div class="row"
         div class="col-sm-offset-3"
           = submit_tag t('buttons.submit'), class: 'btn btn-primary'
           | &nbsp; &nbsp;
-          = link_to t('buttons.view'), Setting.favicon, class:'btn btn-info', target:'_blank'
+          = link_to t('buttons.view'), Setting.favicon, class: 'btn btn-info', target: '_blank'
 br
 div class="row"
   fieldset
     legend #{t('links.admin.site.seo.google.code')}
-    = form_tag(admin_site_google_path, class:'form-horizontal') do
+    = form_tag(admin_site_google_path, class: 'form-horizontal') do
       div class="form-group"
         label class="col-sm-2 control-label" Code
         div class="col-sm-6"
@@ -28,12 +29,12 @@ div class="row"
         div class="col-sm-offset-3"
           = submit_tag t('buttons.submit'), class: 'btn btn-primary'
           | &nbsp; &nbsp;
-          = link_to t('buttons.view'), "/google#{Setting.google_code}.html", class:'btn btn-info', target:'_blank'
+          = link_to t('buttons.view'), "/google#{Setting.google_code}.html", class: 'btn btn-info', target: '_blank'
 br
 div class="row"
   fieldset
     legend #{t('links.admin.site.seo.baidu.code')}
-    = form_tag(admin_site_baidu_path, class:'form-horizontal') do
+    = form_tag(admin_site_baidu_path, class: 'form-horizontal') do
       div class="form-group"
         label class="col-sm-2 control-label" Code
         div class="col-sm-6"
@@ -43,4 +44,4 @@ div class="row"
         div class="col-sm-offset-3"
           = submit_tag t('buttons.submit'), class: 'btn btn-primary'
           | &nbsp; &nbsp;
-          = link_to t('buttons.view'), "/baidu_verify_#{Setting.baidu_code}.html", class:'btn btn-info', target:'_blank'
+          = link_to t('buttons.view'), "/baidu_verify_#{Setting.baidu_code}.html", class: 'btn btn-info', target: '_blank'
