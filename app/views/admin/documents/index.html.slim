@@ -7,8 +7,8 @@ div class='row'
 
 - @documents.each do |d|
   blockquote
-    h4 #{d.title}
-    p #{{md2html d.summary}}
+    h3 #{d.title}
+    |#{{md2html d.summary}}
   footer
     | #{time_ago_in_words d.updated_at} &nbsp;
     cite
