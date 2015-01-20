@@ -1,6 +1,11 @@
 zh-CN:
   helpers:
     label:
+      document:
+        name: '路径名'
+        title: '标题'
+        summary: '摘要'
+        body: '正文'
       role:
         assistant: '客户服务'
         author: '网站编辑'

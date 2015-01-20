@@ -8,12 +8,15 @@ Rails.application.routes.draw do
     resources :orders
     resources :carts
     resources :comments
-    resource :tags
+    resources :tags
 
+    #------------------------------------
+    get 'documents/:name'=>'documents#show', as: :show_document
     namespace :admin do
 
       resources :notices, except:[:show]
       resources :users, only: [:index, :edit, :update]
+      resources :documents, expect:[:show]
 
       %w(status seo).each { |a| get "site/#{a}" }
 
@@ -26,23 +29,23 @@ Rails.application.routes.draw do
 
     end
 
-    resources :documents
+
 
     get 'home' => 'home/index'
 
     get 'search' => 'search#index'
   end
 
+
+  get 'robots' => 'home#robots', constraints: {format: 'txt'}
+  %w(sitemap rss).each { |a| get a => "home##{a}", constraints: {format: 'xml'} }
+  %w(google baidu).each { |a| match a, to: "home##{a}", anchor: false, constraints: {format: 'html'}, via: [:get] }
+
   authenticate :user, lambda { |u| u.is_admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
   devise_for :users
-
-
-  get 'robots' => 'home#robots', constraints: {format: 'txt'}
-  %w(sitemap rss).each { |a| get a => "home##{a}", constraints: {format: 'xml'} }
-  %w(google baidu).each { |a| match a, to: "home##{a}", anchor: false, constraints: {format: 'html'}, via: [:get] }
 
   root 'home#index'
 

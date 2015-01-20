@@ -1,6 +1,6 @@
 class Admin::NoticesController < ApplicationController
   layout 'dashboard'
-  before_action :must_admin!
+  before_action :must_author!
 
   def index
     @notices = Notice.select(:id, :content, :updated_at).order(updated_at: :desc).where(lang: params[:locale]).page params[:page]

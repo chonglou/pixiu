@@ -1,0 +1,20 @@
+- @title = t('links.admin.document.index')
+br
+div class='row'
+  div class='btn-group pull-right'
+    = link_to t('links.admin.document.new'), new_admin_document_path, class: 'btn btn-primary'
+= paginate @documents
+
+- @documents.each do |d|
+  blockquote
+    h4 #{d.title}
+    p #{{md2html d.summary}}
+  footer
+    | #{time_ago_in_words d.updated_at} &nbsp;
+    cite
+      = link_to t('buttons.view'), show_document_path(d.name)
+      | &nbsp; &nbsp;
+      = link_to t('buttons.edit'), edit_admin_document_path(d)
+
+
+

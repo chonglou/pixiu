@@ -1,0 +1,28 @@
+- @title=t('links.admin.document.new')
+
+= bootstrap_form(@document, url:{action:'create'}) do |f|
+  = f.error_messages
+  = f.fieldset do
+    = f.legend(@title)
+
+    = f.group do
+      = f.label :name
+      = f.name_field :name
+
+    = f.group do
+      = f.label :title
+      = f.text_field :title
+
+    = f.group do
+      = f.label :summary
+      = f.text_area :summary
+
+    = f.group do
+      = f.label :body
+      = f.text_area :body
+
+    = f.button_group do
+      = f.submit t('buttons.submit')
+      = f.reset t('buttons.reset')
+      = f.back t('buttons.back')
+

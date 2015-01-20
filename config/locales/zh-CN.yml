@@ -1,5 +1,5 @@
 zh-CN:
   labels:
-    must_admin: '您必须是管理员'
+    require_role: '权限不足'
     are_you_sure: '你确定要进行此操作么？'
     success: '操作成功！'

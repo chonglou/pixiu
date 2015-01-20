@@ -3,13 +3,18 @@ zh-CN:
     welcome: "欢迎你, <img src='%{logo}' alt='%{username}' title='%{username}'/>"
     add_to_favorites: '收藏本页'
     admin:
+      document:
+        index: '文档管理'
+        new: '添加文档'
+        edit: '编辑文档[%{id}]'
+        remove: '删除文档[%{id}]'
       notice:
         index: '通知公告'
         new: '添加公告'
         edit: '编辑公告[%{id}]'
         remove: '删除公告[%{id}]'
       user:
-        index: '用户列表'
+        index: '用户权限'
         edit: '修改用户[%{user}]权限'
       site:
         index: '站点管理'

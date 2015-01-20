@@ -14,8 +14,8 @@ module SiteHelper
     if user_signed_in?
       links << {url: edit_user_registration_path, name: t('links.personal.index')}
     end
-    links << {url: document_url(id: 'help'), name: t('links.document.help')}
-    links << {url: document_url(id: 'contact'), name: t('links.document.contact')}
+    links << {url: show_document_url('help'), name: t('links.document.help')}
+    links << {url: show_document_url('contact'), name: t('links.document.contact')}
 
     links
   end

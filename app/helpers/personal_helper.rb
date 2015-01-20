@@ -7,7 +7,7 @@ module PersonalHelper
     end
     if user.is_author? || user.is_admin?
       links << {url: admin_notices_url, name: t('links.admin.notice.index')}
-      links << {url: documents_url, name: t('links.personal.document.index')}
+      links << {url: admin_documents_url, name: t('links.admin.document.index')}
     end
     links
   end

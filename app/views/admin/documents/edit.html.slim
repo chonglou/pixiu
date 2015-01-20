@@ -1,0 +1,32 @@
+- @title=t('links.admin.document.edit', id:@document.id)
+
+= bootstrap_form(@document, url:{action:'update'}) do |f|
+  = f.error_messages
+  = f.fieldset do
+    = f.legend(@title)
+
+    = f.group do
+      = f.label :name
+      = f.name_field :name
+
+    = f.group do
+      = f.label :title
+      = f.text_field :title
+
+    = f.group do
+      = f.label :summary
+      = f.text_area :summary
+
+    = f.group do
+      = f.label :body
+      = f.text_area :body
+
+    = f.button_group do
+      = f.submit t('buttons.submit')
+      = f.reset t('buttons.reset')
+      = f.back t('buttons.back')
+
+h3 #{t('links.admin.document.remove', id:@document.id)}
+hr
+= render 'widgets/remove_button', url:admin_document_path(@document)
+

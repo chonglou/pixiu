@@ -9,9 +9,16 @@ class ApplicationController < ActionController::Base
     {locale: I18n.locale}.merge options
   end
 
+  def must_author!
+    unless current_user && (current_user.is_author? || current_user.is_admin?)
+      flash[:alert] = t('labels.require_role')
+      redirect_to root_path
+    end
+  end
+
   def must_admin!
-    unless current_user && current_user.has_role?(:admin)
-      flash[:alert] = t('labels.must_admin')
+    unless current_user && current_user.is_admin?
+      flash[:alert] = t('labels.require_role')
       redirect_to root_path
     end
   end
