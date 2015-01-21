@@ -14,6 +14,7 @@ module PersonalHelper
     links << {url: admin_notices_url, name: t('links.admin.notice.index')} if ab.can?(:manage, :notice)
     links << {url: admin_documents_url, name: t('links.admin.document.index')} if ab.can?(:manage, :document)
     links << {url: admin_products_url, name: t('links.admin.product.index')} if ab.can?(:manage, :product)
+    links << {url: admin_tags_url, name: t('links.admin.tag.index')} if ab.can?(:manage, :tag)
 
     links
   end

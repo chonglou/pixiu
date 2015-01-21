@@ -12,6 +12,7 @@ class Ability
         can :manage, :notice
         can :manage, :document
         can :manage, :product
+        can :manage, :tag
       end
     end
 
