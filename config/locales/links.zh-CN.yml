@@ -3,6 +3,11 @@ zh-CN:
     welcome: "欢迎你, <img src='%{logo}' alt='%{username}' title='%{username}'/>"
     add_to_favorites: '收藏本页'
     admin:
+      product:
+        index: '商品管理'
+        new: '添加商品'
+        edit: '编辑商品[%{id}]'
+        remove: '删除商品[%{id}]'
       document:
         index: '文档管理'
         new: '添加文档'

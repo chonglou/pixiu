@@ -129,18 +129,20 @@ ActiveRecord::Schema.define(version: 20150120204313) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.integer  "user_id", limit: 4,                       null: false
-    t.string   "lang",    limit: 5,     default: "zh-CN", null: false
-    t.string   "uid",     limit: 36,                      null: false
-    t.string   "name",    limit: 255,                     null: false
-    t.string   "logo",    limit: 255
-    t.string   "summary", limit: 255,                     null: false
-    t.text     "details", limit: 65535,                   null: false
-    t.integer  "status",  limit: 4,     default: 0,       null: false
-    t.datetime "created",                                 null: false
+    t.string   "lang",       limit: 5,     default: "zh-CN", null: false
+    t.string   "uid",        limit: 36,                      null: false
+    t.string   "name",       limit: 255,                     null: false
+    t.string   "logo",       limit: 255
+    t.string   "summary",    limit: 255,                     null: false
+    t.text     "details",    limit: 65535,                   null: false
+    t.integer  "status",     limit: 4,     default: 0,       null: false
+    t.integer  "version",    limit: 4,     default: 0,       null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "products", ["lang"], name: "index_products_on_lang", using: :btree
+  add_index "products", ["uid", "version"], name: "index_products_on_uid_and_version", unique: true, using: :btree
   add_index "products", ["uid"], name: "index_products_on_uid", using: :btree
 
   create_table "roles", force: :cascade do |t|

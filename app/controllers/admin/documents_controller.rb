@@ -27,8 +27,11 @@ class Admin::DocumentsController < ApplicationController
 
   def update
     @document = Document.find params[:id]
-    @document.update _document_params
-    redirect_to admin_documents_path
+     if @document.update _document_params
+       redirect_to admin_documents_path
+     else
+       render 'edit'
+     end
   end
 
   def destroy

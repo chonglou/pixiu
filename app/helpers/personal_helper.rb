@@ -8,10 +8,12 @@ module PersonalHelper
   end
   def left_nav_links
     ab = Ability.new(current_user)
+
     links = [{url: edit_user_registration_url, name: t('links.personal.profile')}]
     links << {url: admin_site_info_url, name: t('links.admin.site.index')} if ab.can?(:manage, :site)
     links << {url: admin_notices_url, name: t('links.admin.notice.index')} if ab.can?(:manage, :notice)
     links << {url: admin_documents_url, name: t('links.admin.document.index')} if ab.can?(:manage, :document)
+    links << {url: admin_products_url, name: t('links.admin.product.index')} if ab.can?(:manage, :product)
 
     links
   end

@@ -1,13 +1,10 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
-  namespace :admin do
-  get 'products/index'
-  end
 
   #-------开始-----------
   scope '/:locale' do
-    resources :products
+
     resources :orders
     resources :carts
     resources :comments
@@ -15,6 +12,8 @@ Rails.application.routes.draw do
 
     #------------------------------------
     get 'documents/:name'=>'documents#show', as: :show_document
+    get 'products/:uid'=>'products#show', as: :show_product
+
 
     get 'personal/contact'
     post 'personal/contact'
@@ -22,9 +21,10 @@ Rails.application.routes.draw do
 
     namespace :admin do
 
-      resources :notices, except:[:show]
       resources :users, only: [:index, :edit, :update]
+      resources :notices, except:[:show]
       resources :documents, expect:[:show]
+      resources :products, expect: [:show]
 
       %w(status seo).each { |a| get "site/#{a}" }
 

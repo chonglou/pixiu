@@ -1,0 +1,20 @@
+- @title = t('links.admin.product.index')
+br
+div class='row'
+  div class='btn-group pull-right'
+    = link_to t('links.admin.product.new'), new_admin_product_path, class: 'btn btn-primary'
+= paginate @products
+
+- @products.each do |p|
+  blockquote
+    h3 #{p.name}
+    |#{{md2html p.summary}}
+  footer
+    | #{time_ago_in_words p.created_at} &nbsp;
+    cite
+      = link_to t('buttons.view'), show_product_path(p.uid), target: '_blank'
+      | &nbsp; &nbsp;
+      = link_to t('buttons.edit'), edit_admin_product_path(p.id)
+
+
+

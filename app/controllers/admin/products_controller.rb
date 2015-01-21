@@ -3,7 +3,11 @@ class Admin::ProductsController < ApplicationController
   before_action :_can_manage_product!
 
   def index
-    @products = Product.select(:uid, :name, :name, :summary, :updated_at).order(updated_at: :desc).where(lang: params[:locale]).page params[:page]
+    @products = Product.select(
+        :id, :uid, :name, :name, :summary, :created_at).order(id: :desc).where(
+        'lang = ? AND status <> ?',
+        params[:locale],
+        Product.statuses[:done]).page params[:page]
   end
 
 
@@ -14,6 +18,9 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new _product_params
     @product.lang = params[:locale]
+    @product.uid = SecureRandom.uuid
+    @product.status = Product.statuses[:submit]
+    @product.version = 1
     if @product.save
       redirect_to admin_products_path
     else
@@ -26,13 +33,23 @@ class Admin::ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.find params[:id]
-    @product.update _product_params
-    redirect_to admin_products_path
+    op = Product.find(params[:id])
+    @product = Product.new _product_params
+    @product.uid = op.uid
+    @product.version = op.version+1
+    @product.status = op.status
+    if @product.save
+      op.update status: Product.statuses[:done]
+      redirect_to admin_products_path
+    else
+      render 'edit'
+    end
+
   end
 
   def destroy
-    Product.destroy params[:id]
+    p = Product.find params[:id]
+    p.update status: Product.statuses[:done]
     redirect_to admin_products_path
   end
 
