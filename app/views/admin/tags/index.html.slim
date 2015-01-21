@@ -1,20 +1,4 @@
 - @title = t('links.admin.tag.index')
-div class='row'
-  div class='col-sm-4'
-    button class='btn btn-success'
-      i class='glyphicon glyphicon-asterisk'
-      |#{t('buttons.create')}
-    | &nbsp;
-    button class='btn btn-warning'
-      i class='glyphicon glyphicon-pencil'
-      |#{t('buttons.rename')}
-    | &nbsp;
-    button class='btn btn-danger'
-      i class='glyphicon glyphicon-remove'
-      |#{t('buttons.remove')}
-
 br
-div class='row'
-  div id='tree' class='col-sm-6'
-  = render 'widgets/tree', id:'div#tree', path:admin_tags_path
+= render 'widgets/tree_edit', path:admin_tags_path
 

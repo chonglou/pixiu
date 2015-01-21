@@ -9,6 +9,5 @@ class CreateTags < ActiveRecord::Migration
     end
     add_index :tags, :name
     add_index :tags, :lang
-    add_index :tags, [:name, :lang, :flag], unique: true
   end
 end

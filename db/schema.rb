@@ -177,7 +177,6 @@ ActiveRecord::Schema.define(version: 20150121053455) do
   end
 
   add_index "tags", ["lang"], name: "index_tags_on_lang", using: :btree
-  add_index "tags", ["name", "lang", "flag"], name: "index_tags_on_name_and_lang_and_flag", unique: true, using: :btree
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|

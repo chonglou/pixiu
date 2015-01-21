@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       resources :notices, except:[:show]
       resources :documents, expect:[:show]
       resources :products, expect: [:show]
-      resources :tags, expect: [:show]
+      resources :tags, expect: [:show, :new, :edit]
 
       %w(status seo).each { |a| get "site/#{a}" }
 

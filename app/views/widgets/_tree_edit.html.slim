@@ -1,0 +1,141 @@
+= stylesheet_link_tag '/3rd/jstree/themes/default/style.min.css'
+= javascript_include_tag '/3rd/jstree/jstree.min.js'
+div class='row'
+  div class='col-sm-12'
+    button id='tree_create' class='btn btn-success'
+      i class='glyphicon glyphicon-asterisk'
+      |#{t('buttons.create')}
+    | &nbsp;
+    button id='tree_rename' class='btn btn-warning'
+      i class='glyphicon glyphicon-pencil'
+      |#{t('buttons.rename')}
+    | &nbsp;
+    button id='tree_remove' class='btn btn-danger'
+      i class='glyphicon glyphicon-remove'
+      |#{t('buttons.remove')}
+br
+div class='row'
+  div id='tree_view' class='col-sm-12'
+
+javascript:
+  $(function () {
+    var tid = "div#tree_view";
+    var url = '#{path}';
+
+    $("button#tree_create").click(function () {
+      var ref = $(tid).jstree(true);
+      var sel = ref.get_selected();
+      if (!sel.length) {
+        return false;
+      }
+      sel = sel[0];
+      sel = ref.create_node(sel, {type: "file"});
+      if (sel) {
+        ref.edit(sel);
+      }
+    });
+
+    $("button#tree_rename").click(function () {
+      var ref = $(tid).jstree(true);
+      var sel = ref.get_selected();
+      if (!sel.length) {
+        return false;
+      }
+      sel = sel[0];
+      if (sel.indexOf('root_') == 0) {
+        alert("#{t('labels.in_using')}");
+        return false;
+      }
+      ref.edit(sel);
+    });
+
+    $("button#tree_remove").click(function () {
+      var ref = $(tid).jstree(true);
+      var sel = ref.get_selected();
+      if (!sel.length) {
+        return false;
+      }
+
+      sel = sel[0];
+      //ref.is_parent(sel)
+      if (sel.indexOf('root_') == 0) {
+        alert("#{t('labels.in_using')}");
+        return false;
+      }
+      $.ajax({
+        url: url + '/' + sel,
+        type: 'DELETE',
+        success: function(result){
+          if(result.ok){
+            ref.delete_node(sel);
+          }
+          else
+          {
+            alert(result.reason);
+          }
+        }
+      });
+    });
+
+    $(tid).jstree({
+      core: {
+        animation: 0,
+        check_callback: true,
+        themes: {stripes: true},
+        data: {
+          url: url,
+          dataType: 'json',
+          data: function (node) {
+            return {id: node.id};
+          }
+        }
+      },
+      types: {
+        "root": {
+          "icon": "glyphicon glyphicon-home",
+          "valid_children": ["product"]
+        },
+        file: {
+          icon: "glyphicon glyphicon-file",
+          valid_children: []
+        }
+      },
+      plugins: ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
+    }).on('rename_node.jstree', function (e, data) {
+
+      if (data.node.id.indexOf('j') == 0) {
+        var params = {
+          name: data.node.text
+        };
+        if (data.node.parent.indexOf('root_') == 0) {
+          params.flag = data.node.parent.substring(5);
+        }
+        else {
+          params.parent_id = data.node.parent;
+        }
+        $.post(url, params, function (result) {
+          if (result.ok) {
+            $(data.node).attr('id', result.id);
+          }
+          else {
+            alert(result.reason);
+            data.node.text = data.node.old;
+          }
+        })
+      }
+      else {
+        $.ajax({
+          url: url + '/' + data.node.id + '',
+          type: 'PATCH',
+          data: {name: data.node.text},
+          success: function (result) {
+            if (!result.ok) {
+              alert(result.reason);
+              data.node.text = data.node.old;
+            }
+          }
+        });
+      }
+    });
+
+  });

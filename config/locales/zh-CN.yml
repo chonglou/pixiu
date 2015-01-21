@@ -3,11 +3,12 @@ zh-CN:
     product: '商品'
     document: '文档'
   labels:
+    in_using: '正在被使用'
     build_using: "本站使用<a href='https://github.com/chonglou/itpkg' target='_blank'>貔貅电商系统</a>构建"
     require_role: '权限不足'
     are_you_sure: '你确定要进行此操作么？'
     success: '操作成功！'
-    input_not_valid: '输入数据类型不对'
+    input_not_valid: '输入数据无效'
     recent_documents: '相关文档'
     ueditor:
       error:

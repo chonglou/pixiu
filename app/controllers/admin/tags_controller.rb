@@ -5,7 +5,7 @@ class Admin::TagsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        render json: [_tree(:product), _tree(:document)]
+        render json: [_root_tree(:product), _root_tree(:document)]
       end
       format.html do
         render 'index'
@@ -13,33 +13,38 @@ class Admin::TagsController < ApplicationController
     end
   end
 
-  def new
-    @tag = Tag.new
-  end
 
   def create
-    @tag = Tag.new params.require(:tag).permit(:name)
+    @tag = Tag.new params.permit(:name, :parent_id)
+    if params[:flag]
+      @tag.flag = Tag.flags[params[:flag].to_sym]
+    else
+      @tag.flag = Tag.find(params[:parent_id]).flag
+    end
     @tag.lang = params[:locale]
     if @tag.save
-      redirect_to admin_tags_path
+      render json: {ok: true, id: @tag.id}
     else
-      render 'new'
+      render json: {ok: false, reason: t('labels.input_not_valid')}
     end
-  end
-
-  def edit
-    @tag = Tag.find params[:id]
   end
 
   def update
     @tag = Tag.find params[:id]
-    @tag.update params.require(:tag).permit(:name)
-    redirect_to admin_tags_path
+    if @tag.update params.permit(:name)
+      render json: {ok: true}
+    else
+      render json: {ok: false, reason: t('labels.input_not_valid')}
+    end
   end
 
   def destroy
-    Tag.destroy params[:id]
-    redirect_to admin_tags_path
+    if Tag.where(parent_id: params[:id]).count == 0
+      Tag.destroy params[:id]
+      render json: {ok: true}
+    else
+      render json: {ok: false, reason: t('labels.in_using')}
+    end
   end
 
   private
@@ -47,16 +52,30 @@ class Admin::TagsController < ApplicationController
     need_role unless Ability.new(current_user).can?(:manage, :tag)
   end
 
-  def _tree(flag)
-    children = Tag.select(:id, :name).where('lang = ? AND flag = ? AND parent_id IS NULL', params[:locale], Tag.flags[flag]).order(id: :asc).map do |t1|
-      {id: t1.id, text: t1.name}
-    end
+  def _root_tree(flag)
+    children = Tag.select(:id, :name).where(
+        'lang = ? AND flag = ? AND parent_id IS NULL',
+        params[:locale], Tag.flags[flag]).order(id: :asc).map {|t|_node_tree t}
+
     {
-        id: flag,
+        id: "root_#{flag}",
         text: t("models.#{flag}"),
+        type: 'folder',
         children: children,
         state: {opened: true},
         icon: 'glyphicon glyphicon-home'
+    }
+  end
+
+  def _node_tree(tag)
+    children = Tag.select(:id, :name).where(parent_id:tag.id).order(id: :asc).map{|tag| _node_tree tag}
+    {
+        id: tag.id,
+        text: tag.name,
+        type: 'folder',
+        state: {opened: true},
+        children: children,
+        #icon: 'glyphicon glyphicon-folder-open'
     }
   end
 end
