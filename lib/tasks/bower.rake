@@ -46,16 +46,16 @@ namespace :bower do
     end
 
     #-------JStree-------
-    # s = "#{bower_home}/jstree"
-    # d = "#{third_home}/jstree"
-    # unless Dir.exists?(d)
-    #   `cp -av #{s}/../jstree/dist #{d}`
-    # end
+    s = "#{bower_home}/jstree"
+    d = "#{third_home}/jstree"
+    unless Dir.exists?(d)
+       puts `cp -av #{s}/../jstree/dist #{d}`
+    end
 
   end
 
 end
 
-task 'assets:precompile' => 'bower:ueditor'
+task 'assets:precompile' => 'bower:third'
 
 

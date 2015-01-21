@@ -16,15 +16,5 @@ div class='row'
 br
 div class='row'
   div id='tree' class='col-sm-6'
+  = render 'widgets/tree', id:'div#tree', path:admin_tags_path
 
-javascript:
-  $(function(){
-    $('div#tree').jstree({
-      core:{
-        data:{
-          url: '#{admin_tags_path}',
-          dataType: 'json'
-        }
-      }
-    });
-  });

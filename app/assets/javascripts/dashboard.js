@@ -1,4 +1,3 @@
-//= require jstree/dist/jstree
 //= require editor.config
 
 function click_table_row(id) {
