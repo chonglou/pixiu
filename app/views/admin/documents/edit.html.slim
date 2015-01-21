@@ -1,5 +1,6 @@
 - @title=t('links.admin.document.edit', id: @document.id)
-
+- @right_nav_links = admin_documents_right_nav_links
+br
 = bootstrap_form(@document, url: {action: 'update'}) do |f|
   = f.error_messages
   = f.fieldset do

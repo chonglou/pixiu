@@ -18,6 +18,8 @@ zh-CN:
         new: '添加文档'
         edit: '编辑文档[%{id}]'
         remove: '删除文档[%{id}]'
+        info: '基本信息'
+        tag: '分类信息'
       notice:
         index: '通知公告'
         new: '添加公告'

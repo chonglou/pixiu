@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121053455) do
+ActiveRecord::Schema.define(version: 20150121224500) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,   null: false
@@ -83,6 +83,14 @@ ActiveRecord::Schema.define(version: 20150121053455) do
   end
 
   add_index "documents", ["name", "lang"], name: "index_documents_on_name_and_lang", unique: true, using: :btree
+
+  create_table "documents_tags", id: false, force: :cascade do |t|
+    t.integer "document_id", limit: 4, null: false
+    t.integer "tag_id",      limit: 4, null: false
+  end
+
+  add_index "documents_tags", ["document_id"], name: "index_documents_tags_on_document_id", using: :btree
+  add_index "documents_tags", ["tag_id"], name: "index_documents_tags_on_tag_id", using: :btree
 
   create_table "locales", force: :cascade do |t|
     t.integer "flag", limit: 2,  null: false

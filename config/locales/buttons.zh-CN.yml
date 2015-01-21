@@ -9,3 +9,5 @@ zh-CN:
     remove: '删除'
     edit: '编辑'
     test: '测试'
+    save: '保存'
+    recover: '恢复'

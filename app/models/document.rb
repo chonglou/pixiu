@@ -6,6 +6,8 @@ class Document < ActiveRecord::Base
   validates_format_of :name, with: /[a-zA-Z0-9_]{1,32}\z/, on: :create
   validates :name, :title, :summary, :body, presence: true
 
+  has_and_belongs_to_many :tags
+
   def add_counter
     VisitCounter.create flag: VisitCounter.flags[:document], key:self.id
   end

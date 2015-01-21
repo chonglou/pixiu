@@ -25,7 +25,10 @@ Rails.application.routes.draw do
 
       resources :users, only: [:index, :edit, :update]
       resources :notices, except:[:show]
-      resources :documents, expect:[:show]
+      resources :documents, expect:[:show] do
+        get 'tag'
+        post 'tag'
+      end
       resources :products, expect: [:show]
       resources :tags, expect: [:show, :new, :edit]
 

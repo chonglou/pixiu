@@ -2,6 +2,20 @@ class Admin::DocumentsController < ApplicationController
   layout 'dashboard'
   before_action :_can_manage_document!
 
+  def tag
+    @document = Document.find params[:document_id]
+    case request.method
+      when 'GET'
+        @tree = Tag.get_root_tree(:document, @document.lang).fetch(:children)
+        @ids = @document.tags.map{|t| t.id}
+      when 'POST'
+        @document.tag_ids = params[:tags]
+        render json: {ok:true}
+      else
+
+    end
+
+  end
   def index
     @documents = Document.select(:id, :name, :title, :summary, :updated_at).order(updated_at: :desc).where(lang: params[:locale]).page params[:page]
   end

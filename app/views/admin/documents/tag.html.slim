@@ -1,0 +1,4 @@
+- @title=t('links.admin.document.edit', id: @document.id)
+- @right_nav_links = admin_documents_right_nav_links
+br
+= render 'widgets/tree_view', tree:@tree, ids:@ids, path: admin_document_tag_path(@document)

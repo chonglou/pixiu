@@ -1,0 +1,36 @@
+div class='row'
+  div id='tree_view' class='col-sm-12'
+br
+div class='row'
+  button id='tree_save' class='btn btn-success'
+    |#{t('buttons.save')}
+  | &nbsp;
+  button id='tree_reset' class='btn btn-warning'
+    |#{t('buttons.reset')}
+  | &nbsp;
+
+
+javascript:
+  $(function () {
+    var tid = 'div#tree_view';
+    $(tid).jstree({
+      core: {
+        data: JSON.parse('#{{tree.to_json}}')
+      },
+      checkbox: {
+        keep_selected_style: false
+      },
+      plugins: ["checkbox"]
+    }).on('changed.jstree', function (e, data) {
+      var i, j, k=[];
+      for (i = 0, j = data.selected.length; i < j; i++) {
+        k.push(data.instance.get_node(data.selected[i]).id);
+      }
+      $.post("#{path}", {tags:k}, function(result){
+        if(!result.ok){
+          alert(result.reason);
+        }
+      });
+    });
+
+  });

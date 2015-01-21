@@ -3,9 +3,10 @@ class Admin::TagsController < ApplicationController
   before_action :_can_manage_tag!
 
   def index
+    lang =  params[:locale]
     respond_to do |format|
       format.json do
-        render json: [_root_tree(:product), _root_tree(:document)]
+        render json: [Tag.get_root_tree(:product,lang), Tag.get_root_tree(:document, lang)]
       end
       format.html do
         render 'index'
@@ -52,30 +53,30 @@ class Admin::TagsController < ApplicationController
     need_role unless Ability.new(current_user).can?(:manage, :tag)
   end
 
-  def _root_tree(flag)
-    children = Tag.select(:id, :name).where(
-        'lang = ? AND flag = ? AND parent_id IS NULL',
-        params[:locale], Tag.flags[flag]).order(id: :asc).map {|t|_node_tree t}
-
-    {
-        id: "root_#{flag}",
-        text: t("models.#{flag}"),
-        type: 'folder',
-        children: children,
-        state: {opened: true},
-        icon: 'glyphicon glyphicon-home'
-    }
-  end
-
-  def _node_tree(tag)
-    children = Tag.select(:id, :name).where(parent_id:tag.id).order(id: :asc).map{|tag| _node_tree tag}
-    {
-        id: tag.id,
-        text: tag.name,
-        type: 'folder',
-        state: {opened: true},
-        children: children,
-        #icon: 'glyphicon glyphicon-folder-open'
-    }
-  end
+  # def _root_tree(flag)
+  #   children = Tag.select(:id, :name).where(
+  #       'lang = ? AND flag = ? AND parent_id IS NULL',
+  #       params[:locale], Tag.flags[flag]).order(id: :asc).map {|t|_node_tree t}
+  #
+  #   {
+  #       id: "root_#{flag}",
+  #       text: t("models.#{flag}"),
+  #       type: 'folder',
+  #       children: children,
+  #       state: {opened: true},
+  #       icon: 'glyphicon glyphicon-home'
+  #   }
+  # end
+  #
+  # def _node_tree(tag)
+  #   children = Tag.select(:id, :name).where(parent_id:tag.id).order(id: :asc).map{|tag| _node_tree tag}
+  #   {
+  #       id: tag.id,
+  #       text: tag.name,
+  #       type: 'folder',
+  #       state: {opened: true},
+  #       children: children,
+  #       #icon: 'glyphicon glyphicon-folder-open'
+  #   }
+  # end
 end
