@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121050653) do
+ActiveRecord::Schema.define(version: 20150121053455) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,   null: false
@@ -167,6 +167,18 @@ ActiveRecord::Schema.define(version: 20150121050653) do
 
   add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
 
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       limit: 32,                   null: false
+    t.string   "lang",       limit: 5,  default: "zh-CN", null: false
+    t.integer  "parent_id",  limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "tags", ["lang"], name: "index_tags_on_lang", using: :btree
+  add_index "tags", ["name", "lang"], name: "index_tags_on_name_and_lang", unique: true, using: :btree
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -208,7 +220,7 @@ ActiveRecord::Schema.define(version: 20150121050653) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   create_table "visit_counters", force: :cascade do |t|
-    t.integer "flag",  limit: 4,               null: false
+    t.integer "flag",  limit: 2,               null: false
     t.string  "key",   limit: 255,             null: false
     t.integer "count", limit: 4,   default: 0, null: false
   end

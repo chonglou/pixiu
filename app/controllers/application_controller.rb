@@ -22,6 +22,14 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
+  def render_404
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/404", layout: false, status: :not_found }
+      format.xml  { head :not_found }
+      format.any  { head :not_found }
+    end
+  end
+
   private
   def _set_locale
     I18n.locale = params[:locale] || I18n.default_locale

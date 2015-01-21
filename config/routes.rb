@@ -2,6 +2,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
 
+
   #-------开始-----------
   scope '/:locale' do
 
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
     #------------------------------------
     get 'documents/:name'=>'documents#show', as: :show_document
     get 'products/:uid'=>'products#show', as: :show_product
+    get 'tags/:name'=>'tags#show', as: :show_tag
 
 
     get 'personal/contact'
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
       resources :notices, except:[:show]
       resources :documents, expect:[:show]
       resources :products, expect: [:show]
+      resources :tags, expect: [:show]
 
       %w(status seo).each { |a| get "site/#{a}" }
 

@@ -1,5 +1,5 @@
 class VisitCounter < ActiveRecord::Base
   validates :key, uniqueness: {scope: :flag}
   validates :flag, :key, presence: true
-  enum flag: {product: 1, document: 2}
+  enum flag: {product: 1, document: 2, tag:100}
 end
