@@ -6,5 +6,5 @@
 *.swp
 
 /public/*
-!/public/.keep
+!/public/*.html
 /vendor/assets/bower_components

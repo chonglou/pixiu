@@ -1,5 +1,7 @@
 zh-CN:
   buttons:
+    create: '新建'
+    rename: '重命名'
     submit: '提交'
     back: '返回'
     view: '查看'

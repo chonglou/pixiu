@@ -3,7 +3,14 @@ class Admin::TagsController < ApplicationController
   before_action :_can_manage_tag!
 
   def index
-    @tags = Tag.select(:id, :name, :parent_id).where(lang: params[:locale]).page params[:page]
+    respond_to do |format|
+      format.json do
+        render json: [_tree(:product), _tree(:document)]
+      end
+      format.html do
+        render 'index'
+      end
+    end
   end
 
   def new
@@ -38,5 +45,18 @@ class Admin::TagsController < ApplicationController
   private
   def _can_manage_tag!
     need_role unless Ability.new(current_user).can?(:manage, :tag)
+  end
+
+  def _tree(flag)
+    children = Tag.select(:id, :name).where('lang = ? AND flag = ? AND parent_id IS NULL', params[:locale], Tag.flags[flag]).order(id: :asc).map do |t1|
+      {id: t1.id, text: t1.name}
+    end
+    {
+        id: flag,
+        text: t("models.#{flag}"),
+        children: children,
+        state: {opened: true},
+        icon: 'glyphicon glyphicon-home'
+    }
   end
 end

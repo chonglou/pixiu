@@ -1,4 +1,7 @@
 zh-CN:
+  models:
+    product: '商品'
+    document: '文档'
   labels:
     build_using: "本站使用<a href='https://github.com/chonglou/itpkg' target='_blank'>貔貅电商系统</a>构建"
     require_role: '权限不足'

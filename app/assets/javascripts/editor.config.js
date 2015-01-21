@@ -1,4 +1,4 @@
-window.UEDITOR_HOME_URL = "/3rd/UEditor/";
+window.UEDITOR_HOME_URL = "/3rd/ueditor/";
 /**
  * ueditor完整配置项
  * 可以在这里配置整个编辑器的特性

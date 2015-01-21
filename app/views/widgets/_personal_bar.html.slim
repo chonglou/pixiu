@@ -4,9 +4,3 @@ li id='personalBar' class="dropdown"
     span class="caret"
   ul class='dropdown-menu' role='menu'
     |#{{personal_bar.fetch(:links).map{|k,v| "<li><a href='#{k}'>#{v}</a></li>"}.join("<li class='divider'></li>")}}
-
-javascript:
-  $(function(){
-    // todo
-    $('li#personalBar .dropdown-toggle').dropdown();
-  });

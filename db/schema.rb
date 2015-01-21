@@ -171,12 +171,13 @@ ActiveRecord::Schema.define(version: 20150121053455) do
     t.string   "name",       limit: 32,                   null: false
     t.string   "lang",       limit: 5,  default: "zh-CN", null: false
     t.integer  "parent_id",  limit: 4
+    t.integer  "flag",       limit: 4,                    null: false
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end
 
   add_index "tags", ["lang"], name: "index_tags_on_lang", using: :btree
-  add_index "tags", ["name", "lang"], name: "index_tags_on_name_and_lang", unique: true, using: :btree
+  add_index "tags", ["name", "lang", "flag"], name: "index_tags_on_name_and_lang_and_flag", unique: true, using: :btree
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
