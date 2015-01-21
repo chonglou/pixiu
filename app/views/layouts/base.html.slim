@@ -10,9 +10,7 @@ html
     link href='/favicon.ico' rel="shortcut icon" type="image/vnd.microsoft.icon"
     title #{site_info 'title'}#{"-#{@title}" if @title}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = stylesheet_link_tag 'base', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = javascript_include_tag 'base', 'data-turbolinks-track' => true
     /[if lt IE 9]
       = javascript_include_tag 'html5shiv.min'
       = javascript_include_tag 'respond.min'
