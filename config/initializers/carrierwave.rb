@@ -15,7 +15,7 @@ CarrierWave.configure do |config|
   config.fog_credentials = {
       provider: 'Local',
       local_root: "#{Rails.root}/public/fog",
-      endpoint: "#{"https://www.#{ENV['PIXIU_DOMAIN']}" if Rails.env.production?}/fog",
+      endpoint: "http#{Rails.env.production? ? "s://www.#{ENV['PIXIU_DOMAIN']}" : '://localhost:3000'}/fog",
   }
 
   config.fog_directory = 'tmp'

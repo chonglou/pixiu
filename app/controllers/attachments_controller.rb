@@ -17,7 +17,7 @@ class AttachmentsController < ApplicationController
         begin
           file.write Base64.strict_decode64(params.fetch(cfg.fetch('scrawlFieldName').to_sym))
           file.flush
-          ret = _store current_user.id, file
+          ret = _store current_user.id, file, 'scrawl.png', 'image/png'
         ensure
           file.close
           file.unlink
@@ -55,13 +55,14 @@ class AttachmentsController < ApplicationController
     files = urls.map do |url|
       ret = {}
       res = Net::HTTP.get_response URI(url)
-      file = Tempfile.new ['remote', File.extname(url)], encoding: 'ascii-8bit'
+      ext = File.extname(url)
+      file = Tempfile.new ['remote', ext], encoding: 'ascii-8bit'
       begin
         if res.is_a?(Net::HTTPSuccess)
           if res.content_type.include?('image')
             file.write res.body
             file.flush
-            ret = _store user_id, file
+            ret = _store user_id, file, url, _ext2type(ext)
           else
             ret['state'] = '不是图片'
           end
@@ -78,7 +79,7 @@ class AttachmentsController < ApplicationController
   end
 
   def _list(user_id, types)
-    files = Attachment.where(user_id: user_id).select { |a| types.include? File.extname(a.avatar.to_s) }.map { |a| a.avatar.url }
+    files = Attachment.where(user_id: user_id).order(id: :desc).select { |a| types.include? File.extname(a.avatar.to_s) }.map { |a| a.avatar.url }
     {
         state: 'SUCCESS',
         list: files,
@@ -88,11 +89,14 @@ class AttachmentsController < ApplicationController
   end
 
 
-  def _store(user_id, file)
+  def _store(user_id, file, name=nil, type=nil)
+    name ||= file.original_filename
+    type ||= file.content_type
+
     attach = Attachment.new user_id: user_id
-    attach.content_type = file.content_type
-    attach.title = file.original_filename
-    attach.ext = _file_ext file.original_filename
+    attach.content_type = type
+    attach.title = name
+    attach.ext = _file_ext name
     attach.avatar = file
     attach.save!
     {
@@ -105,11 +109,10 @@ class AttachmentsController < ApplicationController
   def _file_ext(name)
     name[name.rindex('.')+1, name.size].downcase
   end
-  #
-  # def _ext2type(ext)
-  #   Mime::Type.lookup_by_extension(ext).to_s #'application/octet-stream'
-  # end
 
+  def _ext2type(ext)
+    Mime::Type.lookup_by_extension(ext) || 'application/octet-stream'
+  end
 
 
 end
