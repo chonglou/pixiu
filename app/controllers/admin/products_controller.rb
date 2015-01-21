@@ -50,6 +50,7 @@ class Admin::ProductsController < ApplicationController
   def destroy
     p = Product.find params[:id]
     p.update status: Product.statuses[:done]
+    VisitCounter.find_by( flag: VisitCounter.flags[:product], key:p.uid).destroy
     redirect_to admin_products_path
   end
 

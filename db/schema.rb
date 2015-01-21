@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120204313) do
+ActiveRecord::Schema.define(version: 20150121050653) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,   null: false
@@ -206,5 +206,13 @@ ActiveRecord::Schema.define(version: 20150120204313) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "visit_counters", force: :cascade do |t|
+    t.integer "flag",  limit: 4,               null: false
+    t.string  "key",   limit: 255,             null: false
+    t.integer "count", limit: 4,   default: 0, null: false
+  end
+
+  add_index "visit_counters", ["flag", "key"], name: "index_visit_counters_on_flag_and_key", unique: true, using: :btree
 
 end

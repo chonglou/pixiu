@@ -5,6 +5,7 @@ class DocumentsController < ApplicationController
     lang=params[:locale]
     @document = Document.find_by name: params[:name], lang: lang
     if @document
+      VisitCounter.find_by(flag: VisitCounter.flags[:document], key: @document.name).increment!(:count)
       @right_sidebars = [{
                              name: t('labels.recent_documents'),
                              links: Document.select(:name, :title, :lang).where(
