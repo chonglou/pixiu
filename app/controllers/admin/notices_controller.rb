@@ -1,6 +1,6 @@
 class Admin::NoticesController < ApplicationController
   layout 'dashboard'
-  before_action :_must_can_manage_notice!
+  before_action :_can_manage_notice!
 
   def index
     @notices = Notice.select(:id, :content, :updated_at).order(updated_at: :desc).where(lang: params[:locale]).page params[:page]
@@ -36,10 +36,7 @@ class Admin::NoticesController < ApplicationController
   end
 
   private
-  def _must_can_manage_notice!
-      unless Ability.new(current_user).can?(:manage, :notice)
-        flash[:alert] = t('labels.require_role')
-        redirect_to root_path
-      end
+  def _can_manage_notice!
+    need_role unless Ability.new(current_user).can?(:manage, :notice)
   end
 end

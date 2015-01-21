@@ -1,4 +1,6 @@
 <% @title="Edit #{resource_name.to_s.humanize}" %>
+<% @right_nav_links = personal_right_nav_links %>
+
 <fieldset>
   <legend>Logo</legend>
   <img src="<%= email2logo resource.email %>" title="<%= resource.email %>">

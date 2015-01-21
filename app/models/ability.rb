@@ -11,6 +11,7 @@ class Ability
       if user.is_author?
         can :manage, :notice
         can :manage, :document
+        can :manage, :product
       end
     end
 

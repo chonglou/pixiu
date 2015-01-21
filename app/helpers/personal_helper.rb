@@ -1,14 +1,18 @@
 module PersonalHelper
+  def personal_right_nav_links
+    [
+        {url: edit_user_registration_url, name: t('links.personal.profile')},
+
+        {url: personal_contact_url, name: t('links.personal.contact')}
+    ]
+  end
   def left_nav_links
-    user = current_user
+    ab = Ability.new(current_user)
     links = [{url: edit_user_registration_url, name: t('links.personal.profile')}]
-    if user.is_admin?
-      links << {url: admin_site_info_url, name: t('links.admin.site.index')}
-    end
-    if user.is_author? || user.is_admin?
-      links << {url: admin_notices_url, name: t('links.admin.notice.index')}
-      links << {url: admin_documents_url, name: t('links.admin.document.index')}
-    end
+    links << {url: admin_site_info_url, name: t('links.admin.site.index')} if ab.can?(:manage, :site)
+    links << {url: admin_notices_url, name: t('links.admin.notice.index')} if ab.can?(:manage, :notice)
+    links << {url: admin_documents_url, name: t('links.admin.document.index')} if ab.can?(:manage, :document)
+
     links
   end
 

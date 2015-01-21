@@ -1,6 +1,6 @@
 class Admin::SiteController < ApplicationController
   layout 'dashboard'
-  before_action :must_admin!
+  before_action :_can_manage_site!
 
   def google
     Setting.google_code = params[:code]
@@ -15,7 +15,7 @@ class Admin::SiteController < ApplicationController
   def favicon
     iio = params[:icon]
     if iio && iio.content_type == 'image/vnd.microsoft.icon'
-      Setting.favicon = {data:iio.read, type:iio.content_type}
+      Setting.favicon = {data: iio.read, type: iio.content_type}
     else
       flash[:alert] = t('labels.input_not_valid')
     end
@@ -48,4 +48,8 @@ class Admin::SiteController < ApplicationController
     "site_#{k}_#{request[:locale]}"
   end
 
+  private
+  def _can_manage_site!
+    need_role unless Ability.new(current_user).can?(:manage, :site)
+  end
 end

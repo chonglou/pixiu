@@ -1,0 +1,38 @@
+- @title=t('links.personal.contact')
+- @right_nav_links = personal_right_nav_links 
+
+= bootstrap_form(@contact, url:{action:'contact'}) do |f|
+  = f.error_messages
+  = f.fieldset do
+    = f.legend(@title)
+
+    = f.group do
+      = f.label :email
+      = f.email_field :email, autofocus: true
+    = f.group do
+      = f.label :qq
+      = f.name_field :qq
+    = f.group do
+      = f.label :wechat
+      = f.name_field :wechat
+    = f.group do
+      = f.label :fax
+      = f.name_field :fax
+    = f.group do
+      = f.label :phone
+      = f.name_field :phone
+    = f.group do
+      = f.label :skype
+      = f.name_field :skype
+    = f.group do
+      = f.label :address
+      = f.text_field :address
+    = f.group do
+      = f.label :details
+      = f.text_area :details
+
+    = f.button_group do
+      = f.submit t('buttons.submit')
+      = f.reset t('buttons.reset')
+      = f.back t('buttons.back')
+

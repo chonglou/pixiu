@@ -1,6 +1,10 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
 
+  namespace :admin do
+  get 'products/index'
+  end
+
   #-------开始-----------
   scope '/:locale' do
     resources :products
@@ -11,6 +15,11 @@ Rails.application.routes.draw do
 
     #------------------------------------
     get 'documents/:name'=>'documents#show', as: :show_document
+
+    get 'personal/contact'
+    post 'personal/contact'
+    patch 'personal/contact'
+
     namespace :admin do
 
       resources :notices, except:[:show]
@@ -25,13 +34,11 @@ Rails.application.routes.draw do
         get "site/#{a}"
         post "site/#{a}"
       end
-
     end
 
 
 
     get 'home' => 'home/index'
-
     get 'search' => 'search#index'
   end
 

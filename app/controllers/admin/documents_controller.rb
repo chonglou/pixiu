@@ -1,6 +1,6 @@
 class Admin::DocumentsController < ApplicationController
   layout 'dashboard'
-  before_action :_must_can_manage_document!
+  before_action :_can_manage_document!
 
   def index
     @documents = Document.select(:id, :name, :title, :summary, :updated_at).order(updated_at: :desc).where(lang: params[:locale]).page params[:page]
@@ -40,10 +40,8 @@ class Admin::DocumentsController < ApplicationController
   def _document_params
     params.require(:document).permit(:name, :title, :summary, :body)
   end
-  def _must_can_manage_document!
-    unless Ability.new(current_user).can?(:manage, :document)
-      flash[:alert] = t('labels.require_role')
-      redirect_to root_path
-    end
+
+  def _can_manage_document!
+    need_role unless Ability.new(current_user).can?(:manage, :document)
   end
 end

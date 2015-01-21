@@ -9,18 +9,17 @@ class ApplicationController < ActionController::Base
     {locale: I18n.locale}.merge options
   end
 
-  def must_admin!
-    unless current_user && current_user.is_admin?
-      flash[:alert] = t('labels.require_role')
-      redirect_to root_path
-    end
-  end
 
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:label, :email, :first_name, :middle_name, :last_name, :password, :password_confirmation, :remember_me) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :label, :email, :password, :remember_me) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:first_name, :middle_name, :last_name, :password, :password_confirmation, :current_password) }
+  end
+
+  def need_role
+    flash[:alert] = t('labels.require_role')
+    redirect_to root_path
   end
 
   private
