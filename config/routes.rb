@@ -29,7 +29,12 @@ Rails.application.routes.draw do
         get 'tag'
         post 'tag'
       end
-      resources :products, expect: [:show]
+      resources :products, expect: [:show] do
+        %w(price status tag).each do |a|
+          get a
+          post a
+        end
+      end
       resources :tags, expect: [:show, :new, :edit]
 
       %w(status seo).each { |a| get "site/#{a}" }

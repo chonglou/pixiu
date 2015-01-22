@@ -2,6 +2,30 @@ class Admin::ProductsController < ApplicationController
   layout 'dashboard'
   before_action :_can_manage_product!
 
+  def price
+    @product = Product.find params[:product_id]
+    # todo
+  end
+
+  def status
+    @product = Product.find params[:product_id]
+    # todo
+  end
+
+  def tag
+    @product = Product.find params[:product_id]
+    case request.method
+      when 'GET'
+        @tree = Tag.get_root_tree(:product, @product.lang).fetch(:children)
+        @ids = ProductTag.select(:tag_id).where(product_uid: @product.uid).map { |t| t.id }
+      when 'POST'
+        ProductTag.delete_all(['product_uid = ?', @product.uid])
+        params[:tags].each { |tid| ProductTag.create product_uid: @product.uid, tag_id: tid }
+        render json: {ok: true}
+      else
+    end
+  end
+
   def index
     @products = Product.select(
         :id, :uid, :name, :name, :summary, :created_at).order(id: :desc).where(
@@ -50,7 +74,7 @@ class Admin::ProductsController < ApplicationController
   def destroy
     p = Product.find params[:id]
     p.update status: Product.statuses[:done]
-    VisitCounter.find_by( flag: VisitCounter.flags[:product], key:p.uid).destroy
+    VisitCounter.find_by(flag: VisitCounter.flags[:product], key: p.uid).destroy
     redirect_to admin_products_path
   end
 

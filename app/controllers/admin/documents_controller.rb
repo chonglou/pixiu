@@ -7,15 +7,14 @@ class Admin::DocumentsController < ApplicationController
     case request.method
       when 'GET'
         @tree = Tag.get_root_tree(:document, @document.lang).fetch(:children)
-        @ids = @document.tags.map{|t| t.id}
+        @ids = @document.tags.map { |t| t.id }
       when 'POST'
         @document.tag_ids = params[:tags]
-        render json: {ok:true}
+        render json: {ok: true}
       else
-
     end
-
   end
+
   def index
     @documents = Document.select(:id, :name, :title, :summary, :updated_at).order(updated_at: :desc).where(lang: params[:locale]).page params[:page]
   end
@@ -41,11 +40,11 @@ class Admin::DocumentsController < ApplicationController
 
   def update
     @document = Document.find params[:id]
-     if @document.update _document_params
-       redirect_to admin_documents_path
-     else
-       render 'edit'
-     end
+    if @document.update _document_params
+      redirect_to admin_documents_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy

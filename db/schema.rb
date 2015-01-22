@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121224500) do
+ActiveRecord::Schema.define(version: 20150122000355) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,   null: false
@@ -136,6 +136,13 @@ ActiveRecord::Schema.define(version: 20150121224500) do
     t.datetime "created",                                         null: false
   end
 
+  create_table "product_tags", id: false, force: :cascade do |t|
+    t.string  "product_uid", limit: 36, null: false
+    t.integer "tag_id",      limit: 4,  null: false
+  end
+
+  add_index "product_tags", ["product_uid"], name: "index_product_tags_on_product_uid", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.string   "lang",       limit: 5,     default: "zh-CN", null: false
     t.string   "uid",        limit: 36,                      null: false
@@ -152,6 +159,13 @@ ActiveRecord::Schema.define(version: 20150121224500) do
   add_index "products", ["lang"], name: "index_products_on_lang", using: :btree
   add_index "products", ["uid", "version"], name: "index_products_on_uid_and_version", unique: true, using: :btree
   add_index "products", ["uid"], name: "index_products_on_uid", using: :btree
+
+  create_table "products_tags", id: false, force: :cascade do |t|
+    t.string  "product_uid", limit: 255, null: false
+    t.integer "tag_id",      limit: 4,   null: false
+  end
+
+  add_index "products_tags", ["product_uid"], name: "index_products_tags_on_product_uid", unique: true, using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255

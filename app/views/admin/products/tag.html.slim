@@ -1,0 +1,4 @@
+- @title=t('links.admin.product.edit', id: @product.id)
+- @right_nav_links = admin_products_right_nav_links
+br
+= render 'widgets/tree_view', tree:@tree, ids:@ids, path: admin_product_tag_path(@product)

@@ -13,6 +13,10 @@ zh-CN:
         new: '添加商品'
         edit: '编辑商品[%{id}]'
         remove: '删除商品[%{id}]'
+        info: '页面'
+        tag: '分类'
+        price: '价格'
+        status: '状态'
       document:
         index: '文档管理'
         new: '添加文档'
