@@ -2,6 +2,8 @@ class Tag < ActiveRecord::Base
   after_create :add_counter
   before_destroy { |t| VisitCounter.find_by(flag: VisitCounter.flags[:tag], key: t.id).destroy }
 
+  before_create :add_uid
+
   validates :name, :lang, :flag, presence: true
   #validates :name, uniqueness: {scope: [:lang, :flag], case_sensitive: false}
   enum flag: {product: 1, document: 2}
@@ -42,5 +44,8 @@ class Tag < ActiveRecord::Base
         children: children,
         #icon: 'glyphicon glyphicon-folder-open'
     }
+  end
+  def add_uid
+    self.uid = SecureRandom.uuid
   end
 end

@@ -8,11 +8,9 @@ class CreateProducts < ActiveRecord::Migration
       t.string :summary, null:false
       t.text :details, null:false
       t.integer :status, null:false, default:0
-      t.integer :version, null:false, default:0
       t.timestamps null:false
     end
-    add_index :products, :uid
-    add_index :products, [:uid, :version], unique: true
+    add_index :products, :uid, unique: true
     add_index :products, :lang
   end
 end

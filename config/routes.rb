@@ -30,7 +30,7 @@ Rails.application.routes.draw do
         post 'tag'
       end
       resources :products, expect: [:show] do
-        %w(price status tag).each do |a|
+        %w(price status tag spec pack service sample).each do |a|
           get a
           post a
         end

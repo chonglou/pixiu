@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 
   has_one :contact
 
+  before_create :add_uid
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
 
@@ -29,5 +31,9 @@ class User < ActiveRecord::Base
 
   def to_s
     "#{self.label}<#{self.email}>"
+  end
+  private
+  def add_uid
+    self.uid = SecureRandom.uuid
   end
 end

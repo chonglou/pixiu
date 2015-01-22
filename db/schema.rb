@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122000355) do
+ActiveRecord::Schema.define(version: 20150122184218) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,   null: false
@@ -136,13 +136,6 @@ ActiveRecord::Schema.define(version: 20150122000355) do
     t.datetime "created",                                         null: false
   end
 
-  create_table "product_tags", id: false, force: :cascade do |t|
-    t.string  "product_uid", limit: 36, null: false
-    t.integer "tag_id",      limit: 4,  null: false
-  end
-
-  add_index "product_tags", ["product_uid"], name: "index_product_tags_on_product_uid", using: :btree
-
   create_table "products", force: :cascade do |t|
     t.string   "lang",       limit: 5,     default: "zh-CN", null: false
     t.string   "uid",        limit: 36,                      null: false
@@ -151,21 +144,23 @@ ActiveRecord::Schema.define(version: 20150122000355) do
     t.string   "summary",    limit: 255,                     null: false
     t.text     "details",    limit: 65535,                   null: false
     t.integer  "status",     limit: 4,     default: 0,       null: false
-    t.integer  "version",    limit: 4,     default: 0,       null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.text     "spec",       limit: 65535
+    t.text     "pack",       limit: 65535
+    t.text     "service",    limit: 65535
   end
 
   add_index "products", ["lang"], name: "index_products_on_lang", using: :btree
-  add_index "products", ["uid", "version"], name: "index_products_on_uid_and_version", unique: true, using: :btree
-  add_index "products", ["uid"], name: "index_products_on_uid", using: :btree
+  add_index "products", ["uid"], name: "index_products_on_uid", unique: true, using: :btree
 
   create_table "products_tags", id: false, force: :cascade do |t|
-    t.string  "product_uid", limit: 255, null: false
-    t.integer "tag_id",      limit: 4,   null: false
+    t.integer "product_id", limit: 4, null: false
+    t.integer "tag_id",     limit: 4, null: false
   end
 
-  add_index "products_tags", ["product_uid"], name: "index_products_tags_on_product_uid", unique: true, using: :btree
+  add_index "products_tags", ["product_id"], name: "index_products_tags_on_product_id", using: :btree
+  add_index "products_tags", ["tag_id"], name: "index_products_tags_on_tag_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -194,12 +189,14 @@ ActiveRecord::Schema.define(version: 20150122000355) do
     t.string   "lang",       limit: 5,  default: "zh-CN", null: false
     t.integer  "parent_id",  limit: 4
     t.integer  "flag",       limit: 4,                    null: false
+    t.string   "uid",        limit: 36,                   null: false
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end
 
   add_index "tags", ["lang"], name: "index_tags_on_lang", using: :btree
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+  add_index "tags", ["uid"], name: "index_tags_on_uid", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -225,6 +222,7 @@ ActiveRecord::Schema.define(version: 20150122000355) do
     t.string   "last_name",              limit: 32,               null: false
     t.string   "middle_name",            limit: 32
     t.string   "label",                  limit: 32,               null: false
+    t.string   "uid",                    limit: 36,               null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -232,6 +230,7 @@ ActiveRecord::Schema.define(version: 20150122000355) do
   add_index "users", ["first_name", "last_name", "middle_name"], name: "index_users_on_first_name_and_last_name_and_middle_name", using: :btree
   add_index "users", ["label"], name: "index_users_on_label", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -242,11 +241,9 @@ ActiveRecord::Schema.define(version: 20150122000355) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   create_table "visit_counters", force: :cascade do |t|
-    t.integer "flag",  limit: 2,               null: false
-    t.string  "key",   limit: 255,             null: false
-    t.integer "count", limit: 4,   default: 0, null: false
+    t.integer "flag",  limit: 2,             null: false
+    t.integer "key",   limit: 4,             null: false
+    t.integer "count", limit: 4, default: 0, null: false
   end
-
-  add_index "visit_counters", ["flag", "key"], name: "index_visit_counters_on_flag_and_key", unique: true, using: :btree
 
 end

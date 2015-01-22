@@ -2,6 +2,26 @@ class Admin::ProductsController < ApplicationController
   layout 'dashboard'
   before_action :_can_manage_product!
 
+  def sample
+    @product = Product.select().find params[:product_id]
+    # todo
+  end
+
+  def service
+    @product = Product.find params[:product_id]
+    # todo
+  end
+
+  def pack
+    @product = Product.find params[:product_id]
+    # todo
+  end
+
+  def spec
+    @product = Product.find params[:product_id]
+    # todo
+  end
+
   def price
     @product = Product.find params[:product_id]
     # todo
@@ -42,7 +62,6 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new _product_params
     @product.lang = params[:locale]
-    @product.uid = SecureRandom.uuid
     @product.status = Product.statuses[:submit]
     @product.version = 1
     if @product.save
@@ -57,13 +76,8 @@ class Admin::ProductsController < ApplicationController
   end
 
   def update
-    op = Product.find(params[:id])
-    @product = Product.new _product_params
-    @product.uid = op.uid
-    @product.version = op.version+1
-    @product.status = op.status
-    if @product.save
-      op.update status: Product.statuses[:done]
+    @product = Product.find(params[:id])
+    if @product.update _product_params
       redirect_to admin_products_path
     else
       render 'edit'

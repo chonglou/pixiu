@@ -1,5 +1,8 @@
 class Product < ActiveRecord::Base
   after_create :add_counter
+  before_create :add_uid
+
+  before_destroy { |p| VisitCounter.find_by(flag: VisitCounter.flags[:product], key: p.id).destroy }
 
   validates :uid, uniqueness: {scope: :version}
   validates :uid, :name, :summary, :details, presence: true
@@ -9,7 +12,11 @@ class Product < ActiveRecord::Base
 
   enum status: {submit:1, publish: 5, close: 10, done:100}
 
+  private
   def add_counter
-    VisitCounter.create flag: VisitCounter.flags[:product], key:self.uid
+    VisitCounter.create flag: VisitCounter.flags[:product], key:self.id
+  end
+  def add_uid
+    self.uid = SecureRandom.uuid
   end
 end

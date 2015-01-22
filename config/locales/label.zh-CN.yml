@@ -2,7 +2,7 @@ zh-CN:
   helpers:
     label:
       document:
-        name: '路径名'
+        name: '名称'
         title: '标题'
         summary: '摘要'
         body: '正文'
