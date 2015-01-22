@@ -6,6 +6,7 @@ class Product < ActiveRecord::Base
 
   validates :name, :summary, :details, presence: true
 
+  has_many :samples
   has_many :prices
   has_and_belongs_to_many :carts
   has_and_belongs_to_many :tags

@@ -5,10 +5,10 @@ module ProductsHelper
         {url: admin_product_spec_url(@product), name: t('links.admin.product.spec', id:@product.id)},
         {url: admin_product_pack_url(@product), name: t('links.admin.product.pack', id:@product.id)},
         {url: admin_product_service_url(@product), name: t('links.admin.product.service', id:@product.id)},
-        {url: admin_product_sample_url(@product), name: t('links.admin.product.sample', id:@product.id)},
+        {url: admin_product_samples_url(@product), name: t('links.admin.product.sample', id:@product.id)},
         {url: admin_product_tag_url(@product), name: t('links.admin.product.tag', id:@product.id)},
         {url: admin_product_status_url(@product), name: t('links.admin.product.status', id:@product.id)},
-        {url: admin_product_price_url(@product), name: t('links.admin.product.price', id:@product.id)},
+        {url: admin_product_prices_url(@product), name: t('links.admin.product.price', id:@product.id)},
     ]
   end
 end

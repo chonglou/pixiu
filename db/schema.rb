@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122184218) do
+ActiveRecord::Schema.define(version: 20150122211729) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,   null: false
@@ -172,6 +172,15 @@ ActiveRecord::Schema.define(version: 20150122184218) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "samples", id: false, force: :cascade do |t|
+    t.integer  "product_id",    limit: 4,   null: false
+    t.integer  "attachment_id", limit: 4,   null: false
+    t.string   "title",         limit: 255, null: false
+    t.string   "summary",       limit: 500
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",        limit: 255,   null: false

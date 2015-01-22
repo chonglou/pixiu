@@ -2,7 +2,6 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
 
-
   #-------开始-----------
   scope '/:locale' do
 
@@ -30,10 +29,13 @@ Rails.application.routes.draw do
         post 'tag'
       end
       resources :products, expect: [:show] do
-        %w(price status tag spec pack service sample).each do |a|
+        %w(status tag spec pack service).each do |a|
           get a
           post a
         end
+
+        resources :samples, expect:[:show]
+        resources :prices, expect:[:show]
       end
       resources :tags, expect: [:show, :new, :edit]
 

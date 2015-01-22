@@ -1,23 +1,10 @@
-class Admin::ProductsController < ApplicationController
-  layout 'dashboard'
-  before_action :_can_manage_product!
-
-
-  def price
-    @product = Product.find params[:product_id]
-    # todo
-  end
+class Admin::ProductsController < Admin::ProductController
 
   def status
     @product = Product.find params[:product_id]
     #todo
   end
 
-
-  def sample
-    @product = Product.find params[:product_id]
-    # todo
-  end
 
   def service
     @product = Product.find params[:product_id]
@@ -111,7 +98,4 @@ class Admin::ProductsController < ApplicationController
     params.require(:product).permit(:name, :summary, :details)
   end
 
-  def _can_manage_product!
-    need_role unless Ability.new(current_user).can?(:manage, :product)
-  end
 end
