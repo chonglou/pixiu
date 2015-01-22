@@ -2,10 +2,6 @@ class Admin::ProductsController < ApplicationController
   layout 'dashboard'
   before_action :_can_manage_product!
 
-  def sample
-    @product = Product.select().find params[:product_id]
-    # todo
-  end
 
   def price
     @product = Product.find params[:product_id]
@@ -17,6 +13,11 @@ class Admin::ProductsController < ApplicationController
     #todo
   end
 
+
+  def sample
+    @product = Product.find params[:product_id]
+    # todo
+  end
 
   def service
     @product = Product.find params[:product_id]

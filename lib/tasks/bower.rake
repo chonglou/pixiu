@@ -49,8 +49,17 @@ namespace :bower do
     s = "#{bower_home}/jstree"
     d = "#{third_home}/jstree"
     unless Dir.exists?(d)
-       puts `cp -av #{s}/../jstree/dist #{d}`
+       puts `cp -av #{s}/dist #{d}`
     end
+
+    #-------jquery.fileupload
+
+    # s = "#{bower_home}/jquery-file-upload"
+    # d = "#{third_home}/jquery-file-upload"
+    # unless Dir.exists?(d)
+    #   FileUtils.mkdir_p d
+    #   %w(css img js).each {|n| puts `cp -av #{s}/#{n} #{d}/#{n}`}
+    # end
 
   end
 

@@ -12,3 +12,8 @@ zh-CN:
     save: '保存'
     recover: '恢复'
     refresh: '刷新'
+    add: '添加'
+    cancel: '取消'
+    start: '开始'
+    stop: '停止'
+    complete: '完成'
