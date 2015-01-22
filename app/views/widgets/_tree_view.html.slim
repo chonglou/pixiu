@@ -33,11 +33,13 @@ javascript:
       var tree = $(tid).jstree(true);
 
       for (i = 0, j = ids.length; i < j; i++) {
-        var id = 'child-'+ids[i];
-        console.log(tree.get_node({id:id}));
-        //tree.check_node();
+        // todo 初始化选择
+        console.log('li#'+ids[i]);
+        $('li#'+ids[i]).attr('aria-selected', true);
+        $('li#'+ids[i]+" a").addClass('jstree-checked');
+        //$(tid).jstree('check_node', $('li#'+ids[i]));
         //console.log(tree.get_node('child-'+ids[i]));
-        //console.log();
+        //
       }
     }
 

@@ -12,6 +12,10 @@ class Tag < ActiveRecord::Base
     VisitCounter.create flag: VisitCounter.flags[:tag], key: self.id
   end
 
+  def tree_id
+    "child-#{self.id}"
+  end
+
   def self.get_root_tree(flag, locale)
     children = self.select(:id, :name).where(
         'lang = ? AND flag = ? AND parent_id IS NULL',
@@ -31,7 +35,7 @@ class Tag < ActiveRecord::Base
   def self._get_node_tree(tag)
     children = self.select(:id, :name).where(parent_id: tag.id).order(id: :asc).map { |t| self._get_node_tree t }
     {
-        id: "child-#{tag.id}",
+        id: tag.tree_id,
         text: tag.name,
         type: 'folder',
         state: {opened: true},

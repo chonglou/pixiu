@@ -7,7 +7,7 @@ class Admin::DocumentsController < ApplicationController
     case request.method
       when 'GET'
         @tree = Tag.get_root_tree(:document, @document.lang).fetch(:children)
-        @ids = @document.tags.map { |t| t.id }
+        @ids = @document.tags.map { |t| t.tree_id }
       when 'POST'
         @document.tag_ids = params[:tags]
         render json: {ok: true}
