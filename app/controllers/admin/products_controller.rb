@@ -7,21 +7,6 @@ class Admin::ProductsController < ApplicationController
     # todo
   end
 
-  def service
-    @product = Product.find params[:product_id]
-    # todo
-  end
-
-  def pack
-    @product = Product.find params[:product_id]
-    # todo
-  end
-
-  def spec
-    @product = Product.find params[:product_id]
-    # todo
-  end
-
   def price
     @product = Product.find params[:product_id]
     # todo
@@ -29,8 +14,37 @@ class Admin::ProductsController < ApplicationController
 
   def status
     @product = Product.find params[:product_id]
-    # todo
+    #todo
   end
+
+
+  def service
+    @product = Product.find params[:product_id]
+    case request.method
+      when 'POST'
+        @product.update params.require(:product).permit(:service)
+      else
+    end
+  end
+
+  def pack
+    @product = Product.find params[:product_id]
+    case request.method
+      when 'POST'
+        @product.update params.require(:product).permit(:pack)
+      else
+    end
+  end
+
+  def spec
+    @product = Product.find params[:product_id]
+    case request.method
+      when 'POST'
+        @product.update params.require(:product).permit(:spec)
+      else
+    end
+  end
+
 
   def tag
     @product = Product.find params[:product_id]

@@ -1,6 +1,13 @@
 zh-CN:
   helpers:
     label:
+      product:
+        spec: '规格参数'
+        pack: '包装清单'
+        service: '售后保障'
+        details: '商品介绍'
+        summary: '摘要信息'
+        name: '商品名称'
       document:
         name: '名称'
         title: '标题'

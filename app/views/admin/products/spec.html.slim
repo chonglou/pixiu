@@ -1,3 +1,15 @@
 - @title=t('links.admin.product.edit', id: @product.id)
 - @right_nav_links = admin_products_right_nav_links
 br
+= bootstrap_form(@product, url: {action: 'spec'}, method: :post) do |f|
+  = f.error_messages
+  = f.fieldset do
+    = f.legend(@title)
+
+    = f.group do
+      = f.label :spec
+      = render 'widgets/html_field', resource: @product, field: :spec
+
+    = f.button_group do
+      = f.submit t('buttons.submit')
+      = f.reset t('buttons.reset')
