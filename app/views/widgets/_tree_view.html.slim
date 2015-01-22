@@ -1,4 +1,16 @@
 div class='row'
+  div class='col-sm-12'
+    button id='tree_save' class='btn btn-success'
+      i class='glyphicon glyphicon-save'
+      | #{t('buttons.save')}
+    | &nbsp;
+    a id='tree_refresh' class='btn btn-warning' href='#{path}'
+      i class='glyphicon glyphicon-refresh'
+      | #{t('buttons.refresh')}
+      | &nbsp;
+br
+div class='row'
+  input type='hidden' id='tree_init'
   div id='tree_view' class='col-sm-12'
 
 javascript:
@@ -13,36 +25,36 @@ javascript:
       },
       plugins: ["checkbox"]
     }).on('changed.jstree', function (e, data) {
-      var i, j, k=[];
+      var i, j, k = [];
       for (i = 0, j = data.selected.length; i < j; i++) {
         var id = data.instance.get_node(data.selected[i]).id;
-        if(id.indexOf('child-') == 0){
+        if (id.indexOf('child-') == 0) {
           k.push(id.substring(6));
         }
       }
-      $.post("#{path}", {tags:k}, function(result){
-        if(!result.ok){
+      $('input#tree_init').val(JSON.stringify(k));
+    }).on('ready.jstree', function (e, data) {
+
+      var tree = data.instance;
+
+      var ids = JSON.parse('#{{ids.to_json}}');
+      var i, j;
+
+      for (i = 0, j = ids.length; i < j; i++) {
+        var id = ids[i];
+        var node = tree.get_node(id);
+        tree.check_node(node);
+      }
+
+    });
+
+    $('button#tree_save').click(function () {
+      $.post("#{path}", {tags: JSON.parse($('input#tree_init').val())}, function (result) {
+        if (!result.ok) {
           alert(result.reason);
         }
       });
     });
 
-    function init_tree(){
-      var ids = JSON.parse('#{{ids.to_json}}');
-      var i, j;
-      var tree = $(tid).jstree(true);
-
-      for (i = 0, j = ids.length; i < j; i++) {
-        // todo 初始化选择
-        console.log('li#'+ids[i]);
-        $('li#'+ids[i]).attr('aria-selected', true);
-        $('li#'+ids[i]+" a").addClass('jstree-checked');
-        //$(tid).jstree('check_node', $('li#'+ids[i]));
-        //console.log(tree.get_node('child-'+ids[i]));
-        //
-      }
-    }
-
-    init_tree();
 
   });
