@@ -41,7 +41,10 @@ class Admin::TagsController < ApplicationController
 
   def destroy
     if Tag.where(parent_id: params[:id]).count == 0
-      Tag.destroy params[:id]
+      t = Tag.find params[:id]
+      t.documents.clear
+      t.products.clear
+      t.destroy
       render json: {ok: true}
     else
       render json: {ok: false, reason: t('labels.in_using')}

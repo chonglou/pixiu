@@ -37,10 +37,10 @@ class Admin::ProductsController < ApplicationController
     case request.method
       when 'GET'
         @tree = Tag.get_root_tree(:product, @product.lang).fetch(:children)
-        @ids = ProductTag.select(:tag_id).where(product_uid: @product.uid).map { |pt| "child-#{pt.tag_id}" }
+        @ids = @product.tags.map { |t| "child-#{t.id}" }
       when 'POST'
-        ProductTag.delete_all(['product_uid = ?', @product.uid])
-        params[:tags].each { |tid| ProductTag.create product_uid: @product.uid, tag_id: tid }
+        @product.tags.clear
+        @product.tag_ids = params[:tags]
         render json: {ok: true}
       else
     end
@@ -63,7 +63,6 @@ class Admin::ProductsController < ApplicationController
     @product = Product.new _product_params
     @product.lang = params[:locale]
     @product.status = Product.statuses[:submit]
-    @product.version = 1
     if @product.save
       redirect_to admin_products_path
     else
@@ -87,8 +86,8 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     p = Product.find params[:id]
-    p.update status: Product.statuses[:done]
-    VisitCounter.find_by(flag: VisitCounter.flags[:product], key: p.uid).destroy
+    p.tags.clear
+    p.destroy
     redirect_to admin_products_path
   end
 

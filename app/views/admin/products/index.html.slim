@@ -12,7 +12,7 @@ div class='row'
   footer
     | #{time_ago_in_words p.created_at} &nbsp;
     cite
-      = link_to t('buttons.view'), show_product_path(p.uid), target: '_blank'
+      = link_to t('buttons.view'), show_product_path(uid:p.uid), target: '_blank'
       | &nbsp; &nbsp;
       = link_to t('buttons.edit'), edit_admin_product_path(p)
 

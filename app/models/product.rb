@@ -4,11 +4,11 @@ class Product < ActiveRecord::Base
 
   before_destroy { |p| VisitCounter.find_by(flag: VisitCounter.flags[:product], key: p.id).destroy }
 
-  validates :uid, uniqueness: {scope: :version}
-  validates :uid, :name, :summary, :details, presence: true
+  validates :name, :summary, :details, presence: true
 
   has_many :prices
   has_and_belongs_to_many :carts
+  has_and_belongs_to_many :tags
 
   enum status: {submit:1, publish: 5, close: 10, done:100}
 

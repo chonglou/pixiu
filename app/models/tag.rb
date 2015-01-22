@@ -9,6 +9,7 @@ class Tag < ActiveRecord::Base
   enum flag: {product: 1, document: 2}
 
   has_and_belongs_to_many :documents
+  has_and_belongs_to_many :products
 
   def add_counter
     VisitCounter.create flag: VisitCounter.flags[:tag], key: self.id
