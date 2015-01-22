@@ -18,7 +18,7 @@ class Tag < ActiveRecord::Base
         locale, self.flags[flag]).order(id: :asc).map { |t| self._get_node_tree t }
 
     {
-        id: "root_#{flag}",
+        id: "root-#{flag}",
         text: I18n.t("models.#{flag}"),
         type: 'folder',
         children: children,
@@ -31,7 +31,7 @@ class Tag < ActiveRecord::Base
   def self._get_node_tree(tag)
     children = self.select(:id, :name).where(parent_id: tag.id).order(id: :asc).map { |t| self._get_node_tree t }
     {
-        id: tag.id,
+        id: "child-#{tag.id}",
         text: tag.name,
         type: 'folder',
         state: {opened: true},

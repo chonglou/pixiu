@@ -15,7 +15,10 @@ javascript:
     }).on('changed.jstree', function (e, data) {
       var i, j, k=[];
       for (i = 0, j = data.selected.length; i < j; i++) {
-        k.push(data.instance.get_node(data.selected[i]).id);
+        var id = data.instance.get_node(data.selected[i]).id;
+        if(id.indexOf('child-') == 0){
+          k.push(id.substring(6));
+        }
       }
       $.post("#{path}", {tags:k}, function(result){
         if(!result.ok){
@@ -23,5 +26,21 @@ javascript:
         }
       });
     });
+
+    function init_tree(){
+      var ids = JSON.parse('#{{ids.to_json}}');
+      var i, j;
+      var tree = $(tid).jstree(true);
+
+      for (i = 0, j = ids.length; i < j; i++) {
+        var id = 'child-'+ids[i];
+        console.log(tree.get_node({id:id}));
+        //tree.check_node();
+        //console.log(tree.get_node('child-'+ids[i]));
+        //console.log();
+      }
+    }
+
+    init_tree();
 
   });

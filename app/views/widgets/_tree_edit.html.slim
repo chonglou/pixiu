@@ -40,7 +40,7 @@ javascript:
         return false;
       }
       sel = sel[0];
-      if (sel.indexOf('root_') == 0) {
+      if (sel.indexOf('root-') == 0) {
         alert("#{t('labels.in_using')}");
         return false;
       }
@@ -56,23 +56,29 @@ javascript:
 
       sel = sel[0];
       //ref.is_parent(sel)
-      if (sel.indexOf('root_') == 0) {
+      if (sel.indexOf('root-') == 0) {
         alert("#{t('labels.in_using')}");
         return false;
       }
-      $.ajax({
-        url: url + '/' + sel,
-        type: 'DELETE',
-        success: function(result){
-          if(result.ok){
-            ref.delete_node(sel);
+      else if (sel.indexOf('child-') == 0) {
+        $.ajax({
+          url: url + '/' + sel.substring(6),
+          type: 'DELETE',
+          success: function (result) {
+            if (result.ok) {
+              ref.delete_node(sel);
+              return true;
+            }
+            else {
+              alert(result.reason);
+              return false;
+            }
           }
-          else
-          {
-            alert(result.reason);
-          }
-        }
-      });
+        });
+      }
+      else {
+        return false;
+      }
     });
 
     $(tid).jstree({
@@ -105,31 +111,40 @@ javascript:
         var params = {
           name: data.node.text
         };
-        if (data.node.parent.indexOf('root_') == 0) {
+        if (data.node.parent.indexOf('root-') == 0) {
           params.flag = data.node.parent.substring(5);
         }
+        else if (data.node.parent.indexOf('child-') == 0) {
+          params.parent_id = data.node.parent.substring(6);
+        }
         else {
-          params.parent_id = data.node.parent;
+          return false;
         }
         $.post(url, params, function (result) {
           if (result.ok) {
             $(data.node).attr('id', result.id);
+            return true;
           }
           else {
             alert(result.reason);
             data.node.text = data.node.old;
+            return false;
           }
         })
       }
       else {
         $.ajax({
-          url: url + '/' + data.node.id + '',
+          url: url + '/' + data.node.id.substring(6),
           type: 'PATCH',
           data: {name: data.node.text},
           success: function (result) {
-            if (!result.ok) {
+            if (result.ok) {
+              return true;
+            }
+            else {
               alert(result.reason);
               data.node.text = data.node.old;
+              return false;
             }
           }
         });

@@ -17,7 +17,7 @@ class Admin::ProductsController < ApplicationController
     case request.method
       when 'GET'
         @tree = Tag.get_root_tree(:product, @product.lang).fetch(:children)
-        @ids = ProductTag.select(:tag_id).where(product_uid: @product.uid).map { |t| t.id }
+        @ids = ProductTag.select(:tag_id).where(product_uid: @product.uid).map { |t| t.tag_id }
       when 'POST'
         ProductTag.delete_all(['product_uid = ?', @product.uid])
         params[:tags].each { |tid| ProductTag.create product_uid: @product.uid, tag_id: tid }
