@@ -2,6 +2,8 @@ zh-CN:
   links:
     welcome: "欢迎你, <img src='%{logo}' alt='%{username}' title='%{username}'/>"
     add_to_favorites: '收藏本页'
+    attachments:
+      manage: '附件列表'
     admin:
       tag:
         index: '分类管理'

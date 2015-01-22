@@ -1,8 +1,24 @@
 class AttachmentsController < ApplicationController
-  before_action :authenticate_user!, only: [:controller]
+  before_action :authenticate_user! #, only: [:controller]
 
   skip_before_action :verify_authenticity_token, only: [:controller]
 
+
+
+  def manage
+    case request.method
+      when 'POST'
+        a = Attachment.find params[:id]
+        if a.user_id == current_user.id
+          a.destroy
+        else
+          flash[:alert] = t('labels.require_role')
+        end
+      else
+    end
+    @attachments = Attachment.select(:id, :title, :avatar, :created_at).order(id: :desc).where(user_id: current_user.id).page params[:page]
+    render 'manage', layout: 'dashboard'
+  end
 
   def controller
     cfg = JSON.parse File.read("#{Rails.root}/config/ueditor.json")

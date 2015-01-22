@@ -1,0 +1,14 @@
+- @title = t('links.attachments.manage')
+br
+= paginate @attachments
+
+div class='row'
+  div class='col-sm-12'
+    - @attachments.each do |a|
+      div class='col-sm-3'
+        h4 class='wrap' #{a.title}
+        p
+          a href="#{a.avatar.url}" target="_blank"
+            img src="#{a.avatar.thumb.url}"
+        p
+          = button_to t('buttons.remove'), attachments_manage_path(id:a.id), data: {confirm: t('labels.are_you_sure')}, method: :post, class: 'btn btn-danger'

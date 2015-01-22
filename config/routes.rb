@@ -58,6 +58,8 @@ Rails.application.routes.draw do
   namespace :attachments do
     get 'controller'
     post 'controller'
+    get 'manage'
+    post 'manage'
   end
 
 
