@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :tags
 
     #------------------------------------
+    get 'notices'=>'notices#index'
+
     get 'documents/:name'=>'documents#show', as: :show_document
     get 'products/:uid'=>'products#show', as: :show_product
     get 'tags/:name'=>'tags#show', as: :show_tag

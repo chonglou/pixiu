@@ -1,0 +1,6 @@
+- @title= t 'links.notice.index'
+
+- @notices.each do |n|
+  blockquote
+    |#{{md2html n.content}}
+    footer #{time_ago_in_words n.updated_at}

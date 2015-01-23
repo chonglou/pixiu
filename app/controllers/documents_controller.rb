@@ -9,7 +9,7 @@ class DocumentsController < ApplicationController
       @right_sidebars = [{
                              name: t('labels.recent_documents'),
                              links: Document.select(:name, :title, :lang).where(
-                                 'id > ?', @document.id-10).order(
+                                 'id > ? AND lang = ?', @document.id-10, lang).order(
                                  updated_at: :desc).limit(20).map { |d| {
                                  name: d.title,
                                  url: show_document_path(d.name, locale: d.lang)}

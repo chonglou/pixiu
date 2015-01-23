@@ -4,6 +4,8 @@ zh-CN:
     add_to_favorites: '收藏本页'
     attachments:
       manage: '附件列表'
+    notice:
+      index: '消息通知'
     admin:
       tag:
         index: '分类管理'

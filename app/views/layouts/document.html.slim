@@ -17,16 +17,16 @@ html lang="#{params[:locale]}"
             = render 'widgets/lang_bar'
     div class="container-fluid"
       div class='row'
-        div class='col-sm-offset-1 col-sm-8'
+        br
+        div class='col-sm-offset-1 col-sm-7 blog-main'
           = render 'widgets/message', message:notice, style:'info'
           = render 'widgets/message', message:alert, style:'danger'
           = yield
           = render 'widgets/footer'
         div class='col-sm-offset-1 col-sm-2'
-          br
           div class="sidebar-module sidebar-module-inset"
             h4 #{t 'labels.latest_notice'}(#{time_ago_in_words latest_notice.updated_at})
-            |#{{md2html latest_notice.content}}
+            a href='#{notices_path}' #{{md2html latest_notice.content}}
           - if @right_sidebars
             - @right_sidebars.each do |sb|
               div class="sidebar-module"
