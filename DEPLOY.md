@@ -66,8 +66,8 @@
     cap production puma:nginx_config
 ### 初始化数据库
     cap production deploy:migrate
-    TASK=db:seed cap production rails:task
-    TASK=nginx:certs cap production rails:task
+    ROLE=db TASK=db:seed cap production rails:task
+    ROLE=web TASK=nginx:certs cap production rails:task(可选，你也可以上传自己的数字证书到/etc/nginx/ssl)
 ### 部署
     cap production deploy
 
