@@ -5,7 +5,7 @@ module SiteHelper
 
   def top_nav_links
     links = [
-        {url: home_url, name: t('links.home.index')}
+        {url: root_url, name: t('links.home.index')}
     ]
 
     sl = Setting.site_top_links

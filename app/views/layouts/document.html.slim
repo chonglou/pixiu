@@ -5,6 +5,16 @@ html lang="#{params[:locale]}"
     = stylesheet_link_tag 'document', media: 'all', 'data-turbolinks-track' => true
     = yield :head
   body
+    div class="blog-masthead"
+      div class="container"
+        nav class="blog-nav"
+          - top_nav_links.each do |l|
+            - if l.fetch(:url) == request.original_url
+              a class="blog-nav-item active" href='#{l.fetch :url}' #{l.fetch :name}
+            - else
+              a class="blog-nav-item" href='#{l.fetch :url}' #{l.fetch :name}
+          ul class="nav navbar-nav navbar-right"
+            = render 'widgets/lang_bar'
     div class="container-fluid"
       div class='row'
         div class='col-sm-offset-1 col-sm-8'
@@ -13,10 +23,16 @@ html lang="#{params[:locale]}"
           = yield
           = render 'widgets/footer'
         div class='col-sm-offset-1 col-sm-2'
+          br
+          div class="sidebar-module sidebar-module-inset"
+            h4 #{t 'labels.latest_notice'}(#{time_ago_in_words latest_notice.updated_at})
+            |#{{md2html latest_notice.content}}
           - if @right_sidebars
             - @right_sidebars.each do |sb|
-              br
-              h4 #{sb.fetch :name}
-              - sb.fetch(:links).each do |l|
-                a href='#{l.fetch :url}' #{l.fetch :name}
-                br
+              div class="sidebar-module"
+                h4 #{sb.fetch :name}
+                ol class="list-unstyled"
+                  - sb.fetch(:links).each do |l|
+                    li
+                      a href='#{l.fetch :url}' #{l.fetch :name}
+

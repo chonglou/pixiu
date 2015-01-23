@@ -1,0 +1,11 @@
+div class="blog-post"
+  h2 class='blog-post-title' #{document.title}
+  p class=="blog-post-meta"
+    | #{time_ago_in_words document.updated_at}
+    - if Ability.new(current_user).can?(:manage, :document)
+      | &nbsp;
+      a href='#{edit_admin_document_path(document)}' [#{t 'buttons.edit'}]
+
+  |#{{md2html document.summary}}
+  hr
+  p #{{document.body}}

@@ -1,13 +1,5 @@
 - @title = @document.title
 
-h2
-  | #{@title}
-  - if Ability.new(current_user).can?(:manage, :document)
-    | &nbsp;
-    a href='#{edit_admin_document_path(@document)}' [#{t 'buttons.edit'}]
-hr
-div class='row' #{{md2html @document.summary}}
-div class='row' #{{md2html @document.body}}
-
-
+div class="col-sm-12 blog-main"
+  =render 'widgets/document', document:@document
 
