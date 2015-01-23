@@ -6,6 +6,6 @@ class Price < ActiveRecord::Base
   enum flags: {cny:1, hkd:2, mop:3, twd:4, jpy:5, usd:6, eur:7, gbp:8, cad:9}
 
   def flag_s
-    I18n.t("helpers.label.price.flags.#{Price.flags.invert[self.flag]}")
+    I18n.t("helpers.label.price.flag_#{Price.flags.invert[self.flag]}")
   end
 end

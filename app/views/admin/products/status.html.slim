@@ -1,3 +1,18 @@
-- @title=t('links.admin.product.edit', id: @product.id)
+- @title=t('links.admin.product.status')
 - @right_nav_links = admin_products_right_nav_links
 br
+
+= bootstrap_form(@product, url: {action: 'status'}, method: :post) do |f|
+  = f.error_messages
+  = f.fieldset do
+    = f.legend(@title)
+
+    = f.group do
+      = f.label :status
+      = f.radios :status, Product.statuses.keys
+
+
+    = f.button_group do
+      = f.submit t('buttons.submit')
+      = f.reset t('buttons.reset')
+      = f.back t('buttons.back')

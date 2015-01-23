@@ -11,7 +11,7 @@ class Product < ActiveRecord::Base
   has_and_belongs_to_many :carts
   has_and_belongs_to_many :tags
 
-  enum status: {submit:1, publish: 5, close: 10, done:100}
+  enum status: {submit:1, publish: 5, expire:12, close: 10}
 
   private
   def add_counter

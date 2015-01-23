@@ -11,7 +11,8 @@ module ProductsHelper
         {url: admin_product_prices_url(@product), name: t('links.admin.product.price.index', id:@product.id)},
     ]
   end
-  def admin_price_select_options
-    Price.flags.map{|k,v| [t("helpers.label.price.flags.#{k}"),v]}
+  def admin_product_price_flag_select_options
+    Price.flags.map{|k,v| [t("helpers.label.price.flag_#{k}"),v]}
   end
+
 end

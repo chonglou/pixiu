@@ -2,7 +2,11 @@ class Admin::ProductsController < Admin::ProductController
 
   def status
     @product = Product.find params[:product_id]
-    #todo
+    case request.method
+      when 'POST'
+        @product.update params.require(:product).permit(:status)
+      else
+    end
   end
 
 
@@ -50,10 +54,7 @@ class Admin::ProductsController < Admin::ProductController
 
   def index
     @products = Product.select(
-        :id, :uid, :name, :name, :summary, :created_at).order(id: :desc).where(
-        'lang = ? AND status <> ?',
-        params[:locale],
-        Product.statuses[:done]).page params[:page]
+        :id, :uid, :name, :name, :summary, :created_at).order(id: :desc).where(lang:params[:locale]).page params[:page]
   end
 
 
