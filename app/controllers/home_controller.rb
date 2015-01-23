@@ -8,15 +8,6 @@ class HomeController < ApplicationController
     render 'index', layout: 'carousel'
   end
 
-  def favicon
-    icon = Setting.favicon
-    if icon
-      send_data icon.fetch(:data), type: icon.fetch(:type), disposition: 'inline'
-    else
-      render text: ''
-    end
-  end
-
   def google
     render 'google', layout: false
   end

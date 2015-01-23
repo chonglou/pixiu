@@ -14,7 +14,7 @@ div class="row"
         div class="col-sm-offset-3"
           = submit_tag t('buttons.submit'), class: 'btn btn-primary'
           | &nbsp; &nbsp;
-          = link_to t('buttons.view'), '/favicon.ico', class: 'btn btn-info', target: '_blank'
+          = link_to t('buttons.view'), Setting.favicon || image_path('favicon.ico'), class: 'btn btn-info', target: '_blank'
 br
 div class="row"
   fieldset

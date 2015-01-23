@@ -14,10 +14,7 @@ class Admin::SamplesController < Admin::ProductController
       render 'new' and return
     end
     attach = Attachment.new user_id: current_user.id
-    attach.content_type = file.content_type
-    attach.title = file.original_filename
-    attach.ext = file_ext file.original_filename
-    attach.avatar = file
+    attach.read! file
     attach.save!
     @sample.attachment_id = attach.id
     @sample.product_id = @product.id

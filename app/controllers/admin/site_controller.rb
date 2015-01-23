@@ -14,8 +14,11 @@ class Admin::SiteController < ApplicationController
 
   def favicon
     iio = params[:icon]
-    if iio && iio.content_type == 'image/vnd.microsoft.icon'
-      Setting.favicon = {data: iio.read, type: iio.content_type}
+    if iio && %w(image/vnd.microsoft.icon application/ico).include?(iio.content_type)
+      attach = Attachment.new user_id: current_user.id
+      attach.read! iio
+      attach.save!
+      Setting.favicon = attach.avatar.url
     else
       flash[:alert] = t('labels.input_not_valid')
     end
