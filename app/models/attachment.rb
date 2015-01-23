@@ -4,4 +4,8 @@ class Attachment < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   belongs_to :user
+
+  def image?
+    self.content_type.start_with? 'image'
+  end
 end

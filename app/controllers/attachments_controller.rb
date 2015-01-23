@@ -16,7 +16,7 @@ class AttachmentsController < ApplicationController
         end
       else
     end
-    @attachments = Attachment.select(:id, :title, :avatar, :created_at).order(id: :desc).where(user_id: current_user.id).page params[:page]
+    @attachments = Attachment.select(:id,:content_type, :title, :avatar, :created_at).order(id: :desc).where(user_id: current_user.id).page params[:page]
     render 'manage', layout: 'dashboard'
   end
 
