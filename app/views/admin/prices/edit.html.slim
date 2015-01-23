@@ -1,3 +1,28 @@
-- @title=t('links.admin.product.edit', id: @product.id)
+- @title=t('links.admin.product.price.edit', id: @price.id)
 - @right_nav_links = admin_products_right_nav_links
 br
+br
+= bootstrap_form(@price, url: {action: 'update'}, multipart: true) do |f|
+  = f.error_messages
+  = f.fieldset do
+    = f.legend(@title)
+
+
+    = f.group do
+      = f.label :flag
+      = f.select :flag, admin_price_select_options
+
+    = f.group do
+      = f.label :value
+      = f.name_field :value
+
+    = f.button_group do
+      = f.submit t('buttons.submit')
+      = f.reset t('buttons.reset')
+      = f.back t('buttons.back')
+
+br
+h3 #{t('links.admin.product.price.remove', id: @price.id)}
+hr
+div class='row'
+  =render 'widgets/remove_button', url:admin_product_price_path(product_id:@product.id)

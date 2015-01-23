@@ -2,7 +2,7 @@
 - @right_nav_links = admin_products_right_nav_links
 br
 
-= bootstrap_form(@sample, url: {action: 'create'}, multipart: true) do |f|
+= bootstrap_form(@sample, url: {action: 'create'}) do |f|
   = f.error_messages
   = f.fieldset do
     = f.legend(@title)

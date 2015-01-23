@@ -1,6 +1,19 @@
 zh-CN:
   helpers:
     label:
+      price:
+        flag: '类型'
+        value: '值'
+        flags:
+          cny: '人民币'
+          hkd: '港元'
+          mop: '澳门元'
+          twd: '台币'
+          jpy: '日元'
+          usd: '美元'
+          eur: '欧元'
+          gbp: '英镑'
+          cad: '加元'
       product:
         spec: '规格参数'
         pack: '包装清单'

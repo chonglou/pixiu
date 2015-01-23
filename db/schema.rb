@@ -51,7 +51,8 @@ ActiveRecord::Schema.define(version: 20150122211729) do
     t.integer  "order_id",    limit: 4,     null: false
     t.integer  "user_id",     limit: 4,     null: false
     t.integer  "star",        limit: 4,     null: false
-    t.datetime "created",                   null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "comments", ["project_uid"], name: "index_comments_on_project_uid", using: :btree
@@ -130,10 +131,11 @@ ActiveRecord::Schema.define(version: 20150122211729) do
   add_index "orders_products", ["product_id"], name: "index_orders_products_on_product_id", using: :btree
 
   create_table "prices", force: :cascade do |t|
-    t.integer  "product_id", limit: 4,                            null: false
-    t.decimal  "value",                precision: 10, default: 0, null: false
-    t.integer  "flag",       limit: 4,                default: 0, null: false
-    t.datetime "created",                                         null: false
+    t.integer  "product_id", limit: 4,                                        null: false
+    t.decimal  "value",                precision: 15, scale: 2, default: 0.0, null: false
+    t.integer  "flag",       limit: 4,                          default: 0,   null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
   end
 
   create_table "products", force: :cascade do |t|

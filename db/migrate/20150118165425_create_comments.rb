@@ -8,7 +8,7 @@ class CreateComments < ActiveRecord::Migration
       t.integer :order_id, null:false
       t.integer :user_id, null:false
       t.integer :star, null:false
-      t.timestamp :created, null:false
+      t.timestamps null:false
     end
     add_index :comments, :project_uid
     add_index :comments, :uid

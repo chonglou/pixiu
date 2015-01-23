@@ -27,6 +27,9 @@ zh-CN:
         tag: '分类信息'
         price:
           index: '价格信息'
+          new: '新增价格'
+          edit: '编辑价格[%{id}]'
+          remove: '删除价格[%{id}]'
         status: '当前状态'
       document:
         index: '文档管理'

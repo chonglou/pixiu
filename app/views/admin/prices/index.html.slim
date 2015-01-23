@@ -1,3 +1,23 @@
 - @title=t('links.admin.product.edit', id: @product.id)
 - @right_nav_links = admin_products_right_nav_links
 br
+div class='row pull-right'
+  = link_to t('buttons.add'), new_admin_product_price_path(@product), class: 'btn btn-primary'
+
+br
+br
+div class="row"
+  - if @product.prices
+    table class="table table-bordered table-hover"
+      thead
+        tr
+          th #{t 'helpers.label.price.flag'}
+          th #{t 'helpers.label.price.value'}
+          th #{t('buttons.manage')}
+      tbody
+        -@product.prices.each do |p|
+          tr
+            td #{p.flag_s}
+            td #{p.value}
+            td
+              = link_to t('buttons.edit'), edit_admin_product_price_path(id:p.id, product_id:@product.id), class:'btn btn-success'
