@@ -1,7 +1,7 @@
 namespace :rails do
   desc 'Invoke rake task'
   task :task, :name do
-    on roles(:db) do
+    on roles(:ops) do
       within current_path do
         with rails_env: :production do
           #execute('uname -a')

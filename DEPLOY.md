@@ -36,26 +36,6 @@
     GRANT ALL PRIVILEGES ON pixiu.* TO 'pixiu'@'localhost' IDENTIFIED BY 'changeme';
     FLUSH PRIVILEGES;
 
-### SSL证书安装
-#### 制作（可选）
-
-    mkdir /tmp/ssl
-    cd /tmp/ssl
-    openssl genrsa -out key.pem 2048 
-    openssl req -new -key key.pem  -subj "/C=US/ST=California/L=Goleta/O=pixiu/CN=0-dong.com" -out cert.csr -text 
-    openssl x509 -req -in cert.csr -sha512 -days 3650  -signkey key.pem -out cert.pem -text
-
-
-#### 安装
-
-    sudo mkdir -p /etc/nginx/ssl
-    cd /etc/nginx/ssl
-    sudo cp /tmp/ssl/key.pem pixiu_production_key.pem 
-    sudo cp /tmp/ssl/cert.pem pixiu_production_cert.pem 
-    sudo chmod 400 pixiu_production_key.pem
-    sudo chmod 444 pixiu_production_cert.pem
-    rm -r /tmp/ssl
-
 ### ruby环境
 
     git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -87,6 +67,7 @@
 ### 初始化数据库
     cap production deploy:migrate
     TASK=db:seed cap production rails:task
+    TASK=nginx:certs cap production rails:task
 ### 部署
     cap production deploy
 
