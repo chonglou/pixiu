@@ -1,6 +1,6 @@
 class Sample < ActiveRecord::Base
   belongs_to :product
-  has_one :attachment
+  belongs_to :attachment
 
   validates :attachment_id, :product_id, presence: true
 end

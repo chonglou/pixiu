@@ -112,7 +112,7 @@ class AttachmentsController < ApplicationController
     attach = Attachment.new user_id: user_id
     attach.content_type = type
     attach.title = name
-    attach.ext = _file_ext name
+    attach.ext = file_ext name
     attach.avatar = file
     attach.save!
     {
@@ -122,9 +122,7 @@ class AttachmentsController < ApplicationController
     }
   end
 
-  def _file_ext(name)
-    name[name.rindex('.')+1, name.size].downcase
-  end
+
 
   def _ext2type(ext)
     Mime::Type.lookup_by_extension(ext) || 'application/octet-stream'

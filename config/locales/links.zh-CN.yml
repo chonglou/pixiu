@@ -15,13 +15,18 @@ zh-CN:
         new: '添加商品'
         edit: '编辑商品[%{id}]'
         remove: '删除商品[%{id}]'
-        sample: '样品图片'
+        sample:
+          index: '样品图片'
+          new: '新增样品信息'
+          edit: '编辑样品信息[%{id}]'
+          remove: '删除样品信息[%{id}]'
         info: '商品介绍'
         spec: '规格参数'
         pack: '包装清单'
         service: '售后保障'
         tag: '分类信息'
-        price: '价格信息'
+        price:
+          index: '价格信息'
         status: '当前状态'
       document:
         index: '文档管理'

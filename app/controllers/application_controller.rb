@@ -30,6 +30,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  def file_ext(name)
+    name[name.rindex('.')+1, name.size].downcase
+  end
+
   private
   def _set_locale
     I18n.locale = params[:locale] || I18n.default_locale

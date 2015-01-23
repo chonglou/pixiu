@@ -1,6 +1,6 @@
 class CreateSamples < ActiveRecord::Migration
   def change
-    create_table :samples, id:false do |t|
+    create_table :samples do |t|
       t.integer :product_id, null:false
       t.integer :attachment_id, null:false
       t.string :title, null:false
