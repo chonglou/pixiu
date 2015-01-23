@@ -37,7 +37,7 @@ class HomeController < ApplicationController
           xm = Builder::XmlMarkup.new(target: target)
           xm.instruct!
           xm.urlset(xmlns: xmlns) {
-            Product.select(:uid, :lang, :updated_at).where('status <> ?', Product.statuses[:done]).order(id: :desc).each do |p|
+            Product.select(:uid, :lang, :updated_at).where('updated_at >= ? && updated_at< ?', time, time>>1).order(id: :desc).each do |p|
               xm.url {
                 xm.loc show_product_url(p.uid, locale: p.lang)
                 xm.lastmod p.updated_at
@@ -110,8 +110,7 @@ class HomeController < ApplicationController
         }
 
         Product.select(
-            :uid, :name, :lang, :summary, :updated_at).where(
-            'status <> ?', Product.statuses[:done]).order(id: :desc).limit(
+            :uid, :name, :lang, :summary, :updated_at).order(updated_at: :desc).limit(
             20).each { |p| insert_item.call show_product_url(p.uid, locale: p.lang), p.name, md2html(p.summary), p.updated_at }
 
         # if lang
