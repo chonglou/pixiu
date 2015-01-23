@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   include SharedHelper
 
   def index
+    render 'index', layout: 'carousel'
   end
 
   def favicon

@@ -1,21 +1,22 @@
-- content_for :head
-  = stylesheet_link_tag 'document', media: 'all', 'data-turbolinks-track' => true
-
-- content_for :body
-  div class="container-fluid"
-    div class='row'
-      div class='col-sm-offset-1 col-sm-8'
-        = render 'widgets/message', message:notice, style:'info'
-        = render 'widgets/message', message:alert, style:'danger'
-        = yield
-        = render 'widgets/footer'
-      div class='col-sm-offset-1 col-sm-2'
-        - if @right_sidebars
-          - @right_sidebars.each do |sb|
-            br
-            h4 #{sb.fetch :name}
-            - sb.fetch(:links).each do |l|
-              a href='#{l.fetch :url}' #{l.fetch :name}
+doctype html
+html lang="#{params[:locale]}"
+  head
+    = render 'widgets/header'
+    = stylesheet_link_tag 'document', media: 'all', 'data-turbolinks-track' => true
+    = yield :head
+  body
+    div class="container-fluid"
+      div class='row'
+        div class='col-sm-offset-1 col-sm-8'
+          = render 'widgets/message', message:notice, style:'info'
+          = render 'widgets/message', message:alert, style:'danger'
+          = yield
+          = render 'widgets/footer'
+        div class='col-sm-offset-1 col-sm-2'
+          - if @right_sidebars
+            - @right_sidebars.each do |sb|
               br
-
-= render template:'layouts/base'
+              h4 #{sb.fetch :name}
+              - sb.fetch(:links).each do |l|
+                a href='#{l.fetch :url}' #{l.fetch :name}
+                br

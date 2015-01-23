@@ -1,36 +1,39 @@
-- content_for :head
-  = stylesheet_link_tag 'dashboard', media: 'all', 'data-turbolinks-track' => true
-  = stylesheet_link_tag '/3rd/jstree/themes/default/style.min.css', media: 'all', 'data-turbolinks-track' => true
+doctype html
+html lang="#{params[:locale]}"
+  head
+    = render 'widgets/header'
+    = stylesheet_link_tag 'dashboard', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag '/3rd/jstree/themes/default/style.min.css', media: 'all', 'data-turbolinks-track' => true
 
-  = javascript_include_tag 'dashboard', 'data-turbolinks-track' => true
-  = javascript_include_tag '/3rd/jstree/jstree.min.js', 'data-turbolinks-track' => true
+    = javascript_include_tag 'dashboard', 'data-turbolinks-track' => true
+    = javascript_include_tag '/3rd/jstree/jstree.min.js', 'data-turbolinks-track' => true
+    = yield :head
+  body
+    = render 'widgets/top_nav_bar_0'
+    div class="container-fluid"
+      div class='row'
+        div class="col-sm-2 sidebar"
+          ul class="nav nav-sidebar"
+            - left_nav_links.each do |l|
+              - if l.fetch(:url) == request.original_url
+                li role="presentation" class="active"
+                  a href="#{l.fetch :url}" #{l.fetch :name}
+              - else
+                li role="presentation"
+                  a href="#{l.fetch :url}" #{l.fetch :name}
+        div class='col-sm-offset-2 col-sm-10 main'
+          = render 'widgets/message', message:notice, style:'info'
+          = render 'widgets/message', message:alert, style:'danger'
+          div class='row'
+            - if @right_nav_links
+              ul class="nav nav-tabs"
+                - @right_nav_links.each do |l|
+                  - if l.fetch(:url) == request.original_url
+                    li role="menu" class="active"
+                      a href="#{l.fetch :url}" #{l.fetch :name}
+                  - else
+                    li role="menu"
+                      a href="#{l.fetch :url}" #{l.fetch :name}
+          = yield
+          = render 'widgets/footer'
 
-- content_for :body
-  = render 'widgets/top_nav_bar_0'
-  div class="container-fluid"
-    div class='row'
-      div class="col-sm-2 sidebar"
-        ul class="nav nav-sidebar"
-          - left_nav_links.each do |l|
-            - if l.fetch(:url) == request.original_url
-              li role="presentation" class="active"
-                a href="#{l.fetch :url}" #{l.fetch :name}
-            - else
-              li role="presentation"
-                a href="#{l.fetch :url}" #{l.fetch :name}
-      div class='col-sm-offset-2 col-sm-10 main'
-        = render 'widgets/message', message:notice, style:'info'
-        = render 'widgets/message', message:alert, style:'danger'
-        div class='row'
-          - if @right_nav_links
-            ul class="nav nav-tabs"
-              - @right_nav_links.each do |l|
-                - if l.fetch(:url) == request.original_url
-                  li role="menu" class="active"
-                    a href="#{l.fetch :url}" #{l.fetch :name}
-                - else
-                  li role="menu"
-                    a href="#{l.fetch :url}" #{l.fetch :name}
-        = yield
-        = render 'widgets/footer'
-= render template:'layouts/base'
