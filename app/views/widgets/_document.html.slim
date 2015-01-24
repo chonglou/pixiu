@@ -6,6 +6,6 @@ div class="blog-post"
       | &nbsp;
       a href='#{edit_admin_document_path(document)}' [#{t 'buttons.edit'}]
 
-  |#{{md2html document.summary}}
+  | #{{md2html document.summary}}
   hr
-  p #{{document.body}}
+  | #{{document.body}}

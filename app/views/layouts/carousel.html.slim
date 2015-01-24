@@ -1,6 +1,110 @@
 doctype html
-html
+html lang="#{params[:locale]}"
   head
+    = render 'widgets/header'
+    = stylesheet_link_tag 'carousel', media: 'all', 'data-turbolinks-track' => true
     = yield :head
   body
-    = yield :body
+    /--------navbar-----------
+    div class="navbar-wrapper"
+      div class="container"
+        nav class="navbar navbar-inverse navbar-static-top"
+          div class="container"
+            div class="navbar-header"
+              button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
+                span class="sr-only" Toggle navigation
+                span class="icon-bar"
+                span class="icon-bar"
+                span class="icon-bar"
+              a class="navbar-brand" href="#" #{site_info 'name'}
+            div id="navbar" class="navbar-collapse collapse"
+              ul class="nav navbar-nav"
+                - top_nav_links.each do |l|
+                  - if l.fetch(:url) == request.original_url
+                    li class='active'
+                      a href='#{l.fetch :url}' #{l.fetch :name}
+                  -else
+                    li
+                      a href='#{l.fetch :url}' #{l.fetch :name}
+              ul class="nav navbar-nav navbar-right"
+                = render 'widgets/personal_bar'
+    /----------carousel-----
+    div id="myCarousel" class="carousel slide" data-ride="carousel"
+      ol class="carousel-indicators"
+        - @carouses.each_index do |i|
+          - if i == 0
+            li data-target="#myCarousel" data-slide-to="#{i}" class="active"
+          - else
+            li data-target="#myCarousel" data-slide-to="#{i}"
+      div class="carousel-inner" role="listbox"
+        - @carouses.each_with_index do |c, i|
+          - if i == 0
+            div class="item active"
+              img src="#{c.fetch :img}"
+              div class="container"
+                div class="carousel-caption"
+                  h1 #{c.fetch :title}
+                  | #{{c.fetch :summary}}
+                  p
+                    a class="btn btn-lg btn-primary" href="#{c.fetch :url}" role="button" #{t 'buttons.more' }
+          - else
+            div class="item"
+              img src="#{c.fetch :img}"
+              div class="container"
+                div class="carousel-caption"
+                  h1 #{c.fetch :title}
+                  | #{{c.fetch :summary}}
+                  p
+                    a class="btn btn-lg btn-primary" href="#{c.fetch :url}" role="button" #{t 'buttons.more' }
+        a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"
+          span class="glyphicon glyphicon-chevron-left" aria-hidden="true"
+          span class="sr-only" #{t 'buttons.previous'}
+        a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"
+          span class="glyphicon glyphicon-chevron-right" aria-hidden="true"
+          span class="sr-only"# {t 'buttons.next'}
+
+    /---------marketings--------
+    div class="container marketing"
+      div class="row"
+        - @markings.each do |m|
+          div class="col-lg-4"
+            img class="img-circle marking-img" src="#{m.fetch :img}" style="width: 140px; height: 140px;"
+            h2 #{m.fetch :title}
+            | #{{m.fetch :summary}}
+            p
+              a class="btn btn-default" href="#{m.fetch :url}" role="button" #{t 'buttons.more'}
+
+      /---------featurettes----------
+      - @featurettes.each_with_index do |f, i|
+        hr class="featurette-divider"
+        div class="row featurette"
+          - if i.odd?
+            div class="col-md-5"
+              - if f[:img]
+                a href='#{f.fetch :url}'
+                  img class="featurette-image img-responsive" src="#{f.fetch :img}"
+              - else
+                a href='#{f.fetch :url}'
+                  img class="featurette-image img-responsive" data-src="holder.js/500x500/auto"
+            div class="col-md-7"
+              h2 class="featurette-heading" #{f.fetch :title}
+              div class='lead'
+                | #{{f.fetch :summary}}
+                =link_to t("buttons.more"), f.fetch(:url)
+          - else
+            div class="col-md-7"
+              h2 class="featurette-heading" #{f.fetch :title}
+              div class='lead'
+                | #{{f.fetch :summary}}
+                =link_to t("buttons.more"), f.fetch(:url)
+            div class="col-md-5"
+              - if f[:img]
+                a href='#{f.fetch :url}'
+                  img class="featurette-image img-responsive" src="#{f.fetch :img}"
+              - else
+                a href='#{f.fetch :url}'
+                  img class="featurette-image img-responsive" data-src="holder.js/500x500/auto"
+
+
+      = yield :body
+      = render 'widgets/footer'

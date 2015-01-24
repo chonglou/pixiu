@@ -5,6 +5,48 @@ class HomeController < ApplicationController
   include SharedHelper
 
   def index
+    @carouses =[]
+    @markings=[]
+    @featurettes=[]
+    if @carouses.empty?
+      @carouses << {
+          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+          url: '#',
+          title: 'Page 1',
+          summary: '<p>Summary 1</p>'
+      }
+      @carouses << {
+          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+          url: '#',
+          title: 'Page 2',
+          summary: '<p>Summary 2</p>'
+      }
+      @carouses << {
+          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+          url: '#',
+          title: 'Page 3',
+          summary: '<p>Summary 3</p>'
+      }
+    end
+    if @markings.empty?
+      1.upto(3) do |i|
+        @markings << {
+            img: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+            url: '#',
+            title: "User #{i}",
+            summary: "<p>Contact #{i}</p>"
+        }
+      end
+    end
+    if @featurettes.empty?
+      1.upto(5) do |i|
+        @featurettes << {
+            url: '#',
+            title: "Product #{i}",
+            summary: "<p>Details #{i}</p>"
+        }
+      end
+    end
     render 'index', layout: 'carousel'
   end
 
@@ -101,8 +143,7 @@ class HomeController < ApplicationController
           end
         }
 
-        Product.select(
-            :uid, :name, :lang, :summary, :updated_at).order(updated_at: :desc).limit(
+        Product.select(:uid, :name, :lang, :summary, :updated_at).order(updated_at: :desc).limit(
             20).each { |p| insert_item.call show_product_url(p.uid, locale: p.lang), p.name, md2html(p.summary), p.updated_at }
 
         # if lang

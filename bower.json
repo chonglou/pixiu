@@ -3,6 +3,7 @@
   "name": "bower-rails generated vendor assets",
   "dependencies": {
     "bootstrap-sass": "latest",
+    "holderjs": "latest",
     "angular": "latest",
     "angular-ui-router": "latest",
     "angular-animate": "latest",
