@@ -3,7 +3,8 @@ module PersonalHelper
     [
         {url: edit_user_registration_url, name: t('links.personal.profile')},
 
-        {url: personal_contact_url, name: t('links.personal.contact')}
+        {url: personal_contact_url, name: t('links.personal.contact')},
+        {url: personal_logo_url, name: t('links.personal.logo')},
     ]
   end
   def left_nav_links

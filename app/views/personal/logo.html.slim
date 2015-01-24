@@ -1,0 +1,16 @@
+- @title = t('links.personal.logo')
+- @right_nav_links = personal_right_nav_links
+br
+fieldset
+  legend Logo
+  = form_tag(personal_logo_path, class: 'form-horizontal', multipart: true) do
+    div class="form-group"
+      label class="col-sm-2 control-label" Please select file:
+      div class="col-sm-offset-1col-sm-6"
+        = file_field_tag 'logo'
+
+    div class="form-group"
+      div class="col-sm-offset-3"
+        = submit_tag t('buttons.submit'), class: 'btn btn-primary'
+        | &nbsp; &nbsp;
+        = link_to t('buttons.view'), @contact.logo || email2logo(current_user.email), class: 'btn btn-info', target: '_blank'

@@ -19,10 +19,14 @@ Rails.application.routes.draw do
     resources :notices, only:[:index]
     get 'users/:uid'=>'users#show', as: :show_user_by_uid
 
+    #----------personal------------
     get 'personal/contact'
     post 'personal/contact'
     patch 'personal/contact'
+    get 'personal/logo'
+    post 'personal/logo'
 
+    #-------------admin--------------
     namespace :admin do
 
       resources :users, only: [:index, :edit, :update]

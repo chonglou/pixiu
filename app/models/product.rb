@@ -15,7 +15,8 @@ class Product < ActiveRecord::Base
 
 
   def logo
-    Sample.where(product_id: self.id, logo:true).first || Sample.where(product_id: self.id).first
+    attach = Sample.where(product_id: self.id, logo:true).first || Sample.where(product_id: self.id).first
+    attach.attachment.avatar.thumb.url if attach
   end
 
   private

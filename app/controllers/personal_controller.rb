@@ -2,6 +2,25 @@ class PersonalController < ApplicationController
   layout 'dashboard'
   before_action :authenticate_user!
 
+  def logo
+    @contact = current_user.contact || Contact.create(user_id:current_user.id)
+
+    case request.method
+      when 'POST'
+        iio = params[:logo]
+        if iio && iio.content_type.start_with?('image')
+          attach = Attachment.new user_id: current_user.id
+          attach.read! iio
+          attach.save
+
+          @contact.update logo_id:attach.id
+        else
+          flash[:alert] = t('labels.input_not_valid')
+        end
+        redirect_to personal_logo_path
+      else
+    end
+  end
   def contact
     case request.method
       when 'POST'

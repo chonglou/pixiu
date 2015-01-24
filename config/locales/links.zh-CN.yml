@@ -78,6 +78,7 @@ zh-CN:
       register_or_signin: '登录/注册'
       profile: '个人信息'
       contact: '联系人'
+      logo: '头像'
       sign_out: '安全退出'
       sign_in: '账户登录'
       register: '注册账户'

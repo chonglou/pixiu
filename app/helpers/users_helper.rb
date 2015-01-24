@@ -14,10 +14,10 @@ module UsersHelper
         end
 
         waiters << {
-            img: contact.logo.avatar.url,
-            url: show_user_by_uid(uid:u.uid),
+            img: contact.logo,
+            url: show_user_by_uid_path(uid:u.uid),
             title: title,
-            summary: contact.details
+            summary: contact.to_html
         }
       end
     end

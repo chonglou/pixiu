@@ -3,6 +3,9 @@ class Contact < ActiveRecord::Base
   belongs_to :user
 
   def logo
-    Attachment.find(self.logo_id) if self.logo_id
+    Attachment.find(self.logo_id).avatar.finger.url if self.logo_id
+  end
+  def to_html
+    "<p>Qq: #{self.qq}<br>Email: #{self.email}</p>"
   end
 end
