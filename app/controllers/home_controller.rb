@@ -5,19 +5,6 @@ class HomeController < ApplicationController
   include SharedHelper
 
   def index
-
-    @waiters=[]
-    if @waiters.empty?
-      1.upto(3) do |i|
-        @waiters << {
-            img: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-            url: '#',
-            title: "User #{i}",
-            summary: "<p>Contact #{i}</p>"
-        }
-      end
-    end
-
     render 'index', layout: 'carousel'
   end
 
@@ -44,13 +31,13 @@ class HomeController < ApplicationController
           xm.urlset(xmlns: xmlns) {
             Product.select(:uid, :lang, :updated_at).where('updated_at >= ? && updated_at< ?', time, time>>1).order(id: :desc).each do |p|
               xm.url {
-                xm.loc show_product_url(p.uid, locale: p.lang)
+                xm.loc show_product_by_uid_url(p.uid, locale: p.lang)
                 xm.lastmod p.updated_at
               }
             end
             Document.select(:name, :lang, :updated_at).where('updated_at >= ? && updated_at< ?', time, time>>1).order(updated_at: :desc).each do |doc|
               xm.url {
-                xm.loc show_document_url(doc.name, locale: doc.lang)
+                xm.loc show_document_by_name_url(doc.name, locale: doc.lang)
                 xm.lastmod doc.updated_at
               }
             end
@@ -102,7 +89,7 @@ class HomeController < ApplicationController
       r = RSS::Maker.make('atom') do |maker|
         maker.channel.author = "no-reply@#{ENV['PIXIU_DOMAIN']}"
         maker.channel.updated = Time.now.to_s
-        maker.channel.about = show_document_url('contact', locale: (lang||'zh-CN'))
+        maker.channel.about = show_document_by_name_url('contact', locale: (lang||'zh-CN'))
         maker.channel.title = Setting["site_title_#{lang||'zh-CN'}"] || ' '
 
         insert_item = ->(link, title, description, updated) {
@@ -115,12 +102,12 @@ class HomeController < ApplicationController
         }
 
         Product.select(:uid, :name, :lang, :summary, :updated_at).order(updated_at: :desc).limit(
-            20).each { |p| insert_item.call show_product_url(p.uid, locale: p.lang), p.name, md2html(p.summary), p.updated_at }
+            20).each { |p| insert_item.call show_product_by_uid_url(p.uid, locale: p.lang), p.name, md2html(p.summary), p.updated_at }
 
         # if lang
-        #   Document.select(:name, :lang, :summary, :updated_at, :title).where(lang: lang).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_url(doc.name, locale: doc.lang), doc.title, md2html(doc.summary), doc.updated_at }        #
+        #   Document.select(:name, :lang, :summary, :updated_at, :title).where(lang: lang).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_by_name_url(doc.name, locale: doc.lang), doc.title, md2html(doc.summary), doc.updated_at }        #
         # else
-        #   Document.select(:name, :lang, :summary, :updated_at, :title).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_url(doc.name, locale: doc.lang), doc.title, md2html(doc.summary), doc.updated_at }
+        #   Document.select(:name, :lang, :summary, :updated_at, :title).order(updated_at: :desc).limit(5).each { |doc| insert_item.call show_document_by_name_url(doc.name, locale: doc.lang), doc.title, md2html(doc.summary), doc.updated_at }
         # end
 
       end

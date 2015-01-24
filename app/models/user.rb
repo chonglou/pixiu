@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
     end
   end
 
+
   def to_s
     "#{self.label}<#{self.email}>"
   end

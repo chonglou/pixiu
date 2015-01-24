@@ -11,12 +11,13 @@ Rails.application.routes.draw do
     resources :tags
 
     #------------------------------------
-    get 'notices'=>'notices#index'
 
-    get 'documents/:name'=>'documents#show', as: :show_document
-    get 'products/:uid'=>'products#show', as: :show_product
-    get 'tags/:name'=>'tags#show', as: :show_tag
+    get 'documents/:name'=>'documents#show', as: :show_document_by_name
+    get 'products/:uid'=>'products#show', as: :show_product_by_uid
 
+    resources :tags, only:[:show]
+    resources :notices, only:[:index]
+    get 'users/:uid'=>'users#show', as: :show_user_by_uid
 
     get 'personal/contact'
     post 'personal/contact'
@@ -77,7 +78,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :users
+  devise_for :users, path:'accounts'
 
   root 'home#index'
 

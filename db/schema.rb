@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124051536) do
+ActiveRecord::Schema.define(version: 20150124063556) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,   null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150124051536) do
     t.text     "details",    limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "logo_id",    limit: 4
   end
 
   create_table "documents", force: :cascade do |t|
@@ -235,7 +236,6 @@ ActiveRecord::Schema.define(version: 20150124051536) do
     t.string   "middle_name",            limit: 32
     t.string   "label",                  limit: 32,               null: false
     t.string   "uid",                    limit: 36,               null: false
-    t.integer  "logo_id",                limit: 4
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

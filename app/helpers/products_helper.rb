@@ -6,7 +6,7 @@ module ProductsHelper
       if logo
         latest_items << {
             img: logo.attachment.avatar.url,
-            url: show_product_path(p.uid),
+            url: show_product_by_uid_path(p.uid),
             title: p.name,
             summary: md2html(p.summary)
         }
@@ -42,7 +42,7 @@ module ProductsHelper
       if logo
         hot_items << {
             img: logo.attachment.avatar.url,
-            url: show_product_path(p.uid),
+            url: show_product_by_uid_path(p.uid),
             title: p.name,
             summary: md2html(p.summary)
         }
