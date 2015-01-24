@@ -13,5 +13,11 @@ div class='row pull-right'
           |#{{md2html s.summary}}
           p
             = link_to t('buttons.edit'), edit_admin_product_sample_path(id:s.id, product_id:@product.id), class:'btn btn-primary'
+            | &nbsp;
+            - if s.logo
+              img src='#{image_path 'yes.png'}' class='nav_bar-icon'
+
+            -else
+              = button_to t('buttons.default'), admin_product_sample_logo_path(sample_id:s.id, product_id:@product.id), data: {confirm: t('labels.are_you_sure')}, method: :post, class: 'btn btn-warning'
 
 

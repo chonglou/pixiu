@@ -13,6 +13,11 @@ class Product < ActiveRecord::Base
 
   enum status: {submit:1, publish: 5, expire:12, close: 10}
 
+
+  def logo
+    Sample.where(product_id: self.id, logo:true).first || Sample.where(product_id: self.id).first
+  end
+
   private
   def add_counter
     VisitCounter.create flag: VisitCounter.flags[:product], key:self.id

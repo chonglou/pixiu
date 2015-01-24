@@ -5,32 +5,11 @@ class HomeController < ApplicationController
   include SharedHelper
 
   def index
-    @carouses =[]
-    @markings=[]
-    @featurettes=[]
-    if @carouses.empty?
-      @carouses << {
-          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-          url: '#',
-          title: 'Page 1',
-          summary: '<p>Summary 1</p>'
-      }
-      @carouses << {
-          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-          url: '#',
-          title: 'Page 2',
-          summary: '<p>Summary 2</p>'
-      }
-      @carouses << {
-          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-          url: '#',
-          title: 'Page 3',
-          summary: '<p>Summary 3</p>'
-      }
-    end
-    if @markings.empty?
+
+    @waiters=[]
+    if @waiters.empty?
       1.upto(3) do |i|
-        @markings << {
+        @waiters << {
             img: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
             url: '#',
             title: "User #{i}",
@@ -38,15 +17,7 @@ class HomeController < ApplicationController
         }
       end
     end
-    if @featurettes.empty?
-      1.upto(5) do |i|
-        @featurettes << {
-            url: '#',
-            title: "Product #{i}",
-            summary: "<p>Details #{i}</p>"
-        }
-      end
-    end
+
     render 'index', layout: 'carousel'
   end
 

@@ -11,6 +11,14 @@ br
       = f.label :status
       = f.radios :status, Product.statuses.keys
 
+    = f.group do
+      = f.label :hot
+      = f.radios :hot, [true, false]
+
+    = f.group do
+      = f.label :latest
+      = f.radios :latest, [true, false]
+
 
     = f.button_group do
       = f.submit t('buttons.submit')

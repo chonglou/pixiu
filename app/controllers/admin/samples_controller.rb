@@ -1,6 +1,12 @@
 class Admin::SamplesController < Admin::ProductController
   before_action :_fetch_product
 
+  def logo
+    Sample.where(product_id:params[:product_id]).update_all(logo:false)
+    Sample.where(product_id:params[:product_id], id:params[:sample_id]).update_all(logo:true)
+    redirect_to admin_product_samples_path
+  end
+
   def new
     @sample = Sample.new
   end

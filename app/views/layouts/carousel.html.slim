@@ -31,13 +31,13 @@ html lang="#{params[:locale]}"
     /----------carousel-----
     div id="myCarousel" class="carousel slide" data-ride="carousel"
       ol class="carousel-indicators"
-        - @carouses.each_index do |i|
+        - @latest_items.each_index do |i|
           - if i == 0
             li data-target="#myCarousel" data-slide-to="#{i}" class="active"
           - else
             li data-target="#myCarousel" data-slide-to="#{i}"
       div class="carousel-inner" role="listbox"
-        - @carouses.each_with_index do |c, i|
+        - @latest_items.each_with_index do |c, i|
           - if i == 0
             div class="item active"
               img src="#{c.fetch :img}"
@@ -66,7 +66,7 @@ html lang="#{params[:locale]}"
     /---------marketings--------
     div class="container marketing"
       div class="row"
-        - @markings.each do |m|
+        - @waiters.each do |m|
           div class="col-lg-4"
             img class="img-circle marking-img" src="#{m.fetch :img}" style="width: 140px; height: 140px;"
             h2 #{m.fetch :title}
@@ -75,7 +75,7 @@ html lang="#{params[:locale]}"
               a class="btn btn-default" href="#{m.fetch :url}" role="button" #{t 'buttons.more'}
 
       /---------featurettes----------
-      - @featurettes.each_with_index do |f, i|
+      - @hot_items.each_with_index do |f, i|
         hr class="featurette-divider"
         div class="row featurette"
           - if i.odd?

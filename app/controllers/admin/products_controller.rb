@@ -4,7 +4,7 @@ class Admin::ProductsController < Admin::ProductController
     @product = Product.find params[:product_id]
     case request.method
       when 'POST'
-        @product.update params.require(:product).permit(:status)
+        @product.update params.require(:product).permit(:status, :hot, :latest)
       else
     end
   end

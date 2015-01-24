@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122211729) do
+ActiveRecord::Schema.define(version: 20150124051536) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "user_id",      limit: 4,   null: false
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20150122211729) do
     t.integer  "user_id",    limit: 4,     null: false
     t.string   "qq",         limit: 16
     t.string   "wechat",     limit: 32
-    t.string   "logo",       limit: 255
     t.string   "fax",        limit: 16
     t.string   "phone",      limit: 16
     t.string   "email",      limit: 32
@@ -142,7 +141,6 @@ ActiveRecord::Schema.define(version: 20150122211729) do
     t.string   "lang",       limit: 5,     default: "zh-CN", null: false
     t.string   "uid",        limit: 36,                      null: false
     t.string   "name",       limit: 255,                     null: false
-    t.string   "logo",       limit: 255
     t.string   "summary",    limit: 255,                     null: false
     t.text     "details",    limit: 65535,                   null: false
     t.integer  "status",     limit: 4,     default: 0,       null: false
@@ -151,6 +149,8 @@ ActiveRecord::Schema.define(version: 20150122211729) do
     t.text     "spec",       limit: 65535
     t.text     "pack",       limit: 65535
     t.text     "service",    limit: 65535
+    t.boolean  "hot",        limit: 1,     default: false,   null: false
+    t.boolean  "latest",     limit: 1,     default: false,   null: false
   end
 
   add_index "products", ["lang"], name: "index_products_on_lang", using: :btree
@@ -176,12 +176,13 @@ ActiveRecord::Schema.define(version: 20150122211729) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "samples", force: :cascade do |t|
-    t.integer  "product_id",    limit: 4,   null: false
-    t.integer  "attachment_id", limit: 4,   null: false
-    t.string   "title",         limit: 255, null: false
+    t.integer  "product_id",    limit: 4,                   null: false
+    t.integer  "attachment_id", limit: 4,                   null: false
+    t.string   "title",         limit: 255,                 null: false
     t.string   "summary",       limit: 500
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.boolean  "logo",          limit: 1,   default: false, null: false
   end
 
   create_table "settings", force: :cascade do |t|
@@ -234,6 +235,7 @@ ActiveRecord::Schema.define(version: 20150122211729) do
     t.string   "middle_name",            limit: 32
     t.string   "label",                  limit: 32,               null: false
     t.string   "uid",                    limit: 36,               null: false
+    t.integer  "logo_id",                limit: 4
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

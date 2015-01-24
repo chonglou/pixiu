@@ -36,7 +36,9 @@ Rails.application.routes.draw do
           post a
         end
 
-        resources :samples, expect:[:show]
+        resources :samples, expect:[:show] do
+          post 'logo'
+        end
         resources :prices, expect:[:show]
       end
       resources :tags, expect: [:show, :new, :edit]

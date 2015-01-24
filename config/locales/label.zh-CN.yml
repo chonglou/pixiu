@@ -25,6 +25,12 @@ zh-CN:
         status_publish: '发布'
         status_expire: '过期'
         status_close: '关闭'
+        hot: '热门列表'
+        hot_true: '是'
+        hot_false: '否'
+        latest: '新品列表'
+        latest_true: '是'
+        latest_false: '否'
       document:
         name: '名称'
         title: '标题'
