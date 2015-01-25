@@ -6,6 +6,6 @@ class Contact < ActiveRecord::Base
     Attachment.find(self.logo_id).avatar.finger.url if self.logo_id
   end
   def to_html
-    "<p>Qq: #{self.qq}<br>Email: #{self.email}</p>"
+    "<p>Qq: #{self.qq}<br>Email: #{self.email}<br>Skype:#{self.skype}</p>"
   end
 end

@@ -1,8 +1,9 @@
 module ProductsHelper
+
   def latest_products
     latest_items=[]
     Product.where(latest: true).order(updated_at: :desc).each do |p|
-      logo = p.logo
+      logo = p.background
       if logo
         latest_items << {
             img: logo,
@@ -13,24 +14,15 @@ module ProductsHelper
       end
     end
     if latest_items.empty?
-      latest_items << {
-          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-          url: '#',
-          title: 'Page 1',
-          summary: '<p>Summary 1</p>'
-      }
-      latest_items << {
-          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-          url: '#',
-          title: 'Page 2',
-          summary: '<p>Summary 2</p>'
-      }
-      latest_items << {
-          img: 'data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
-          url: '#',
-          title: 'Page 3',
-          summary: '<p>Summary 3</p>'
-      }
+      1.upto(3) do |i|
+        latest_items << {
+            img: latest_backgrounds.sample,
+            url: '#',
+            title: "Page #{i}",
+            summary: "<p>Summary #{i}</p>"
+        }
+
+      end
     end
     latest_items
   end

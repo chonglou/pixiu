@@ -19,6 +19,11 @@ class Product < ActiveRecord::Base
     attach.attachment.avatar.thumb.url if attach
   end
 
+  def background
+    attach = Sample.where(product_id: self.id, logo:true).first || Sample.where(product_id: self.id).first
+    attach.attachment.avatar.url if attach
+  end
+
   private
   def add_counter
     VisitCounter.create flag: VisitCounter.flags[:product], key:self.id
